@@ -1,11 +1,26 @@
 import 'package:coffee_chain/module/Phucvu_provider/order_Provider/order_provider.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+class MangVeResponsive extends StatelessWidget {
+  const MangVeResponsive({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return ResponsiveContainer(
+      small: MangVePage(sizeText: width * 0.3 / 9),
+      large: MangVePage(sizeText: width * 0.2 / 14),
+    );
+  }
+}
+
 class MangVePage extends StatefulWidget {
-  const MangVePage({super.key});
+  const MangVePage({super.key, required this.sizeText});
+  final double sizeText;
 
   @override
   State<MangVePage> createState() => _MangVePageState();
@@ -49,7 +64,7 @@ class _MangVePageState extends State<MangVePage> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               color: AppColors.Sepia,
-                              height: 60,
+                              height: 50,
                               width: double.infinity,
                               child: Row(
                                   mainAxisAlignment:
@@ -57,8 +72,10 @@ class _MangVePageState extends State<MangVePage> {
                                   children: [
                                     Text(
                                       '${model.listMV[index].order.toString()} - ${model.listMV[index].tenBan.toString()}',
-                                      style: AppStyles.lato
-                                          .copyWith(color: AppColors.white),
+                                      style: AppStyles.lato.copyWith(
+                                        color: AppColors.white,
+                                        fontSize: widget.sizeText,
+                                      ),
                                     ),
                                     Row(
                                       children: [
@@ -73,7 +90,9 @@ class _MangVePageState extends State<MangVePage> {
                                             model.listMV[index].soLuongNGuoi
                                                 .toString(),
                                             style: AppStyles.lato.copyWith(
-                                                color: AppColors.white),
+                                              color: AppColors.white,
+                                              fontSize: widget.sizeText,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -91,34 +110,34 @@ class _MangVePageState extends State<MangVePage> {
                                 style: AppStyles.lato.copyWith(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 30,
+                                  fontSize: widget.sizeText,
                                 ),
                               ),
                             ),
                             Container(
                               color: AppColors.white,
-                              height: 60,
+                              height: 50,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   IconButton(
-                                    iconSize: 50,
+                                    iconSize: 40,
                                     icon: const Icon(Icons.notifications),
                                     onPressed: () {},
                                   ),
                                   IconButton(
-                                    iconSize: 50,
+                                    iconSize: 40,
                                     icon: const Icon(Icons.event_note),
                                     onPressed: () {},
                                   ),
                                   IconButton(
-                                    iconSize: 50,
+                                    iconSize: 40,
                                     icon: const Icon(Icons.calculate),
                                     onPressed: () {},
                                   ),
                                   IconButton(
-                                    iconSize: 50,
+                                    iconSize: 40,
                                     icon: const Icon(Icons.more_horiz),
                                     onPressed: () {},
                                   ),

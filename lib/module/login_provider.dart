@@ -14,8 +14,8 @@ class LoginProvider extends ChangeNotifier {
   final TextEditingController _passController = TextEditingController();
   TextEditingController get passController => _passController;
 
-  Radiobutton? _radio; //= Radiobutton.phaChe
-  Radiobutton? get radio => _radio;
+  Radiobutton _radio = Radiobutton.phucVu;
+  Radiobutton get radio => _radio;
 
   void getIsShow() {
     _isShow = !_isShow;

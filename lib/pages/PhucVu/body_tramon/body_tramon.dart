@@ -7,7 +7,7 @@ class TramonPageResponsive extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-      child: Text("con catj"),
+      child: Text("HELLO BRO"),
     ));
   }
 }
