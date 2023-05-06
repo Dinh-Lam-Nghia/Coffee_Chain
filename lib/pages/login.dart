@@ -273,7 +273,7 @@ class LoginPage extends StatelessWidget {
                                                   builder: (context) => (model
                                                               .radio ==
                                                           Radiobutton.phucVu)
-                                                      ? const PhucVuHomePage()
+                                                      ? const PhucVuHomeScreen()
                                                       : (model.radio ==
                                                               Radiobutton
                                                                   .phaChe)

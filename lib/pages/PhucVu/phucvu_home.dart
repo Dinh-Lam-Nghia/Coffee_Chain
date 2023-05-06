@@ -1,15 +1,28 @@
 import 'package:coffee_chain/module/Phucvu_provider/phucvu_Provider.dart';
-import 'package:coffee_chain/pages/PhucVu/body_order/body_ghiorder.dart';
 import 'package:coffee_chain/pages/PhucVu/body_order/orderbody.dart';
 import 'package:coffee_chain/pages/PhucVu/body_tramon/body_tramon.dart';
+import 'package:coffee_chain/pages/login.dart';
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+class PhucVuHomeScreen extends StatelessWidget {
+  const PhucVuHomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const ResponsiveContainer(
+        small: PhucVuHomePage(small: true),
+        large: PhucVuHomePage(small: false));
+  }
+}
+
 class PhucVuHomePage extends StatefulWidget {
-  const PhucVuHomePage({super.key});
+  const PhucVuHomePage({super.key, required this.small});
+  final bool small;
 
   @override
   State<PhucVuHomePage> createState() => _PhucVuHomePageState();
@@ -18,11 +31,11 @@ class PhucVuHomePage extends StatefulWidget {
 class _PhucVuHomePageState extends State<PhucVuHomePage> {
   PhucvuProvider _orderProvider = PhucvuProvider();
 
-  @override
   void initStack() {
     super.initState();
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<PhucvuProvider>(
@@ -31,106 +44,280 @@ class _PhucVuHomePageState extends State<PhucVuHomePage> {
         return Consumer<PhucvuProvider>(
           builder: (context, model, child) {
             return Scaffold(
+              key: _scaffoldKey,
               backgroundColor: AppColors.backgroundColor,
               appBar: AppBar(
                 backgroundColor: AppColors.Sepia,
                 elevation: 0,
                 leading: InkWell(
-                  onTap: () {},
+                  onTap: (widget.small)
+                      ? () {
+                          _scaffoldKey.currentState?.openDrawer();
+                        }
+                      : () {},
                   child: const Icon(
                     Icons.menu,
                     size: 50,
                   ),
                 ),
-                title: SizedBox(
-                  child: Row(
-                    children: [
-                      InkWell(
-                        onTap: model.clickOrder,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          color: (model.chonBody == menuPV.order)
-                              ? AppColors.white1
-                              : AppColors.Sepia,
-                          margin: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.list_alt_rounded,
-                                size: 45,
+                title: (widget.small)
+                    ? const Text("Phục vụ")
+                    : SizedBox(
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: model.clickOrder,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
                                 color: (model.chonBody == menuPV.order)
-                                    ? AppColors.Sepia
-                                    : AppColors.white1,
-                              ),
-                              Text(" Order",
-                                  style: AppStyles.lato.copyWith(
-                                      fontWeight: FontWeight.w600,
+                                    ? AppColors.white1
+                                    : AppColors.Sepia,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.list_alt_rounded,
+                                      size: 45,
                                       color: (model.chonBody == menuPV.order)
                                           ? AppColors.Sepia
-                                          : AppColors.white1))
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: model.clickTramon,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          color: (model.chonBody == menuPV.tramon)
-                              ? AppColors.white1
-                              : AppColors.Sepia,
-                          margin: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                AppAssetIcon.iconChuong,
-                                width: 40,
+                                          : AppColors.white1,
+                                    ),
+                                    Text(" Order",
+                                        style: AppStyles.lato.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color:
+                                                (model.chonBody == menuPV.order)
+                                                    ? AppColors.Sepia
+                                                    : AppColors.white1))
+                                  ],
+                                ),
                               ),
-                              Text(" Trả món",
-                                  style: AppStyles.lato.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: (model.chonBody == menuPV.tramon)
-                                          ? AppColors.Sepia
-                                          : AppColors.white1))
-                            ],
-                          ),
+                            ),
+                            InkWell(
+                              onTap: model.clickTramon,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                color: (model.chonBody == menuPV.tramon)
+                                    ? AppColors.white1
+                                    : AppColors.Sepia,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      AppAssetIcon.iconChuong,
+                                      width: 40,
+                                    ),
+                                    Text(" Trả món",
+                                        style: AppStyles.lato.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: (model.chonBody ==
+                                                    menuPV.tramon)
+                                                ? AppColors.Sepia
+                                                : AppColors.white1))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
                 actions: [
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.wifi,
-                      size: 50,
-                    ),
-                  ),
-                  const SizedBox(width: 50),
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.help_outline,
-                      size: 50,
-                    ),
-                  ),
-                  const SizedBox(width: 50),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.power_settings_new,
-                      size: 50,
-                    ),
-                  ),
-                  const SizedBox(width: 10)
+                  (widget.small)
+                      ? Container()
+                      : Row(
+                          children: [
+                            InkWell(
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.wifi,
+                                size: 50,
+                              ),
+                            ),
+                            const SizedBox(width: 50),
+                            InkWell(
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.help_outline,
+                                size: 50,
+                              ),
+                            ),
+                            const SizedBox(width: 50),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()),
+                                );
+                              },
+                              child: const Icon(
+                                Icons.power_settings_new,
+                                size: 50,
+                              ),
+                            ),
+                            const SizedBox(width: 10)
+                          ],
+                        ),
                 ],
               ),
               body: (model.chonBody == menuPV.tramon)
                   ? const TramonPageResponsive()
                   : const OrderBodyPage(),
+              drawer: Drawer(
+                child: Container(
+                  color: AppColors.Sepia,
+                  child: SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            const SizedBox(height: 30),
+                            Text(
+                              "NHÂN VIÊN PHỤC VỤ",
+                              style: AppStyles.lato.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.white1),
+                            ),
+                            const SizedBox(height: 50),
+                            InkWell(
+                              onTap: model.clickOrder,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                color: (model.chonBody == menuPV.order)
+                                    ? AppColors.white1
+                                    : AppColors.Sepia,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.list_alt_rounded,
+                                      size: 45,
+                                      color: (model.chonBody == menuPV.order)
+                                          ? AppColors.Sepia
+                                          : AppColors.white1,
+                                    ),
+                                    Text(" Order",
+                                        style: AppStyles.lato.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color:
+                                                (model.chonBody == menuPV.order)
+                                                    ? AppColors.Sepia
+                                                    : AppColors.white1))
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 50),
+                            InkWell(
+                              onTap: model.clickTramon,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                color: (model.chonBody == menuPV.tramon)
+                                    ? AppColors.white1
+                                    : AppColors.Sepia,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      AppAssetIcon.iconChuong,
+                                      width: 40,
+                                    ),
+                                    Text(" Trả món",
+                                        style: AppStyles.lato.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            color: (model.chonBody ==
+                                                    menuPV.tramon)
+                                                ? AppColors.Sepia
+                                                : AppColors.white1))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.person,
+                                          size: 40,
+                                          color: AppColors.white,
+                                        ),
+                                        Text("Đinh Lâm Nghĩa ",
+                                            style:
+                                                AppStyles.montserrat.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20,
+                                              color: AppColors.white,
+                                            )),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: const Icon(
+                                    Icons.wifi,
+                                    size: 30,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: const Icon(
+                                    Icons.help_outline,
+                                    size: 30,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen()),
+                                    );
+                                  },
+                                  child: const Icon(
+                                    Icons.power_settings_new,
+                                    size: 30,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             );
           },
         );
