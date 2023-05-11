@@ -20,4 +20,6 @@ class AppColors {
   static const Color green = Color(0xff02AB48);
   static const Color darkGreen = Color(0xff037122);
   static const Color brightPink = Color(0xffB7776B);
+  static const Color colorrow = Color(0xffEBE4E2);
+  static const Color Box = Color(0xffC4C4C4);
 }
