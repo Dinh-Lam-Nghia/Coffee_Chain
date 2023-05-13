@@ -6,6 +6,7 @@ class AppColors {
   static const Color black87 = Colors.black87;
   static const Color black26 = Colors.black26;
   static const Color brownBlack = Color(0xff301E1E);
+  static const Color blue = Color.fromARGB(255, 54, 100, 236);
   static const Color white = Color(0xffFFFFFF);
   static const Color white1 = Color(0xffFFF1E6);
   static const Color Sepia = Color(0xff662C21);

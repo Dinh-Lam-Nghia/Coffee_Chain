@@ -42,7 +42,7 @@ class _QuanLyKhoPageState extends State<QuanLyKhoPage> {
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
                               child: Row(
-                                children: [
+                                children: [ 
                                   Container(
                                     width: 289,
                                     height: 70,
@@ -64,7 +64,7 @@ class _QuanLyKhoPageState extends State<QuanLyKhoPage> {
                                           icon:
                                               const Icon(Icons.arrow_drop_down),
                                           onSelected: (value) {
-                                            setState(() {
+                                            setState(() { 
                                               selectedMenu = value;
                                             });
 

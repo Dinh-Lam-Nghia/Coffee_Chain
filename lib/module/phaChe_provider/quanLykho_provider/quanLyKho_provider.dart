@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class QuanLyKhoProvider extends ChangeNotifier {
-  bool _thongKe = false;
+  bool _thongKe = false; 
   bool get thongKe => _thongKe;
 
   final TextEditingController _maPN = TextEditingController();

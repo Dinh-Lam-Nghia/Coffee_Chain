@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return ResponsiveContainer(
-        small: LoginPage(
+        small: LoginPage( 
           padingWidth: width * 0.03,
           sizeText: 18,
           sizeTextIntput: 15,

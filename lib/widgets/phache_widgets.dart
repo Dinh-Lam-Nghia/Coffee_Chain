@@ -1,3 +1,4 @@
+import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/table2TK_QLK_Provider.dart';
 import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/themPhieu_nhap_xuat_provider/phieunhap_provider.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
@@ -128,8 +129,9 @@ class EditDeleteOnlyTable extends StatelessWidget {
 }
 
 class DateInputPhaChe extends StatefulWidget {
-  const DateInputPhaChe({super.key, required this.dateInput});
+  const DateInputPhaChe({super.key, required this.dateInput, this.tk});
   final TextEditingController dateInput;
+  final bool? tk;
 
   @override
   State<DateInputPhaChe> createState() => _DateInputPhaCheState();
@@ -158,8 +160,20 @@ class _DateInputPhaCheState extends State<DateInputPhaChe> {
 
         if (pickedDate != null) {
           //pickedDate output format => 2021-03-10 00:00:00.000
+          String month = '';
+          if (pickedDate.month <= 9) {
+            month = '0${pickedDate.month}';
+          } else {
+            month = pickedDate.month.toString();
+          }
+          String day = '';
+          if (pickedDate.day <= 9) {
+            day = '0${pickedDate.day}';
+          } else {
+            day = pickedDate.day.toString();
+          }
           String formattedDate =
-              "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+              "${day.toString()}/${month.toString()}/${pickedDate.year}";
           //formatted date output using intl package =>  11/01/2022
           setState(() {
             widget.dateInput.text =

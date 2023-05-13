@@ -88,7 +88,7 @@ class _BodyDangPVPageState extends State<BodyDangPVPage> {
                                         Container(
                                           alignment: Alignment.topCenter,
                                           child: Text(
-                                            model.listBanHD[index].soLuongNGuoi
+                                            model.listBanHD[index].slKhach
                                                 .toString(),
                                             style: AppStyles.lato.copyWith(
                                               color: AppColors.white,

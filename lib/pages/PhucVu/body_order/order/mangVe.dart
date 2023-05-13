@@ -87,7 +87,7 @@ class _MangVePageState extends State<MangVePage> {
                                         Container(
                                           alignment: Alignment.topCenter,
                                           child: Text(
-                                            model.listMV[index].soLuongNGuoi
+                                            model.listMV[index].slKhach
                                                 .toString(),
                                             style: AppStyles.lato.copyWith(
                                               color: AppColors.white,

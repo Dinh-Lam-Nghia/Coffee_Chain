@@ -43,62 +43,62 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 50),
-                              child: Row(
-                                children: [
+                              child:
+                                  // Row(
+                                  // children: [
+                                  // Material(
+                                  //   color: AppColors.redPink,
+                                  //   child: InkWell(
+                                  //     onTap: () {},
+                                  //     splashColor: AppColors.grey,
+                                  //     child: Container(
+                                  //       padding: const EdgeInsets.symmetric(
+                                  //           horizontal: 16, vertical: 12),
+                                  //       decoration: BoxDecoration(
+                                  //           border: Border.all(
+                                  //               width: 1,
+                                  //               color: AppColors.darkRed)),
+                                  //       child: Row(
+                                  //         children: [
+                                  //           const Icon(Icons.add_alert_outlined,
+                                  //               size: 40,
+                                  //               color: AppColors.darkRed),
+                                  //           Text(" Báo hết",
+                                  //               style: AppStyles.lato.copyWith(
+                                  //                   fontWeight:
+                                  //                       FontWeight.w600))
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(width: 40),
                                   Material(
-                                    color: AppColors.redPink,
-                                    child: InkWell(
-                                      onTap: () {},
-                                      splashColor: AppColors.grey,
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 12),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppColors.darkRed)),
-                                        child: Row(
-                                          children: [
-                                            const Icon(Icons.add_alert_outlined,
-                                                size: 40,
-                                                color: AppColors.darkRed),
-                                            Text(" Báo hết",
-                                                style: AppStyles.lato.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w600))
-                                          ],
-                                        ),
-                                      ),
+                                color: AppColors.green,
+                                child: InkWell(
+                                  onTap: model.onclickTraMon,
+                                  splashColor: AppColors.grey,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 13),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1,
+                                            color: AppColors.darkGreen)),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(AppAssetIcon.iconChuong,
+                                            width: 40),
+                                        Text(" Trả hết",
+                                            style: AppStyles.lato.copyWith(
+                                                fontWeight: FontWeight.w600))
+                                      ],
                                     ),
                                   ),
-                                  const SizedBox(width: 40),
-                                  Material(
-                                    color: AppColors.green,
-                                    child: InkWell(
-                                      onTap: () {},
-                                      splashColor: AppColors.grey,
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 13),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppColors.darkGreen)),
-                                        child: Row(
-                                          children: [
-                                            Image.asset(AppAssetIcon.iconChuong,
-                                                width: 40),
-                                            Text(" Trả hết",
-                                                style: AppStyles.lato.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w600))
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
+                              // ],
+                              // ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
@@ -219,7 +219,7 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                                                     ),
                                                     Text(
                                                       model.listBanHD[index]
-                                                          .phucVu
+                                                          .nguoiPhucVu
                                                           .toString(),
                                                       style: AppStyles.lato
                                                           .copyWith(
@@ -284,7 +284,7 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                                                             ),
                                                             SizedBox(
                                                               child: Text(
-                                                                '(${model.listDSmonCheBienTungBan[index].soLuong.toString()})',
+                                                                '(${model.listDSmonCheBienTungBan[index].slMon.toString()})',
                                                                 style: AppStyles.lato.copyWith(
                                                                     fontWeight:
                                                                         FontWeight
@@ -301,14 +301,35 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                                                         alignment: Alignment
                                                             .centerRight,
                                                         child: IconButton(
-                                                            onPressed: () {},
-                                                            hoverColor: null,
-                                                            icon: const Icon(
+                                                            onPressed: () => model.postUpMonHoanThanh(
+                                                                model
+                                                                    .listDSmonCheBienTungBan[
+                                                                        index]
+                                                                    .maBan
+                                                                    .toString(),
+                                                                model
+                                                                    .listDSmonCheBienTungBan[
+                                                                        index]
+                                                                    .maMon
+                                                                    .toString(),
+                                                                int.parse(model
+                                                                    .listDSmonCheBienTungBan[
+                                                                        index]
+                                                                    .hoanThanh
+                                                                    .toString())),
+                                                            icon: Icon(
                                                               Icons
                                                                   .notifications,
                                                               size: 30,
-                                                              color: AppColors
-                                                                  .grey,
+                                                              color: (model
+                                                                          .listDSmonCheBienTungBan[
+                                                                              index]
+                                                                          .hoanThanh ==
+                                                                      0)
+                                                                  ? AppColors
+                                                                      .grey
+                                                                  : AppColors
+                                                                      .green,
                                                             )),
                                                       ),
                                                     ]),
