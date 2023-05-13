@@ -1,36 +1,41 @@
+
 class BanHoatDongModel {
   String? maBan;
   String? tenBan;
   String? order;
-  String? phucVu;
-  int? soLuongNGuoi;
+  String? nguoiPhucVu;
+  int? slKhach;
+  int? hoanThanhMon;
   double? tongTien;
-  bool? dangPV;
-  bool? thanhToan;
-  bool? mangVe;
+  int? dangPhucVu;
+  int? thanhToan;
+  int? mangve;
 
-  BanHoatDongModel(
-      {this.maBan,
-      this.tenBan,
-      this.order,
-      this.phucVu,
-      this.soLuongNGuoi,
-      this.tongTien,
-      this.dangPV,
-      this.thanhToan,
-      this.mangVe});
+  BanHoatDongModel({
+    this.maBan,
+    this.tenBan,
+    this.order,
+    this.nguoiPhucVu,
+    this.slKhach,
+    this.hoanThanhMon,
+    this.tongTien,
+    this.dangPhucVu,
+    this.thanhToan,
+    this.mangve,
+  });
 
   factory BanHoatDongModel.fromJson(Map<String, dynamic> json) {
     return BanHoatDongModel(
       maBan: json['maBan'],
       tenBan: json['tenBan'],
       order: json['order'],
-      phucVu: json['phucVu'],
-      soLuongNGuoi: json['soLuongNGuoi'],
-      tongTien: json['tongTien'],
-      dangPV: json['dangPV'],
-      thanhToan: json['thanhToan'],
-      mangVe: json['mangVe'],
+      nguoiPhucVu: json['nguoiPhucVu'],
+      slKhach: int.parse(json['slKhach'].toString()),
+      hoanThanhMon: int.parse(json['hoanThanhMon'].toString()),
+      tongTien: double.parse(json['tongTien'].toString()),
+      dangPhucVu: int.parse(json['dangPhucVu'].toString()),
+      thanhToan: int.parse(json['thanhToan'].toString()),
+      mangve: int.parse(json['mangve'].toString()),
     );
   }
 }

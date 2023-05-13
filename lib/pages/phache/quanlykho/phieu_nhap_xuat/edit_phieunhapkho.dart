@@ -50,14 +50,11 @@ class ThemPhieuNhapKhoPage extends StatefulWidget {
 }
 
 class _ThemPhieuNhapKhoPageState extends State<ThemPhieuNhapKhoPage> {
-  final PhieuNhapProvider _phieuNhapProvider = PhieuNhapProvider(); 
-  @override 
+  final PhieuNhapProvider _phieuNhapProvider = PhieuNhapProvider();
+  @override
   void initState() {
     super.initState();
     _phieuNhapProvider.getListPhieuNhap();
-    for (var i = 0; i < _phieuNhapProvider.phieuNhap.length; i++) {
-      _phieuNhapProvider.tongtien(_phieuNhapProvider.phieuNhap[i].thanhtien);
-    }
   }
 
   @override
@@ -282,7 +279,7 @@ class _ThemPhieuNhapKhoPageState extends State<ThemPhieuNhapKhoPage> {
                                                   .toString(),
                                               color: 1)),
                                           DataCell(TextTable(
-                                              text: model.phieuNhap[i].soLuong
+                                              text: model.phieuNhap[i].sLuong
                                                   .toString(),
                                               color: 1)),
                                           DataCell(TextTable(
@@ -295,7 +292,7 @@ class _ThemPhieuNhapKhoPageState extends State<ThemPhieuNhapKhoPage> {
                                               color: 1)),
                                           DataCell(TextTable(
                                               text:
-                                                  '${model.phieuNhap[i].thanhtien.toString()} VND'
+                                                  '${model.phieuNhap[i].sLuong.toString()} VND'
                                                       .toString(),
                                               color: 1)),
                                           DataCell(IconButton(

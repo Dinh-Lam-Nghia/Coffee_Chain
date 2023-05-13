@@ -13,34 +13,34 @@ class OrderProvider extends ChangeNotifier {
         maBan: 'b001t1',
         tenBan: 'Bàn 001 - tâng 1',
         order: '1.1',
-        phucVu: 'Dinh Lam Nghia',
-        soLuongNGuoi: 3,
+        nguoiPhucVu: 'Dinh Lam Nghia',
+        slKhach: 3,
         tongTien: 2000.000,
-        dangPV: true,
-        thanhToan: false,
-        mangVe: false,
+        dangPhucVu: 1,
+        thanhToan: 0,
+        mangve: 0,
       ),
       BanHoatDongModel(
         maBan: 'b002t1',
         tenBan: 'Bàn 002 - tâng 1',
         order: '1.2',
-        phucVu: 'Dinh Lam Nghia',
-        soLuongNGuoi: 4,
+        nguoiPhucVu: 'Dinh Lam Nghia',
+        slKhach: 4,
         tongTien: 2000.000,
-        dangPV: false,
-        thanhToan: true,
-        mangVe: false,
+        dangPhucVu: 0,
+        thanhToan: 1,
+        mangve: 0,
       ),
       BanHoatDongModel(
         maBan: 'b001t2',
         tenBan: 'Bàn 001 - tâng 2',
         order: '1.4',
-        phucVu: 'Dinh Lam Nghia',
-        soLuongNGuoi: 5,
+        nguoiPhucVu: 'Dinh Lam Nghia',
+        slKhach: 5,
         tongTien: 2000.000,
-        dangPV: false,
-        thanhToan: false,
-        mangVe: true,
+        dangPhucVu: 0,
+        thanhToan: 0,
+        mangve: 1,
       ),
     ];
     notifyListeners();
@@ -80,15 +80,15 @@ class OrderProvider extends ChangeNotifier {
   void getSL() {
     _listYCTT.clear();
     for (int i = 0; i < _listBanHD.length; i++) {
-      if (_listBanHD[i].dangPV == true) {
+      if (_listBanHD[i].dangPhucVu == 1) {
         _listDPV.add(_listBanHD[i]);
         // _coutDPV++;
       }
-      if (_listBanHD[i].thanhToan == true) {
+      if (_listBanHD[i].thanhToan == 1) {
         _listYCTT.add(_listBanHD[i]);
         // _coutYCTT++;
       }
-      if (_listBanHD[i].mangVe == true) {
+      if (_listBanHD[i].mangve == 1) {
         _listMV.add(_listBanHD[i]);
         // _coutMV++;
       }

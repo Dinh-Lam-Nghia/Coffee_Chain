@@ -1,92 +1,36 @@
 import 'package:coffee_chain/models/DSbanHD_model.dart';
 import 'package:coffee_chain/models/phache/DSmonchebien_model.dart';
+import 'package:coffee_chain/service/BanHD.service.dart';
+import 'package:coffee_chain/service/DSmonCheBien.service.dart';
 import 'package:flutter/material.dart';
 
 class DSmonCheBienProvider extends ChangeNotifier {
+  List<BanHoatDongModel> _listBanHDTMP = [];
+
   List<BanHoatDongModel> _listBanHD = [];
   List<BanHoatDongModel> get listBanHD => _listBanHD;
 
   List<DSmonCheBienModel> _listDSmonCheBien = [];
   List<DSmonCheBienModel> get listDSmonCheBien => _listDSmonCheBien;
 
-  void getListBanHD() {
-    _listBanHD = [
-      BanHoatDongModel(
-        maBan: 'b001t1',
-        tenBan: 'Bàn 001 - tâng 1',
-        order: '1.1',
-        phucVu: 'Dinh Lam Nghia',
-        soLuongNGuoi: 3,
-        tongTien: 2000.000,
-        dangPV: true,
-        thanhToan: false,
-        mangVe: false,
-      ),
-      BanHoatDongModel(
-        maBan: 'b002t1',
-        tenBan: 'Bàn 002 - tâng 1',
-        order: '1.2',
-        phucVu: 'Dinh Lam Nghia',
-        soLuongNGuoi: 4,
-        tongTien: 2000.000,
-        dangPV: false,
-        thanhToan: true,
-        mangVe: false,
-      ),
-      BanHoatDongModel(
-        maBan: 'b001t2',
-        tenBan: 'Bàn 001 - tâng 2',
-        order: '1.4',
-        phucVu: 'Dinh Lam Nghia',
-        soLuongNGuoi: 5,
-        tongTien: 2000.000,
-        dangPV: false,
-        thanhToan: false,
-        mangVe: true,
-      ),
-    ];
+  final BanHDService _banHDService = BanHDService();
+  final DSmonCheBienService _dSmonCheBienService = DSmonCheBienService();
+
+  void getListBanHD() async {
+    List<BanHoatDongModel> _TMP = [];
+    _TMP.clear();
+    _listBanHDTMP = await _banHDService.getBanHD();
+
+    for (int i = 0; i < _listBanHDTMP.length; i++) {
+      if (_listBanHDTMP[i].hoanThanhMon == 0) _TMP.add(_listBanHDTMP[i]);
+    }
+
+    _listBanHD = _TMP;
     notifyListeners();
   }
 
-  void getListMonCheBien() {
-    _listDSmonCheBien = [
-      DSmonCheBienModel(
-        maBan: 'b001t2',
-        tenMon: 'đá say',
-        soLuong: 1,
-        hoanThanh: false,
-      ),
-      DSmonCheBienModel(
-        maBan: 'b001t1',
-        tenMon: 'coffee',
-        soLuong: 1,
-        hoanThanh: false,
-      ),
-      DSmonCheBienModel(
-        maBan: 'b001t1',
-        tenMon: 'Ts lúa mạch',
-        soLuong: 5,
-        hoanThanh: false,
-      ),
-      DSmonCheBienModel(
-        maBan: 'b002t1',
-        tenMon: 'coffee',
-        soLuong: 3,
-        hoanThanh: false,
-      ),
-      DSmonCheBienModel(
-        maBan: 'b002t1',
-        tenMon: 'Sinh tố dừa',
-        soLuong: 2,
-        hoanThanh: false,
-      ),
-      DSmonCheBienModel(
-        maBan: 'b002t1',
-        tenMon: 'trà đào',
-        soLuong: 1,
-        hoanThanh: false,
-      ),
-    ];
+  void getListMonCheBien() async {
+    _listDSmonCheBien = await _dSmonCheBienService.getDSmonCheBien();
     notifyListeners();
   }
 
@@ -113,6 +57,8 @@ class DSmonCheBienProvider extends ChangeNotifier {
     _soLanClick = !_soLanClick;
     if (_soLanClick) {
       clickchonBan(maBan);
+    } else {
+      _chonBan = null;
     }
     notifyListeners();
   }
@@ -120,6 +66,30 @@ class DSmonCheBienProvider extends ChangeNotifier {
   void clickchonBan(String maBan) {
     _chonBan = maBan;
     print(_chonBan);
+    notifyListeners();
+  }
+
+  final BanHDService _updatebanHD = BanHDService();
+  void onclickTraMon() async {
+    if (_chonBan != null) {
+      await _updatebanHD.UpdateBanHDHT(_chonBan.toString(), 1);
+      getListBanHD();
+      getListMonCheBien();
+    }
+    notifyListeners();
+  }
+
+  // xác nhạn hoàn thành
+  final DSmonCheBienService _monHoanThanh = DSmonCheBienService();
+  void postUpMonHoanThanh(String maBan, String maMon, int hoanThanh) async {
+    print(maBan + maMon);
+    if (hoanThanh == 0) {
+      await _monHoanThanh.postUpMonHoanThanh(maBan, maMon, 1);
+    } else {
+      await _monHoanThanh.postUpMonHoanThanh(maBan, maMon, 0);
+    }
+    getListBanHD();
+    getListMonCheBien();
     notifyListeners();
   }
 }

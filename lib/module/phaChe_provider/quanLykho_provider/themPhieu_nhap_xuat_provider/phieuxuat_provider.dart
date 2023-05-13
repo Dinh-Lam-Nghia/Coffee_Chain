@@ -1,82 +1,232 @@
+import 'package:coffee_chain/models/phache/tablePhieu_model.dart';
 import 'package:coffee_chain/models/phache/them_phieu_nhap_xuat_model/phieuxuat_model.dart';
+import 'package:coffee_chain/service/NVL.service.dart';
+import 'package:coffee_chain/service/PhieuNhapXuat.service.dart';
+import 'package:coffee_chain/service/phieuXuatKho.service.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 class PhieuXuatProvider extends ChangeNotifier {
-  final TextEditingController _maPX = TextEditingController();
+  TextEditingController _maPX = TextEditingController();
   TextEditingController get maPX => _maPX;
-  final TextEditingController _nguoiLPX = TextEditingController();
+  TextEditingController _nguoiLPX = TextEditingController();
   TextEditingController get nguoiLPX => _nguoiLPX;
   final TextEditingController _ngayXuatPhieu = TextEditingController();
   TextEditingController get ngayXuatPhieu => _ngayXuatPhieu;
+  final TextEditingController _layDL = TextEditingController();
+  TextEditingController get layDL => _layDL;
   final TextEditingController _tuNgay = TextEditingController();
   TextEditingController get tuNgay => _tuNgay;
   final TextEditingController _denNgay = TextEditingController();
   TextEditingController get denNgay => _denNgay;
-  
-  final TextEditingController _maPhieu = TextEditingController();
-  TextEditingController get maPhieu =>_maPhieu;
-  final TextEditingController _maNVL = TextEditingController();
-  TextEditingController get maNVL=>_maNVL;
-  final TextEditingController _tenNVL = TextEditingController();
-  TextEditingController get tenNVL=>_tenNVL;
-  final TextEditingController _donViTinh = TextEditingController();
-  TextEditingController get donViTinh=>_donViTinh;
-  final TextEditingController _soLuong = TextEditingController();
-  TextEditingController get soLuong=>_soLuong;
-  final TextEditingController _donGia = TextEditingController();
-  TextEditingController get donGia =>_donGia;
-  final TextEditingController _thanhTien = TextEditingController();
-  TextEditingController get thanhTien=>_thanhTien;
 
-  List<PhieuXuatModel> _phieuXuat = [];
-  List<PhieuXuatModel> get phieuXuat => _phieuXuat;
+  TextEditingController _maPhieu = TextEditingController();
+  TextEditingController get maPhieu => _maPhieu;
+  final TextEditingController _maNVL = TextEditingController();
+  TextEditingController get maNVL => _maNVL;
+  final TextEditingController _tenNVL = TextEditingController();
+  TextEditingController get tenNVL => _tenNVL;
+  final TextEditingController _donViTinh = TextEditingController();
+  TextEditingController get donViTinh => _donViTinh;
+  final TextEditingController _soLuong = TextEditingController();
+  TextEditingController get soLuong => _soLuong;
+  final TextEditingController _donGia = TextEditingController();
+  TextEditingController get donGia => _donGia;
 
   double _tongTien = 0;
   double get tongTien => _tongTien;
 
-  void getListPhieuXuat() {
-    _phieuXuat = [
-      PhieuXuatModel(
-          maPhieu: 'PX0001',
-          maNVL: 'ssss',
-          tenNVL: 'cafe',
-          donViTinh: 'kg',
-          donGia: 10000,
-          soLuong: 10,
-          thanhTien: 100000),
-      PhieuXuatModel(
-          maPhieu: 'PX0001',
-          maNVL: 'ssss',
-          tenNVL: 'cafe',
-          donViTinh: 'kg',
-          donGia: 10000,
-          soLuong: 10,
-          thanhTien: 100000),
-      PhieuXuatModel(
-          maPhieu: 'PX0001',
-          maNVL: 'ssss',
-          tenNVL: 'cafe',
-          donViTinh: 'kg',
-          donGia: 10000,
-          soLuong: 10,
-          thanhTien: 100000),
-      PhieuXuatModel(
-          maPhieu: 'PX0001',
-          maNVL: 'ssss',
-          tenNVL: 'cafe',
-          donViTinh: 'kg',
-          donGia: 10000,
-          soLuong: 10,
-          thanhTien: 100000),
-    ];
-    notifyListeners(); 
-  }
-  void tongtien(double? tien){
-    _tongTien += tien!;
+  final TablePhieuNXService _phieuNXService = TablePhieuNXService();
+  List<TablePhieuModel> _listPhieuTMP = [];
+  String? _ma;
+  int cout = 0;
+  void autoMaPN() async {
+    _listPhieuTMP = await _phieuNXService.getTablePhieuNX();
+    int i = _listPhieuTMP.length;
+    (i == 0)
+        ? cout = i + 1
+        : cout = int.parse(_listPhieuTMP[i - 1].maPhieuNX.toString()) + 1;
+    _ma = "pn0$cout";
+    _maPX = TextEditingController(text: _ma);
+    _maPhieu = TextEditingController(text: _ma);
+    _nguoiLPX = TextEditingController(text: "Đinh Lâm Nghĩa");
+    getListPhieuXuat();
     notifyListeners();
   }
-  void xoaDong(String maNVL) {
+
+  List<PhieuXuatModel> _phieuXuatTMP = [];
+  List<PhieuXuatModel> _phieuXuat = [];
+  List<PhieuXuatModel> get phieuXuat => _phieuXuat;
+  final PhieuXuatService _phieuXuatService = PhieuXuatService();
+  void getListPhieuXuat() async {
+    _phieuXuatTMP = await _phieuXuatService.getPhieuXuat();
+    for (int i = 0; i < _phieuXuatTMP.length; i++) {
+      if (_phieuXuatTMP[i].maPhieuNX == cout.toString()) {
+        _phieuXuat.add(_phieuXuatTMP[i]);
+      }
+    }
+    sumTien();
+    notifyListeners();
+  }
+
+  double _sum = 0;
+  double get sum => _sum;
+  void sumTien() {
+    List<double> numbers = [];
+    for (int i = 0; i < _phieuXuat.length; i++) {
+      numbers.add(double.parse(_phieuXuat[i].thanhTien.toString()));
+    }
+    print(numbers);
+    _sum = numbers.sum;
+    notifyListeners();
+    numbers.clear();
+  }
+
+  final DsNVLService _dsNVLModelService = DsNVLService();
+  String _er = '';
+  String get er => _er;
+  int validateThemdong() {
+    print(_maNVL.selection.baseOffset.toInt());
+    if (_maNVL.selection.baseOffset.toInt() < 1) {
+      _er = 'Bạn chưa nhập mã NVL!';
+      load();
+      return 0;
+    }
+    if (_tenNVL.selection.baseOffset.toInt() < 1) {
+      _er = 'Bạn chưa nhập tên NVL!';
+      load();
+      return 0;
+    }
+    if (_donViTinh.selection.baseOffset.toInt() < 1) {
+      _er = 'Bạn chưa nhập đơn vị tính!';
+      load();
+      return 0;
+    }
+    if (_soLuong.selection.baseOffset.toInt() < 1) {
+      _er = 'Bạn chưa nhập số luọng!';
+      load();
+      return 0;
+    }
+    if (_donGia.selection.baseOffset.toInt() < 1) {
+      _er = 'Bạn chưa nhập đơn giá!';
+      load();
+      return 0;
+    }
+    checkMaNVL(_maNVL.text.toString(), _tenNVL.text.toString());
+    notifyListeners();
+    return 0;
+  }
+
+  void checkMaNVL(String ma, String ten) async {
+    bool checkMaNVL = await _dsNVLModelService.checkMaNVL(ma, ten);
+    int i = _listPhieuTMP.length;
+    int cout = 0;
+    (i == 0)
+        ? cout = i + 1
+        : cout = int.parse(_listPhieuTMP[i - 1].maPhieuNX.toString()) + 1;
+    String maPhieuNX = cout.toString();
+    String maNVL = _maNVL.text;
+    String donViTinh = _donViTinh.text;
+    String sLuong = _soLuong.text;
+    String donGia = _donGia.text;
+    double a = double.parse(_soLuong.text);
+    double b = double.parse(_donGia.text);
+    double c = a * b;
+    String thanhTien = '$c';
+
+    addPhieuXuat(maPhieuNX, maNVL, donViTinh, sLuong, donGia, thanhTien);
+    notifyListeners();
+  }
+
+  void addPhieuXuat(String maPhieuNX, String maNVL, String donViTinh,
+      String sLuong, String donGia, String thanhTien) async {
+    await _phieuXuatService.addPhieuXuat(
+      maPhieuNX,
+      maNVL,
+      donViTinh,
+      sLuong,
+      donGia,
+      thanhTien,
+    );
+    _phieuXuat.clear();
+    autoMaPN();
+    _maNVL.clear();
+    _tenNVL.clear();
+    _donViTinh.clear();
+    _donGia.clear();
+    _soLuong.clear();
+    _donGia.clear();
+    notifyListeners();
+  }
+
+  void xoaDong(String id) async {
     print(maNVL);
+    await _phieuXuatService.deletePhieuXuatId(id);
+    _phieuXuat.clear();
+    autoMaPN();
+    notifyListeners();
+  }
+
+  void clickHuy(context) async {
+    String maPhieuNX = cout.toString();
+    await _phieuXuatService.deletePhieuXuatMaPhieu(maPhieuNX);
+    Navigator.of(context).pop();
+    notifyListeners();
+  }
+
+  void timkiem(String value) {
+    List<PhieuXuatModel> _TK = [];
+    _phieuXuat.clear();
+    (value == '')
+        ? _TK = _phieuXuatTMP
+        : _TK = _phieuXuatTMP
+            .where((element) =>
+                element.tenNVL!.toUpperCase().contains(value.toUpperCase()))
+            .toList();
+    for (int i = 0; i < _TK.length; i++) {
+      if (_TK[i].maPhieuNX == cout.toString()) {
+        _phieuXuat.add(_TK[i]);
+      }
+    }
+    notifyListeners();
+  }
+
+  void luuPhieuNX(context) async {
+    int i = _listPhieuTMP.length;
+    int cout = 0;
+    (i == 0)
+        ? cout = i + 1
+        : cout = int.parse(_listPhieuTMP[i - 1].maPhieuNX.toString()) + 1;
+    String maPhieuNX = cout.toString();
+    String nguoiTaoPhieuNX = _nguoiLPX.text;
+    String ngayTaoPhieuNX = _ngayXuatPhieu.text;
+    final a = _ngayXuatPhieu.text.split('/');
+    String ngayTPNX = '${a[2]}${a[1]}${a[0]}';
+    String tuNgay = _tuNgay.text;
+    String denNgay = _denNgay.text;
+    String soTienNX = _sum.toString();
+    String tongTien = soTienNX.toString();
+
+    await _phieuNXService.savePhieuNX(
+      maPhieuNX,
+      'px',
+      nguoiTaoPhieuNX,
+      ngayTaoPhieuNX,
+      ngayTPNX,
+      tuNgay,
+      denNgay,
+      '...',
+      '...',
+      soTienNX,
+      '0',
+      '0',
+      tongTien,
+    );
+    Navigator.of(context).pop();
+    notifyListeners();
+  }
+
+  void load() {
     notifyListeners();
   }
 }
