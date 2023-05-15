@@ -1,10 +1,47 @@
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
 import 'package:flutter/material.dart';
 
 class TramonPageResponsive extends StatelessWidget {
   const TramonPageResponsive({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return ResponsiveContainer(
+        small: TramonPage(
+          sizeText: width * 0.3 / 15,
+          widthButton: width * 0.3,
+          heightButton: width * 0.3 / 5,
+          small: true,
+        ),
+        large: TramonPage(
+          sizeText: width * 0.2 / 15,
+          widthButton: width * 0.2,
+          heightButton: width * 0.2 / 6,
+          small: false,
+        ));
+  }
+}
+
+class TramonPage extends StatefulWidget {
+  const TramonPage(
+      {super.key,
+      required this.sizeText,
+      required this.widthButton,
+      required this.heightButton,
+      required this.small});
+  final bool small;
+  final double sizeText;
+  final double widthButton;
+  final double heightButton;
+
+  @override
+  State<TramonPage> createState() => _TramonPageState();
+}
+
+class _TramonPageState extends State<TramonPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -489,24 +526,24 @@ class TramonPageResponsive extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(),
                                 Container(
-                                  padding: const EdgeInsets.all(50),
+                                  padding: const EdgeInsets.all(30),
                                   width: 187,
                                   height: 130,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: AppColors.Sepia),
                                   ),
-                                  child: const Text(
-                                    "Trả hết",
-                                    style: TextStyle(
-                                        color: AppColors.Sepia,
-                                        fontSize: 24,
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w600),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      IconButton(
+                                          iconSize: 60,
+                                          color: Colors.green,
+                                          onPressed: () {},
+                                          icon: const Icon(Icons.check_circle)),
+                                    ],
                                   ),
                                 ),
-                                
                               ],
                             ),
                           ),

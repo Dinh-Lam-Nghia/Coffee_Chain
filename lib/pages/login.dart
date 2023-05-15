@@ -1,8 +1,4 @@
-import 'package:coffee_chain/module/login_provider.dart';
-import 'package:coffee_chain/pages/PhucVu/phucvu_home.dart';
-import 'package:coffee_chain/pages/admin/admin_home.dart';
-import 'package:coffee_chain/pages/phache/phache_home.dart';
-import 'package:coffee_chain/pages/thungan/thungan_home.dart';
+import 'package:coffee_chain/module/login_provider.dart'; 
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
