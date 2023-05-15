@@ -4,11 +4,13 @@ import 'package:coffee_chain/pages/phache/quanlykho/phieu_nhap_xuat/them_phieunh
 import 'package:coffee_chain/pages/phache/quanlykho/table_data.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/phache_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class QuanLyKhoPage extends StatefulWidget {
-  const QuanLyKhoPage({super.key});
+  const QuanLyKhoPage({super.key, required this.maNV});
+  final String maNV;
   @override
   State<QuanLyKhoPage> createState() => _QuanLyKhoPageState();
 }
@@ -19,6 +21,11 @@ class _QuanLyKhoPageState extends State<QuanLyKhoPage> {
   final QuanLyKhoProvider _quanLyKhoProvider = QuanLyKhoProvider();
 
   listthem? selectedMenu;
+  @override
+  void initState() {
+    super.initState();
+    _quanLyKhoProvider.getAccPQ(widget.maNV);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,50 +57,37 @@ class _QuanLyKhoPageState extends State<QuanLyKhoPage> {
                                         color: AppColors.white,
                                         border: Border.all(
                                             width: 2, color: AppColors.Sepia)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          child: Text("Thêm",
-                                              style: AppStyles.lato.copyWith(
-                                                  fontWeight: FontWeight.w600)),
-                                        ),
-                                        PopupMenuButton<listthem>(
-                                          initialValue: selectedMenu,
-                                          icon:
-                                              const Icon(Icons.arrow_drop_down),
-                                          onSelected: (value) {
-                                            setState(() {
-                                              selectedMenu = value;
-                                            });
+                                    child: PopupMenuButton<listthem>(
+                                      initialValue: selectedMenu,
+                                      child: Center(
+                                        child: Text("Thêm",
+                                            style: AppStyles.lato.copyWith(
+                                                fontWeight: FontWeight.w600)),
+                                      ),
+                                      onSelected: (value) {
+                                        setState(() {
+                                          selectedMenu = value;
+                                        });
 
-                                            if (selectedMenu ==
-                                                listthem.nhapkho) {
-                                              themphieunhapkho(context);
-                                            } else {
-                                              themphieuxuatkho(context);
-                                            }
-                                          },
-                                          itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry<listthem>>[
-                                            PopupMenuItem<listthem>(
-                                              value: listthem.nhapkho,
-                                              child: Text('Phiếu nhập kho',
-                                                  style: AppStyles.lato
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400)),
-                                            ),
-                                            PopupMenuItem<listthem>(
-                                              value: listthem.xuatkho,
-                                              child: Text('Phiếu xuất kho',
-                                                  style: AppStyles.lato
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400)),
-                                            ),
-                                          ],
+                                        if (selectedMenu == listthem.nhapkho) {
+                                          themphieunhapkho(context, widget.maNV);
+                                        } else {
+                                          themphieuxuatkho(context, widget.maNV);
+                                        }
+                                      },
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<listthem>>[
+                                        PopupMenuItem<listthem>(
+                                          value: listthem.nhapkho,
+                                          child: Text('Phiếu nhập kho',
+                                              style: AppStyles.lato.copyWith(
+                                                  fontWeight: FontWeight.w400)),
+                                        ),
+                                        PopupMenuItem<listthem>(
+                                          value: listthem.xuatkho,
+                                          child: Text('Phiếu xuất kho',
+                                              style: AppStyles.lato.copyWith(
+                                                  fontWeight: FontWeight.w400)),
                                         ),
                                       ],
                                     ),
@@ -126,25 +120,15 @@ class _QuanLyKhoPageState extends State<QuanLyKhoPage> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    child: Row(
-                                      children: [
-                                        Text("Đinh Lâm Nghĩa ",
-                                            style: AppStyles.montserrat
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 20)),
-                                        const Icon(Icons.person, size: 40)
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
+                            AccUser(
+                              maNV: widget.maNV,
+                              tenNV: model.tenNV,
+                              PQPV: model.PQPV,
+                              PQTN: model.PQTN,
+                              PQAD: model.PQAD,
+                              PQPC: model.PQPC,
+                              XDTrang: 'phaChe',
+                            ),
                           ],
                         ),
                       ),
@@ -152,8 +136,8 @@ class _QuanLyKhoPageState extends State<QuanLyKhoPage> {
                       SizedBox(
                         width: double.infinity,
                         child: (model.thongKe)
-                            ? const TableData2()
-                            : const TableData1(),
+                            ? TableData2(maNV: widget.maNV)
+                            : TableData1(maNV: widget.maNV),
                       ),
                     ],
                   ),

@@ -1,6 +1,7 @@
 class AppAssetImages {
   static String image = 'assets/images/';
   static String logo = '${image}logo.png';
+  static String dnerr = '${image}dnerr.png';
 }
 
 class AppAssetIcon {

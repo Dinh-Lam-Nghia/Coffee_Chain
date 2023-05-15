@@ -5,9 +5,7 @@ import 'package:coffee_chain/widgets/phache_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void themphieuxuatkho(
-  BuildContext context,
-) async {
+void themphieuxuatkho(BuildContext context, String maNV) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -38,14 +36,15 @@ void themphieuxuatkho(
             ],
           ),
         ),
-        content: const ThemPhieuXuatKhoPage(),
+        content: ThemPhieuXuatKhoPage(maNV: maNV),
       );
     },
   );
 }
 
 class ThemPhieuXuatKhoPage extends StatefulWidget {
-  const ThemPhieuXuatKhoPage({super.key});
+  const ThemPhieuXuatKhoPage({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<ThemPhieuXuatKhoPage> createState() => _ThemPhieuXuatKhoPageState();
@@ -62,10 +61,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
   @override
   void initState() {
     super.initState();
-    _phieuXuatProvider.getListPhieuXuat();
-    for (int i = 0; i < _phieuXuatProvider.phieuXuat.length; i++) {
-      _phieuXuatProvider.tongtien(_phieuXuatProvider.phieuXuat[i].thanhTien);
-    }
+    _phieuXuatProvider.getAccPQ(widget.maNV);
   }
 
   @override
@@ -136,6 +132,31 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                           ),
                         ),
                       ]),
+                      Container(
+                        width: 250,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1,
+                            color: AppColors.grey,
+                          ),
+                        ),
+                        child: TextFormField(
+                          controller: model.layDL,
+                          onChanged: model.timkiem,
+                          style: const TextStyle(
+                              fontSize: 20, color: AppColors.black87),
+                          decoration: InputDecoration(
+                              hintStyle: AppStyles.lato.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.black87,
+                              ),
+                              icon: const Icon(Icons.search, size: 40),
+                              filled: true,
+                              fillColor: AppColors.white,
+                              border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none)),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -143,34 +164,34 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      width: 335,
-                      color: AppColors.grey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          DropdownButton<String>(
-                            value: dropdownValue,
-                            icon: const Icon(Icons.arrow_downward),
-                            elevation: 16,
-                            style: AppStyles.lato
-                                .copyWith(fontWeight: FontWeight.w500),
-                            onChanged: (String? value) {
-                              setState(() {
-                                dropdownValue = value!;
-                              });
-                            },
-                            items: list
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   width: 335,
+                    //   color: AppColors.grey,
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       DropdownButton<String>(
+                    //         value: dropdownValue,
+                    //         icon: const Icon(Icons.arrow_downward),
+                    //         elevation: 16,
+                    //         style: AppStyles.lato
+                    //             .copyWith(fontWeight: FontWeight.w500),
+                    //         onChanged: (String? value) {
+                    //           setState(() {
+                    //             dropdownValue = value!;
+                    //           });
+                    //         },
+                    //         items: list
+                    //             .map<DropdownMenuItem<String>>((String value) {
+                    //           return DropdownMenuItem<String>(
+                    //             value: value,
+                    //             child: Text(value),
+                    //           );
+                    //         }).toList(),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     //
                     SizedBox(
                       child: Row(
@@ -195,7 +216,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                 ),
                               ),
                               child: DateInputPhaChe(
-                                dateInput: model.ngayXuatPhieu,
+                                dateInput: model.tuNgay,
                               ),
                             ),
                           ]),
@@ -220,7 +241,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                 ),
                               ),
                               child: DateInputPhaChe(
-                                dateInput: model.ngayXuatPhieu,
+                                dateInput: model.denNgay,
                               ),
                             ),
                           ]),
@@ -333,7 +354,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                       color: 1)),
                                   DataCell(TextTable(
                                       text:
-                                          model.phieuXuat[i].soLuong.toString(),
+                                          model.phieuXuat[i].sLuong.toString(),
                                       color: 1)),
                                   DataCell(TextTable(
                                       text:
@@ -345,7 +366,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                       color: 1)),
                                   DataCell(IconButton(
                                     onPressed: () => model.xoaDong(
-                                        model.phieuXuat[i].maNVL.toString()),
+                                        model.phieuXuat[i].id.toString()),
                                     icon: const Icon(Icons.delete_forever),
                                   )),
                                 ]),
@@ -358,7 +379,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                         width: double.infinity,
                         alignment: Alignment.centerRight,
                         child: Text(
-                          "Tổng:        ${model.tongTien} VND",
+                          "Tổng:        ${model.sum} VND",
                           style: AppStyles.lato
                               .copyWith(fontWeight: FontWeight.w700),
                         ),
@@ -376,7 +397,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                   color: AppColors.grey1,
                                   child: InkWell(
                                     onTap: () {
-                                      themDong(context);
+                                      themDong(context, model);
                                     },
                                     splashColor: AppColors.black26,
                                     child: const NhapXuatKhoPutton(
@@ -393,7 +414,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                   Material(
                                     color: AppColors.grey1,
                                     child: InkWell(
-                                      onTap: () {},
+                                      onTap: () => model.luuPhieuNX(context),
                                       splashColor: AppColors.black26,
                                       child: const NhapXuatKhoPutton(
                                           width: 125,
@@ -406,7 +427,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                   Material(
                                     color: AppColors.grey1,
                                     child: InkWell(
-                                      onTap: () {},
+                                      onTap: () => model.clickHuy(context),
                                       splashColor: AppColors.black26,
                                       child: const NhapXuatKhoPutton(
                                           width: 125,
@@ -450,7 +471,157 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
   }
 }
 
-void themDong(BuildContext context) async {
+Widget themD(PhieuXuatProvider model) {
+  return SingleChildScrollView(
+    child: Container(
+      padding: const EdgeInsets.only(right: 30),
+      width: 600,
+      color: AppColors.Sepia,
+      child: Column(
+        children: [
+          Text(
+            model.er.toString(),
+            style: const TextStyle(fontSize: 30, color: AppColors.red),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Mã phiếu: ",
+                  style: AppStyles.lato.copyWith(
+                    color: AppColors.white,
+                    fontSize: 25,
+                  ),
+                ),
+                NhapXuatKhoInput(
+                  widthInput: 400,
+                  controller: model.maPhieu,
+                  readOnly: true,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Mã NVL: ",
+                  style: AppStyles.lato.copyWith(
+                    color: AppColors.white,
+                    fontSize: 25,
+                  ),
+                ),
+                NhapXuatKhoInput(
+                  widthInput: 400,
+                  controller: model.maNVL,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Tên NVL: ",
+                  style: AppStyles.lato.copyWith(
+                    color: AppColors.white,
+                    fontSize: 25,
+                  ),
+                ),
+                NhapXuatKhoInput(
+                  widthInput: 400,
+                  controller: model.tenNVL,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Đơn vị tính: ",
+                  style: AppStyles.lato.copyWith(
+                    color: AppColors.white,
+                    fontSize: 25,
+                  ),
+                ),
+                NhapXuatKhoInput(
+                  widthInput: 400,
+                  controller: model.donViTinh,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Đơn giá: ",
+                  style: AppStyles.lato.copyWith(
+                    color: AppColors.white,
+                    fontSize: 25,
+                  ),
+                ),
+                NhapXuatKhoInput(
+                  widthInput: 400,
+                  controller: model.donGia,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Số lượng: ",
+                  style: AppStyles.lato.copyWith(
+                    color: AppColors.white,
+                    fontSize: 25,
+                  ),
+                ),
+                NhapXuatKhoInput(
+                  widthInput: 400,
+                  controller: model.soLuong,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          Container(
+            padding: const EdgeInsets.only(left: 80),
+            child: Material(
+              color: AppColors.grey1,
+              child: InkWell(
+                onTap: model.validateThemdong,
+                splashColor: AppColors.black26,
+                child: const NhapXuatKhoPutton(
+                  width: 200,
+                  height: 35,
+                  icon: Icons.control_point_outlined,
+                  text: "Thêm",
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+void themDong(BuildContext context, PhieuXuatProvider model) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: true, // user must tap button!
@@ -474,196 +645,8 @@ void themDong(BuildContext context) async {
             ],
           ),
         ),
-        content: const ThemDong(),
+        content: themD(model),
       );
     },
   );
-}
-
-class ThemDong extends StatefulWidget {
-  const ThemDong({super.key});
-
-  @override
-  State<ThemDong> createState() => _ThemDongState();
-}
-
-class _ThemDongState extends State<ThemDong> {
-  @override
-  Widget build(BuildContext context) {
-    final PhieuXuatProvider _phieuXuatProvider = PhieuXuatProvider();
-    return ChangeNotifierProvider<PhieuXuatProvider>(
-      create: (context) => _phieuXuatProvider,
-      builder: (context, child) {
-        return Consumer<PhieuXuatProvider>(
-          builder: (context, model, child) {
-            return Scaffold(
-              backgroundColor: AppColors.Sepia,
-              body: SingleChildScrollView(
-                child: Container(
-                  padding: const EdgeInsets.only(right: 30),
-                  width: 600,
-                  color: AppColors.Sepia,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Mã phiếu: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.maPhieu,
-                              readOnly: true,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Mã NVL: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.maNVL,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Tên NVL: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.tenNVL,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Đơn vị tính: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.donViTinh,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Đơn giá: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.donGia,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Số lượng: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.soLuong,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Thành tiền: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.thanhTien,
-                              readOnly: true,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      Container(
-                        padding: const EdgeInsets.only(left: 80),
-                        child: Material(
-                          color: AppColors.grey1,
-                          child: InkWell(
-                            onTap: () {},
-                            splashColor: AppColors.black26,
-                            child: const NhapXuatKhoPutton(
-                              width: 200,
-                              height: 35,
-                              icon: Icons.control_point_outlined,
-                              text: "Thêm",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
 }

@@ -61,10 +61,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
   @override
   void initState() {
     super.initState();
-    _phieuXuatProvider.getListPhieuXuat();
-    for (int i = 0; i < _phieuXuatProvider.phieuXuat.length; i++) {
-      _phieuXuatProvider.tongtien(_phieuXuatProvider.phieuXuat[i].thanhTien);
-    }
+    _phieuXuatProvider.autoMaPN();
   }
 
   @override
@@ -332,7 +329,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                                       color: 1)),
                                   DataCell(TextTable(
                                       text:
-                                          model.phieuXuat[i].soLuong.toString(),
+                                          model.phieuXuat[i].sLuong.toString(),
                                       color: 1)),
                                   DataCell(TextTable(
                                       text:
@@ -617,27 +614,7 @@ class _ThemDongState extends State<ThemDong> {
                             )
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Thành tiền: ",
-                              style: AppStyles.lato.copyWith(
-                                color: AppColors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                            NhapXuatKhoInput(
-                              widthInput: 400,
-                              controller: model.thanhTien,
-                              readOnly: true,
-                            )
-                          ],
-                        ),
-                      ),
+                      ), 
                       const SizedBox(height: 30),
                       Container(
                         padding: const EdgeInsets.only(left: 80),

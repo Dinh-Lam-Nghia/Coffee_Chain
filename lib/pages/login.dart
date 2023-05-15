@@ -1,8 +1,4 @@
-import 'package:coffee_chain/module/login_provider.dart';
-import 'package:coffee_chain/pages/PhucVu/phucvu_home.dart';
-import 'package:coffee_chain/pages/admin/admin_home.dart';
-import 'package:coffee_chain/pages/phache/phache_home.dart';
-import 'package:coffee_chain/pages/thungan/thungan_home.dart';
+import 'package:coffee_chain/module/login_provider.dart'; 
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
@@ -141,163 +137,155 @@ class LoginPage extends StatelessWidget {
                                       const SizedBox(height: 14),
 
                                       //
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                              children: [
-                                                Radio(
-                                                  fillColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  focusColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  value: Radiobutton.phucVu,
-                                                  groupValue: model.radio,
-                                                  onChanged: model.getRadio,
-                                                ),
-                                                Text(
-                                                  'Phục vụ',
-                                                  style: AppStyles.montserrat
-                                                      .copyWith(
-                                                    fontWeight: FontWeight.w100,
-                                                    fontSize: sizeText,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                              children: [
-                                                Radio(
-                                                  fillColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  focusColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  value: Radiobutton.thuNgan,
-                                                  groupValue: model.radio,
-                                                  onChanged: model.getRadio,
-                                                ),
-                                                Text(
-                                                  'Thu ngân',
-                                                  style: AppStyles.montserrat
-                                                      .copyWith(
-                                                    fontWeight: FontWeight.w100,
-                                                    fontSize: sizeText,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 14,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                              children: [
-                                                Radio(
-                                                  fillColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  focusColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  value: Radiobutton.admin,
-                                                  groupValue: model.radio,
-                                                  onChanged: model.getRadio,
-                                                ),
-                                                Text(
-                                                  'Admin',
-                                                  style: AppStyles.montserrat
-                                                      .copyWith(
-                                                    fontWeight: FontWeight.w100,
-                                                    fontSize: sizeText,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                              children: [
-                                                Radio(
-                                                  fillColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  focusColor: MaterialStateColor
-                                                      .resolveWith((states) =>
-                                                          AppColors.Sepia),
-                                                  value: Radiobutton.phaChe,
-                                                  groupValue: model.radio,
-                                                  onChanged: model.getRadio,
-                                                ),
-                                                Text(
-                                                  'Pha chế',
-                                                  style: AppStyles.montserrat
-                                                      .copyWith(
-                                                    fontWeight: FontWeight.w100,
-                                                    fontSize: sizeText,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   mainAxisAlignment:
+                                      //       MainAxisAlignment.spaceAround,
+                                      //   children: [
+                                      //     Expanded(
+                                      //       flex: 1,
+                                      //       child: Row(
+                                      //         children: [
+                                      //           Radio(
+                                      //             fillColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             focusColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             value: Radiobutton.phucVu,
+                                      //             groupValue: model.radio,
+                                      //             onChanged: model.getRadio,
+                                      //           ),
+                                      //           Text(
+                                      //             'Phục vụ',
+                                      //             style: AppStyles.montserrat
+                                      //                 .copyWith(
+                                      //               fontWeight: FontWeight.w100,
+                                      //               fontSize: sizeText,
+                                      //             ),
+                                      //           )
+                                      //         ],
+                                      //       ),
+                                      //     ),
+                                      //     Expanded(
+                                      //       flex: 1,
+                                      //       child: Row(
+                                      //         children: [
+                                      //           Radio(
+                                      //             fillColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             focusColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             value: Radiobutton.thuNgan,
+                                      //             groupValue: model.radio,
+                                      //             onChanged: model.getRadio,
+                                      //           ),
+                                      //           Text(
+                                      //             'Thu ngân',
+                                      //             style: AppStyles.montserrat
+                                      //                 .copyWith(
+                                      //               fontWeight: FontWeight.w100,
+                                      //               fontSize: sizeText,
+                                      //             ),
+                                      //           )
+                                      //         ],
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // const SizedBox(
+                                      //   height: 14,
+                                      // ),
+                                      // Row(
+                                      //   mainAxisAlignment:
+                                      //       MainAxisAlignment.spaceAround,
+                                      //   children: [
+                                      //     Expanded(
+                                      //       flex: 1,
+                                      //       child: Row(
+                                      //         children: [
+                                      //           Radio(
+                                      //             fillColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             focusColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             value: Radiobutton.admin,
+                                      //             groupValue: model.radio,
+                                      //             onChanged: model.getRadio,
+                                      //           ),
+                                      //           Text(
+                                      //             'Admin',
+                                      //             style: AppStyles.montserrat
+                                      //                 .copyWith(
+                                      //               fontWeight: FontWeight.w100,
+                                      //               fontSize: sizeText,
+                                      //             ),
+                                      //           )
+                                      //         ],
+                                      //       ),
+                                      //     ),
+                                      //     Expanded(
+                                      //       flex: 1,
+                                      //       child: Row(
+                                      //         children: [
+                                      //           Radio(
+                                      //             fillColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             focusColor: MaterialStateColor
+                                      //                 .resolveWith((states) =>
+                                      //                     AppColors.Sepia),
+                                      //             value: Radiobutton.phaChe,
+                                      //             groupValue: model.radio,
+                                      //             onChanged: model.getRadio,
+                                      //           ),
+                                      //           Text(
+                                      //             'Pha chế',
+                                      //             style: AppStyles.montserrat
+                                      //                 .copyWith(
+                                      //               fontWeight: FontWeight.w100,
+                                      //               fontSize: sizeText,
+                                      //             ),
+                                      //           )
+                                      //         ],
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
 
                                       //
 
                                       const SizedBox(height: 60),
-                                      InkWell(
-                                        splashColor: AppColors.grey,
-                                        onTap: () {
-                                          Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => (model
-                                                              .radio ==
-                                                          Radiobutton.phucVu)
-                                                      ? const PhucVuHomeScreen()
-                                                      : (model.radio ==
-                                                              Radiobutton
-                                                                  .phaChe)
-                                                          ? const PhaCheHomePage()
-                                                          : (model.radio ==
-                                                                  Radiobutton
-                                                                      .admin)
-                                                              ? const AdminHomePage()
-                                                              : const ThuNganHomeScreen()),
-                                              (route) => false);
-                                        },
-                                        child: Container(
-                                          height: sizeHeightButton,
-                                          width: double.infinity,
-                                          alignment: Alignment.center,
-                                          decoration: const BoxDecoration(
-                                            color: AppColors.brownBlack,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20)),
+                                      Material(
+                                        color: AppColors.brownBlack,
+                                        child: InkWell(
+                                          splashColor: AppColors.grey,
+                                          onTap: () {
+                                            model.DangNhap(context);
+                                            if (model.err == true) {
+                                              _showMaterialDialog(context);
+                                            }
+                                          },
+                                          child: Container(
+                                            height: sizeHeightButton,
+                                            width: double.infinity,
+                                            alignment: Alignment.center,
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20)),
+                                            ),
+                                            child: Text("ĐĂNG NHẬP",
+                                                style: AppStyles.dmSans
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize:
+                                                            sizeTextButton)),
                                           ),
-                                          child: Text("ĐĂNG NHẬP",
-                                              style: AppStyles.dmSans.copyWith(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: sizeTextButton)),
                                         ),
                                       )
                                     ],
@@ -313,4 +301,17 @@ class LoginPage extends StatelessWidget {
           );
         });
   }
+}
+
+void _showMaterialDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Container(
+              width: 300,
+              height: 200,
+              child: Image.asset(AppAssetImages.dnerr)),
+        );
+      });
 }

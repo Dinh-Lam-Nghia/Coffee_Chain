@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OrderBodyPage extends StatefulWidget {
-  const OrderBodyPage({super.key});
+  const OrderBodyPage({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<OrderBodyPage> createState() => _OrderBodyPageState();
@@ -24,7 +25,7 @@ class _OrderBodyPageState extends State<OrderBodyPage> {
             return Scaffold(
               backgroundColor: AppColors.backgroundColor,
               body: (!model.themOrder)
-                  ? const OrderPageResponsive()
+                  ?   OrderPageResponsive(maNV: widget.maNV)
                   : const BodyGhiOrderResponsive(),
               floatingActionButton: (!model.themOrder)
                   ? FloatingActionButton(

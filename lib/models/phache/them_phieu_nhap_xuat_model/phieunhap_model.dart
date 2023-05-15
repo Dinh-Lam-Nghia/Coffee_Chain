@@ -1,22 +1,40 @@
-
 class PhieuNhapModel {
-  String? maPhieu;
+  int? id;
+  String? maPhieuNX;
   String? maNVL;
-  String? tenNVL;
+  String? tenNVL; 
   String? donViTinh;
-  int? soLuong;
+  int? sLuong;
   String? hsd;
   double? donGia;
-  double? thanhtien;
+  double? thanhTien;
+  String? coSo;
 
   PhieuNhapModel({
-    this.maPhieu,
+    this.id,
+    this.maPhieuNX,
     this.maNVL,
     this.tenNVL,
     this.donViTinh,
-    this.soLuong,
+    this.sLuong,
     this.hsd,
     this.donGia,
-    this.thanhtien,
+    this.thanhTien,
+    this.coSo,
   });
+
+  factory PhieuNhapModel.fromJson(Map<String, dynamic> json) {
+    return PhieuNhapModel(
+      id: int.parse(json['id'].toString()),
+      maPhieuNX: json["maPhieuNX"],
+      maNVL: json["maNVL"],
+      tenNVL: json["tenNVL"],
+      donViTinh: json["donViTinh"],
+      sLuong: int.parse(json['sLuong'].toString()),
+      hsd: json["hsd"],
+      donGia: double.parse(json["donGia"].toString()),
+      thanhTien: double.parse(json["thanhTien"].toString()),
+      coSo: json["coSo"],
+    );
+  }
 }

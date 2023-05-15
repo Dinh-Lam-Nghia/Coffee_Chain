@@ -87,7 +87,7 @@ class _YeuCauTTPageState extends State<YeuCauTTPage> {
                                         Container(
                                           alignment: Alignment.topCenter,
                                           child: Text(
-                                            model.listYCTT[index].soLuongNGuoi
+                                            model.listYCTT[index].slKhach
                                                 .toString(),
                                             style: AppStyles.lato.copyWith(
                                               color: AppColors.white,

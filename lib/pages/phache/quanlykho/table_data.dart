@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TableData1 extends StatefulWidget {
-  const TableData1({super.key});
+  const TableData1({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<TableData1> createState() => _TableData1State();
@@ -22,7 +23,7 @@ class _TableData1State extends State<TableData1> {
   @override
   void initState() {
     super.initState();
-    _phieuProvider.getTablePhieu();
+    _phieuProvider.getAccPQ(widget.maNV);
   }
 
   @override
@@ -32,76 +33,82 @@ class _TableData1State extends State<TableData1> {
       builder: (context, child) {
         return Consumer<TablePhieuProvider>(
           builder: (context, model, child) {
-            return model.TablePhieu.isNotEmpty
-                ? DataTable(columns: const [
-                    DataColumn(
-                        label:
-                            Expanded(child: TextTable(text: "Ngày", color: 0))),
-                    DataColumn(
-                        label: Expanded(
-                            child: TextTable(text: "Mã phiếu", color: 0))),
-                    DataColumn(
-                        label: Expanded(
-                            child: TextTable(text: "Loại phiếu", color: 0))),
-                    DataColumn(
-                        label: Expanded(
-                            child: TextTable(text: "Số tiền", color: 0))),
-                    DataColumn(
-                        label: Expanded(
-                            child:
-                                TextTable(text: "Người tạo phiếu", color: 0))),
-                    DataColumn(label: Text('')),
-                  ], rows: [
-                    for (int i = 0; i < model.TablePhieu.length; i++)
-                      DataRow(cells: [
-                        DataCell(TextTable(
-                            text: model.TablePhieu[i].ngayTao.toString(),
-                            color: 1)),
-                        DataCell(TextTable(
-                            text: model.TablePhieu[i].maPhieu.toString(),
-                            color: 1)),
-                        DataCell(TextTable(
-                            text: model.TablePhieu[i].loaiPhieu.toString(),
-                            color: 1)),
-                        DataCell(TextTable(
-                            text: model.TablePhieu[i].soTien.toString(),
-                            color: 1)),
-                        DataCell(TextTable(
-                            text: model.TablePhieu[i].nguoiTaoPhieu.toString(),
-                            color: 1)),
-                        DataCell(Center(
-                          child: Row(
-                            children: [
-                              InkWell(
-                                  onTap: () {
-                                    String text =
-                                        model.TablePhieu[i].maPhieu.toString();
-                                    // print(text[1]);
-                                    (text[1] == 'n' || text[1] == 'N')
-                                        ? editphieunhapkho(
-                                            context,
-                                            model.TablePhieu[i].maPhieu
-                                                .toString())
-                                        : editphieuxuatkho(
-                                            context,
-                                            model.TablePhieu[i].maPhieu
-                                                .toString());
-                                  },
-                                  child:
-                                      const EditDeleteOnlyTable(loai: 'edit')),
-                              const SizedBox(width: 30),
-                              InkWell(
-                                  onTap: () {},
-                                  child:
-                                      const EditDeleteOnlyTable(loai: 'delete'))
-                            ],
-                          ),
+            return DataTable(columns: [
+              const DataColumn(
+                  label: Expanded(child: TextTable(text: "Ngày", color: 0))),
+              const DataColumn(
+                  label:
+                      Expanded(child: TextTable(text: "Mã phiếu", color: 0))),
+              const DataColumn(
+                  label:
+                      Expanded(child: TextTable(text: "Loại phiếu", color: 0))),
+              const DataColumn(
+                  label: Expanded(child: TextTable(text: "Số tiền", color: 0))),
+              const DataColumn(
+                  label: Expanded(
+                      child: TextTable(text: "Người tạo phiếu", color: 0))),
+              DataColumn(
+                  label: Expanded(
+                child: Center(
+                  child: InkWell(
+                    onTap: model.getTablePhieu,
+                    child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.blue,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Icon(
+                          Icons.restart_alt_outlined,
+                          color: AppColors.white,
                         )),
-                      ])
-                  ])
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  ),
+                ),
+              )),
+            ], rows: [
+              for (int i = 0; i < model.TablePhieu.length; i++)
+                DataRow(cells: [
+                  DataCell(TextTable(
+                      text: model.TablePhieu[i].ngayTaoPhieuNX.toString(),
+                      color: 1)),
+                  DataCell(TextTable(
+                      text:
+                          '${model.TablePhieu[i].loaiPhieuNX.toString()}0${model.TablePhieu[i].maPhieuNX.toString()}',
+                      color: 1)),
+                  DataCell(TextTable(
+                      text: model
+                          .loaiPhieu(model.TablePhieu[i].loaiPhieuNX.toString())
+                          .toString(),
+                      color: 1)),
+                  DataCell(TextTable(
+                      text: model.TablePhieu[i].soTienNX.toString(), color: 1)),
+                  DataCell(TextTable(
+                      text: model.TablePhieu[i].ngayTaoPhieuNX.toString(),
+                      color: 1)),
+                  DataCell(Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            String text =
+                                model.TablePhieu[i].maPhieuNX.toString();
+                            // print(text[1]);
+                            (text[1] == 'n' || text[1] == 'N')
+                                ? editphieunhapkho(context,
+                                    model.TablePhieu[i].maPhieuNX.toString())
+                                : editphieuxuatkho(context,
+                                    model.TablePhieu[i].maPhieuNX.toString());
+                          },
+                          child: const EditDeleteOnlyTable(loai: 'edit')),
+                      const SizedBox(width: 30),
+                      InkWell(
+                          onTap: () => model.deletePhieuNX(
+                              model.TablePhieu[i].maPhieuNX.toString()),
+                          child: const EditDeleteOnlyTable(loai: 'delete'))
+                    ],
+                  )),
+                ])
+            ]);
           },
         );
       },
@@ -111,8 +118,9 @@ class _TableData1State extends State<TableData1> {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class TableData2 extends StatefulWidget {
-  const TableData2({super.key});
-
+  const TableData2({super.key, required this.maNV});
+  final String maNV;
+ 
   @override
   State<TableData2> createState() => _TableData2State();
 }
@@ -123,7 +131,7 @@ class _TableData2State extends State<TableData2> {
   @override
   void initState() {
     super.initState();
-    _thongKeKhoProvoder.getlistThongKeKho();
+    _thongKeKhoProvoder.getAccPQ(widget.maNV);
   }
 
   @override
@@ -141,31 +149,31 @@ class _TableData2State extends State<TableData2> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          print("object");
-                        },
-                        child: Container(
-                          width: 260,
-                          height: 50,
-                          color: AppColors.white,
-                          child: Stack(
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                child: Text("Tháng này ",
-                                    style: AppStyles.lato
-                                        .copyWith(fontWeight: FontWeight.w600)),
-                              ),
-                              Container(
-                                alignment: Alignment.centerRight,
-                                child: const Icon(Icons.keyboard_arrow_down,
-                                    size: 40, color: AppColors.Sepia),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     print("object");
+                      //   },
+                      //   child: Container(
+                      //     width: 260,
+                      //     height: 50,
+                      //     color: AppColors.white,
+                      //     child: Stack(
+                      //       children: [
+                      //         Container(
+                      //           alignment: Alignment.center,
+                      //           child: Text("Tháng này ",
+                      //               style: AppStyles.lato
+                      //                   .copyWith(fontWeight: FontWeight.w600)),
+                      //         ),
+                      //         Container(
+                      //           alignment: Alignment.centerRight,
+                      //           child: const Icon(Icons.keyboard_arrow_down,
+                      //               size: 40, color: AppColors.Sepia),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         child: Row(
                           children: [
@@ -181,7 +189,7 @@ class _TableData2State extends State<TableData2> {
                               color: AppColors.white,
                               child: SizedBox(
                                 child: DateInputPhaChe(
-                                  dateInput: model.stackDateInput,
+                                  dateInput: model.startDateInput,
                                 ),
                               ),
                             ),
@@ -213,11 +221,10 @@ class _TableData2State extends State<TableData2> {
                         height: 50,
                         color: AppColors.white,
                         child: TextFormField(
-                          controller: model.timKiem,
+                          onChanged: model.timkiem,
                           style: const TextStyle(
                               fontSize: 20, color: AppColors.black87),
                           decoration: const InputDecoration(
-                              hintText: "Lấy dữ liệu",
                               icon: Icon(Icons.search, size: 40),
                               filled: true,
                               fillColor: AppColors.white,
@@ -228,7 +235,7 @@ class _TableData2State extends State<TableData2> {
                       Material(
                         color: AppColors.white,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: model.getfollowNgay,
                           splashColor: Colors.black26,
                           child: SizedBox(
                             width: 218,
@@ -236,17 +243,22 @@ class _TableData2State extends State<TableData2> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(
-                                  AppAssetIcon.iconExcel,
-                                  width: 40,
-                                ),
-                                Text("Xuất file Excel",
+                                // Image.asset(
+                                //   AppAssetIcon.iconExcel,
+                                //   width: 40,
+                                // ),
+                                Icon(Icons.send),
+                                Text("Search",
                                     style: AppStyles.lato
                                         .copyWith(fontWeight: FontWeight.w600))
                               ],
                             ),
                           ),
                         ),
+                      ),
+                      InkWell(
+                        onTap: model.clear,
+                        child: Icon(Icons.close),
                       )
                     ]),
               ),
@@ -268,9 +280,9 @@ class _TableData2State extends State<TableData2> {
                   DataColumn(
                       label: Expanded(
                           child: TextTable(text: "Số lượng tồn", color: 0))),
-                  DataColumn(
-                      label: Expanded(
-                          child: TextTable(text: "Tồn đầu kỳ", color: 0))),
+                  // DataColumn(
+                  //     label: Expanded(
+                  //         child: TextTable(text: "Tồn đầu kỳ", color: 0))),
                   DataColumn(
                       label: Expanded(
                           child: TextTable(text: "SL nhập", color: 0))),
@@ -293,8 +305,8 @@ class _TableData2State extends State<TableData2> {
                       DataCell(TextTable(
                           text: model.TKkho[i].soLuongTon.toString(),
                           color: 1)),
-                      DataCell(TextTable(
-                          text: model.TKkho[i].tonDauKy.toString(), color: 1)),
+                      // DataCell(TextTable(
+                      //     text: model.TKkho[i].tonDauKy.toString(), color: 1)),
                       DataCell(TextTable(
                           text: model.TKkho[i].slNhap.toString(), color: 1)),
                       DataCell(TextTable(
