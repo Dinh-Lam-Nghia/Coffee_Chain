@@ -2,26 +2,33 @@ import 'package:coffee_chain/module/Phucvu_provider/order_Provider/order_provide
 import 'package:coffee_chain/pages/PhucVu/body_order/order/dangPhucVu.dart';
 import 'package:coffee_chain/pages/PhucVu/body_order/order/mangVe.dart';
 import 'package:coffee_chain/pages/PhucVu/body_order/order/yeuCauThanhToan.dart';
+import 'package:coffee_chain/pages/admin/admin_home.dart';
+import 'package:coffee_chain/pages/phache/phache_home.dart';
+import 'package:coffee_chain/pages/thungan/thungan_home.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/phache_widgets.dart';
 import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OrderPageResponsive extends StatelessWidget {
-  const OrderPageResponsive({super.key});
+  const OrderPageResponsive({super.key, required this.maNV});
+  final String maNV;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return ResponsiveContainer(
         small: OrderPage(
+          maNV: maNV,
           sizeText: width * 0.3 / 15,
           widthButton: width * 0.3,
           heightButton: width * 0.3 / 5,
           small: true,
         ),
         large: OrderPage(
+          maNV: maNV,
           sizeText: width * 0.2 / 15,
           widthButton: width * 0.2,
           heightButton: width * 0.2 / 6,
@@ -36,7 +43,9 @@ class OrderPage extends StatefulWidget {
       required this.sizeText,
       required this.widthButton,
       required this.heightButton,
-      required this.small});
+      required this.small,
+      required this.maNV});
+  final String maNV;
   final bool small;
   final double sizeText;
   final double widthButton;
@@ -46,6 +55,8 @@ class OrderPage extends StatefulWidget {
   State<OrderPage> createState() => _OrderPageState();
 }
 
+enum listthem { thanhToan, admin, phaChe }
+
 class _OrderPageState extends State<OrderPage> {
   OrderProvider _orderProvider = OrderProvider();
 
@@ -54,7 +65,10 @@ class _OrderPageState extends State<OrderPage> {
     super.initState();
     _orderProvider.getListBanHD();
     _orderProvider.getSL();
+    _orderProvider.getAccPQ(widget.maNV);
   }
+
+  listthem? selectedMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -183,26 +197,15 @@ class _OrderPageState extends State<OrderPage> {
                           ),
                           (widget.small)
                               ? Container()
-                              : Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        child: Row(
-                                          children: [
-                                            Text("Đinh Lâm Nghĩa ",
-                                                style: AppStyles.montserrat
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 20)),
-                                            const Icon(Icons.person, size: 40)
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
+                              : AccUser(
+                                  maNV: widget.maNV,
+                                  tenNV: model.tenNV,
+                                  PQPV: model.PQPV,
+                                  PQTN: model.PQTN,
+                                  PQAD: model.PQAD,
+                                  PQPC: model.PQPC,
+                                  XDTrang: 'phucVu',
+                                ),
                         ],
                       ),
                       //

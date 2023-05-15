@@ -1,8 +1,12 @@
 import 'package:coffee_chain/models/DsNVL_model.dart';
+import 'package:coffee_chain/models/NhanVien_model.dart';
+import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phache/tablePhieu_model.dart';
 import 'package:coffee_chain/models/phache/tableThongKe_model.dart';
 import 'package:coffee_chain/models/phache/them_phieu_nhap_xuat_model/phieunhap_model.dart';
 import 'package:coffee_chain/models/phache/them_phieu_nhap_xuat_model/phieuxuat_model.dart';
+import 'package:coffee_chain/models/phanQuyen_model.dart';
+import 'package:coffee_chain/service/DangNhap.service.dart';
 import 'package:coffee_chain/service/NVL.service.dart';
 import 'package:coffee_chain/service/PhieuNhapKho.service.dart';
 import 'package:coffee_chain/service/PhieuNhapXuat.service.dart';
@@ -40,10 +44,41 @@ class ThongKeKhoProvider extends ChangeNotifier {
   List<DsNVLModel> _NVL = [];
   List<DsNVLModel> get NVL => _NVL;
 
+  String? _coSo;
+  String _tenNV = '...';
+  String get tenNV => _tenNV;
+  int _PQPV = 0;
+  int get PQPV => _PQPV;
+  int _PQTN = 0;
+  int get PQTN => _PQTN;
+  int _PQAD = 0;
+  int get PQAD => _PQAD;
+  int _PQPC = 0;
+  int get PQPC => _PQPC;
+  final NhanVienService _nhanVienService = NhanVienService();
+  NhanVienModel? _nhanVien;
+  PhanQuyenModel? _phanQuyen;
+  UserPassModel? _CScoffee;
+  void getAccPQ(String maNV) async {
+    _nhanVien = await _nhanVienService.getNhanVien(maNV);
+    _tenNV = _nhanVien!.tenNV.toString();
+ 
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _PQPV = int.parse(_phanQuyen!.phucVu.toString());
+    _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
+    _PQAD = int.parse(_phanQuyen!.admin.toString());
+    _PQPC = int.parse(_phanQuyen!.phaChe.toString());
+
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
+    getlistThongKeKho();
+    notifyListeners();
+  }
+
   void getlistThongKeKho() async {
     _NVL = await _VL.getNVL();
-    _phieuN = await _PN.getPhieuNhap();
-    _phieuX = await _PX.getPhieuXuat();
+    _phieuN = await _PN.getPhieuNhap(_coSo!);
+    _phieuX = await _PX.getPhieuXuat(_coSo!);
 
     for (int a = 0; a < _NVL.length; a++) {
       String _ma = _NVL[a].maNVL.toString();
@@ -96,9 +131,9 @@ class ThongKeKhoProvider extends ChangeNotifier {
         }
       }
       _NVL = await _VL.getNVL();
-      _phieuNX = await _PNX.getTablePhieuNX();
-      _phieuN = await _PN.getPhieuNhap();
-      _phieuX = await _PX.getPhieuXuat();
+      _phieuNX = await _PNX.getTablePhieuNX(_coSo!);
+      _phieuN = await _PN.getPhieuNhap(_coSo!);
+      _phieuX = await _PX.getPhieuXuat(_coSo!);
 
       for (int a = 0; a < _NVL.length; a++) {
         String _ma = _NVL[a].maNVL.toString();
@@ -159,10 +194,6 @@ class ThongKeKhoProvider extends ChangeNotifier {
   }
 
   void timkiem(String value) {
-    // _TKkhoRun.clear();
-    // (value == '')
-    //     ? _TKkhoRun = _TKkho
-    //     :
     _TKkhoRun = _TKkho.where((element) =>
         element.tenNVL!.toUpperCase().contains(value.toUpperCase())).toList();
     notifyListeners();

@@ -4,10 +4,14 @@ class Url {
   //get
   static const String getBanHD = "$baseUrl/getBanHD.php";
   static const String getDSmonCheBien = "$baseUrl/getDSmonCheBien.php";
-  static const String getTablePhieuNX = "$baseUrl/getPhieuNhapXuat.php";
+  static const String getTablePhieuNX = "$baseUrl/getPhieuNhapXuat.php"; 
   static const String getPhieuNhapKho = "$baseUrl/getPhieuNhapKho.php";
   static const String getPhieuXuatKho = "$baseUrl/getPhieuXuatKho.php";
   static const String getNVL = "$baseUrl/getNVL.php";
+  static const String checkDN = "$baseUrl/checkDN.php";
+  static const String phanQuyen = "$baseUrl/getPhanQuyen.php";
+  static const String getNhanVien = "$baseUrl/getNhanVien.php";
+  static const String getCoSo = "$baseUrl/getCoSo.php";
 
   //update
   static const String updateBanhoatdong = "$baseUrl/updateBanHD.php";

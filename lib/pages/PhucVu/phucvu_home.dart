@@ -1,41 +1,58 @@
 import 'package:coffee_chain/module/Phucvu_provider/phucvu_Provider.dart';
 import 'package:coffee_chain/pages/PhucVu/body_order/orderbody.dart';
 import 'package:coffee_chain/pages/PhucVu/body_tramon/body_tramon.dart';
+import 'package:coffee_chain/pages/admin/admin_home.dart';
 import 'package:coffee_chain/pages/login.dart';
+import 'package:coffee_chain/pages/phache/phache_home.dart';
+import 'package:coffee_chain/pages/thungan/thungan_home.dart';
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/phache_widgets.dart';
 import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PhucVuHomeScreen extends StatelessWidget {
-  const PhucVuHomeScreen({super.key});
+  const PhucVuHomeScreen({super.key, required this.maNV});
+  final String maNV;
 
   @override
   Widget build(BuildContext context) {
-    return const ResponsiveContainer(
-        small: PhucVuHomePage(small: true),
-        large: PhucVuHomePage(small: false));
+    return ResponsiveContainer(
+        small: PhucVuHomePage(
+          maNV: maNV,
+          small: true,
+        ),
+        large: PhucVuHomePage(
+          maNV: maNV,
+          small: false,
+        ));
   }
 }
 
 class PhucVuHomePage extends StatefulWidget {
-  const PhucVuHomePage({super.key, required this.small});
+  const PhucVuHomePage({super.key, required this.small, required this.maNV});
+  final String maNV;
   final bool small;
 
   @override
   State<PhucVuHomePage> createState() => _PhucVuHomePageState();
 }
 
+enum listthem { thanhToan, admin, phaChe }
+
 class _PhucVuHomePageState extends State<PhucVuHomePage> {
   PhucvuProvider _orderProvider = PhucvuProvider();
 
-  void initStack() {
+  @override
+  void initState() {
     super.initState();
+    _orderProvider.getAccPQ(widget.maNV);
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  listthem? selectedMenu;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<PhucvuProvider>(
@@ -167,7 +184,7 @@ class _PhucVuHomePageState extends State<PhucVuHomePage> {
               ),
               body: (model.chonBody == menuPV.tramon)
                   ? const TramonPageResponsive()
-                  : const OrderBodyPage(),
+                  : OrderBodyPage(maNV: widget.maNV),
               drawer: Drawer(
                 child: Container(
                   color: AppColors.Sepia,
@@ -252,24 +269,16 @@ class _PhucVuHomePageState extends State<PhucVuHomePage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.person,
-                                          size: 40,
-                                          color: AppColors.white,
-                                        ),
-                                        Text("Đinh Lâm Nghĩa ",
-                                            style:
-                                                AppStyles.montserrat.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 20,
-                                              color: AppColors.white,
-                                            )),
-                                      ],
-                                    ),
-                                  )
+                                  AccUser(
+                                    maNV: widget.maNV,
+                                    tenNV: model.tenNV,
+                                    PQPV: model.PQPV,
+                                    PQTN: model.PQTN,
+                                    PQAD: model.PQAD,
+                                    PQPC: model.PQPC,
+                                    XDTrang: 'phucVu',
+                                    drawer: AppColors.white1,
+                                  ),
                                 ],
                               ),
                             ),

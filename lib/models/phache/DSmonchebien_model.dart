@@ -5,6 +5,7 @@ class DSmonCheBienModel {
   int? slMon;
   int? hoanThanh;
   String? note;
+  String? coSo;
 
   DSmonCheBienModel(
       {this.maBan,
@@ -12,7 +13,8 @@ class DSmonCheBienModel {
       this.tenMon,
       this.slMon,
       this.hoanThanh,
-      this.note});
+      this.note,
+      this.coSo,});
 
   factory DSmonCheBienModel.fromJson(Map<String, dynamic> json) {
     return DSmonCheBienModel(
@@ -22,6 +24,7 @@ class DSmonCheBienModel {
       slMon: int.parse(json['slMon'].toString()),
       hoanThanh: int.parse(json['hoanThanh'].toString()),
       note: json['note'],
+      coSo: json['coSo'],
     );
   }
 }

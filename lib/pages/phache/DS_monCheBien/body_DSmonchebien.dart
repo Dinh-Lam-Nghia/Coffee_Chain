@@ -2,11 +2,13 @@ import 'package:coffee_chain/module/phaChe_provider/DSmchenien_provider/DSmcheni
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/phache_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DSMCheBienPage extends StatefulWidget {
-  const DSMCheBienPage({super.key});
+  const DSMCheBienPage({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<DSMCheBienPage> createState() => _DSMCheBienPageState();
@@ -18,8 +20,7 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
   @override
   void initState() {
     super.initState();
-    _dSmonCheBienProvider.getListBanHD();
-    _dSmonCheBienProvider.getListMonCheBien();
+    _dSmonCheBienProvider.getAccPQ(widget.maNV);
   }
 
   @override
@@ -100,25 +101,15 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                               // ],
                               // ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    child: Row(
-                                      children: [
-                                        Text("Đinh Lâm Nghĩa ",
-                                            style: AppStyles.montserrat
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 20)),
-                                        const Icon(Icons.person, size: 40)
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
+                            AccUser(
+                              maNV: widget.maNV,
+                              tenNV: model.tenNV,
+                              PQPV: model.PQPV,
+                              PQTN: model.PQTN,
+                              PQAD: model.PQAD,
+                              PQPC: model.PQPC,
+                              XDTrang: 'phaChe',
+                            ),
                           ],
                         ),
                       ),

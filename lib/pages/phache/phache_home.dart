@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PhaCheHomePage extends StatefulWidget {
-  const PhaCheHomePage({super.key});
+  const PhaCheHomePage({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<PhaCheHomePage> createState() => _PhaCheHomePageState();
@@ -87,8 +88,8 @@ class _PhaCheHomePageState extends State<PhaCheHomePage> {
                 ],
               ),
               body: (model.menuClick == "DSmonchebien")
-                  ? const DSMCheBienPage()
-                  : const QuanLyKhoPage(),
+                  ? DSMCheBienPage(maNV: widget.maNV)
+                  : QuanLyKhoPage(maNV: widget.maNV),
             );
           },
         );

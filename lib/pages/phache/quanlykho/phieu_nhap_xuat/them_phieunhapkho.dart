@@ -1,5 +1,3 @@
-import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/quanLyKho_provider.dart';
-import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/table1QLK_Provider.dart';
 import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/themPhieu_nhap_xuat_provider/phieunhap_provider.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
@@ -7,7 +5,7 @@ import 'package:coffee_chain/widgets/phache_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void themphieunhapkho(BuildContext context) async {
+void themphieunhapkho(BuildContext context, String maNV) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -38,14 +36,15 @@ void themphieunhapkho(BuildContext context) async {
             ],
           ),
         ),
-        content: ThemPhieuNhapKhoPage(),
+        content: ThemPhieuNhapKhoPage(maNV: maNV),
       );
     },
   );
 }
 
 class ThemPhieuNhapKhoPage extends StatefulWidget {
-  const ThemPhieuNhapKhoPage({super.key});
+  const ThemPhieuNhapKhoPage({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<ThemPhieuNhapKhoPage> createState() => _ThemPhieuNhapKhoPageState();
@@ -57,7 +56,7 @@ class _ThemPhieuNhapKhoPageState extends State<ThemPhieuNhapKhoPage> {
   @override
   void initState() {
     super.initState();
-    _phieuNhapProvider.autoMaPN();
+    _phieuNhapProvider.getAccPQ(widget.maNV);
   }
 
   @override

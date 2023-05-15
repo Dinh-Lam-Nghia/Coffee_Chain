@@ -1,4 +1,3 @@
-
 class BanHoatDongModel {
   String? maBan;
   String? tenBan;
@@ -10,6 +9,7 @@ class BanHoatDongModel {
   int? dangPhucVu;
   int? thanhToan;
   int? mangve;
+  String? coSo;
 
   BanHoatDongModel({
     this.maBan,
@@ -22,6 +22,7 @@ class BanHoatDongModel {
     this.dangPhucVu,
     this.thanhToan,
     this.mangve,
+    this.coSo,
   });
 
   factory BanHoatDongModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +37,7 @@ class BanHoatDongModel {
       dangPhucVu: int.parse(json['dangPhucVu'].toString()),
       thanhToan: int.parse(json['thanhToan'].toString()),
       mangve: int.parse(json['mangve'].toString()),
+      coSo: json['coSo'].toString(),
     );
   }
 }

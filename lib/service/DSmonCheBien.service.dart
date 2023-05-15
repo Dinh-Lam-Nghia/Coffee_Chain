@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:coffee_chain/service/url.dart';
 
 class DSmonCheBienService {
-  Future<List<DSmonCheBienModel>> getDSmonCheBien() async {
+  Future<List<DSmonCheBienModel>> getDSmonCheBien(String coSo) async {
     var url = Uri.parse(Url.getDSmonCheBien);
-    var res = await http.post(url);
+    var res = await http.post(url, body: {"coSo": coSo});
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
       return body.map((e) => DSmonCheBienModel.fromJson(e)).toList();

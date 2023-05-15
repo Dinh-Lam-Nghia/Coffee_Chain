@@ -1,5 +1,11 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/table2TK_QLK_Provider.dart';
 import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/themPhieu_nhap_xuat_provider/phieunhap_provider.dart';
+import 'package:coffee_chain/pages/PhucVu/phucvu_home.dart';
+import 'package:coffee_chain/pages/admin/admin_home.dart';
+import 'package:coffee_chain/pages/phache/phache_home.dart';
+import 'package:coffee_chain/pages/thungan/thungan_home.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -248,6 +254,133 @@ class NhapXuatKhoPutton extends StatelessWidget {
         Icon(icon),
         Text(text),
       ]),
+    );
+  }
+}
+
+enum listthem { phucVu, thanhToan, admin, phaChe }
+
+class AccUser extends StatefulWidget {
+  const AccUser({
+    super.key,
+    required this.maNV,
+    required this.tenNV,
+    required this.PQPV,
+    required this.PQTN,
+    required this.PQAD,
+    required this.PQPC,
+    required this.XDTrang,
+    this.drawer,
+  });
+  final String maNV;
+  final String tenNV;
+  final int PQPV;
+  final int PQTN;
+  final int PQAD;
+  final int PQPC;
+  final String XDTrang;
+  final Color? drawer;
+
+  @override
+  State<AccUser> createState() => _AccUserState();
+}
+
+class _AccUserState extends State<AccUser> {
+  listthem? selectedMenu;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20),
+      child: Row(
+        children: [
+          SizedBox(
+            child: Row(
+              children: [
+                SizedBox(
+                  child: PopupMenuButton<listthem>(
+                    initialValue: selectedMenu,
+                    child: Center(
+                      child: Text(widget.tenNV.toString(),
+                          style: AppStyles.lato.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: widget.drawer ?? AppColors.black87)),
+                    ),
+                    onSelected: (value) {
+                      setState(() {
+                        selectedMenu = value;
+                      });
+                      if (selectedMenu == listthem.phucVu) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PhucVuHomeScreen(maNV: widget.maNV)),
+                            (route) => false);
+                      } else if (selectedMenu == listthem.thanhToan) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ThuNganHomePage()),
+                            (route) => false);
+                      } else if (selectedMenu == listthem.admin) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AdminHomePage()),
+                            (route) => false);
+                      } else if (selectedMenu == listthem.phaChe) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PhaCheHomePage(maNV: widget.maNV)),
+                            (route) => false);
+                      }
+                    },
+                    itemBuilder: (BuildContext context) =>
+                        <PopupMenuEntry<listthem>>[
+                      if (widget.PQPV == 1 && widget.XDTrang != 'phucVu')
+                        PopupMenuItem<listthem>(
+                          value: listthem.phucVu,
+                          child: Text('Phục vụ',
+                              style: AppStyles.lato
+                                  .copyWith(fontWeight: FontWeight.w400)),
+                        ),
+                      if (widget.PQTN == 1 && widget.XDTrang != 'thuNgan')
+                        PopupMenuItem<listthem>(
+                          value: listthem.thanhToan,
+                          child: Text('Thu ngân',
+                              style: AppStyles.lato
+                                  .copyWith(fontWeight: FontWeight.w400)),
+                        ),
+                      if (widget.PQAD == 1 && widget.XDTrang != 'Admin')
+                        PopupMenuItem<listthem>(
+                          value: listthem.admin,
+                          child: Text('Admin',
+                              style: AppStyles.lato
+                                  .copyWith(fontWeight: FontWeight.w400)),
+                        ),
+                      if (widget.PQPC == 1 && widget.XDTrang != 'phaChe')
+                        PopupMenuItem<listthem>(
+                          value: listthem.phaChe,
+                          child: Text('Pha Chế',
+                              style: AppStyles.lato
+                                  .copyWith(fontWeight: FontWeight.w400)),
+                        ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.person,
+                  size: 40,
+                  color: widget.drawer ?? AppColors.black87,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
