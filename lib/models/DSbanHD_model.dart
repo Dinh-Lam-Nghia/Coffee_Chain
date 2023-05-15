@@ -8,6 +8,7 @@ class BanHoatDongModel {
   bool? dangPV;
   bool? thanhToan;
   bool? mangVe;
+  bool? ctToan;
 
   BanHoatDongModel(
       {this.maBan,
@@ -18,7 +19,8 @@ class BanHoatDongModel {
       this.tongTien,
       this.dangPV,
       this.thanhToan,
-      this.mangVe});
+      this.mangVe,
+      this.ctToan});
 
   factory BanHoatDongModel.fromJson(Map<String, dynamic> json) {
     return BanHoatDongModel(
@@ -31,6 +33,7 @@ class BanHoatDongModel {
       dangPV: json['dangPV'],
       thanhToan: json['thanhToan'],
       mangVe: json['mangVe'],
+      ctToan: json['chothanhToan']
     );
   }
 }

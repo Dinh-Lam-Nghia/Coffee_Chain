@@ -282,7 +282,7 @@ class LoginPage extends StatelessWidget {
                                                                   Radiobutton
                                                                       .admin)
                                                               ? const AdminHomePage()
-                                                              : const ThuNganHomePage()),
+                                                              : const ThuNganHomeScreen()),
                                               (route) => false);
                                         },
                                         child: Container(

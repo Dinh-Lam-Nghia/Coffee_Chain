@@ -4,6 +4,7 @@ import 'package:coffee_chain/module/Phucvu_provider/order_Provider/ghiOrder_Prov
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
+import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,12 +15,35 @@ class BodyGhiOrderResponsive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BodyGhiOrderPage();
+    double width = MediaQuery.of(context).size.width;
+    return ResponsiveContainer(
+        small: BodyGhiOrderPage(
+          sizeText: width * 0.3 / 15,
+          widthButton: width * 0.3,
+          heightButton: width * 0.3 / 5,
+          small: true,
+        ),
+        large: BodyGhiOrderPage(
+          sizeText: width * 0.2 / 15,
+          widthButton: width * 0.2,
+          heightButton: width * 0.2 / 6,
+          small: false,
+        ));
   }
 }
 
 class BodyGhiOrderPage extends StatefulWidget {
-  const BodyGhiOrderPage({super.key});
+  const BodyGhiOrderPage(
+      {super.key,
+      required this.sizeText,
+      required this.widthButton,
+      required this.heightButton,
+      required this.small});
+
+  final bool small;
+  final double sizeText;
+  final double widthButton;
+  final double heightButton;
 
   @override
   State<BodyGhiOrderPage> createState() => _BodyGhiOrderPageState();

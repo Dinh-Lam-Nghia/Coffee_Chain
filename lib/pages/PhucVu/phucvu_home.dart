@@ -29,7 +29,7 @@ class PhucVuHomePage extends StatefulWidget {
 }
 
 class _PhucVuHomePageState extends State<PhucVuHomePage> {
-  PhucvuProvider _orderProvider = PhucvuProvider();
+  final PhucvuProvider _orderProvider = PhucvuProvider();
 
   void initStack() {
     super.initState();
