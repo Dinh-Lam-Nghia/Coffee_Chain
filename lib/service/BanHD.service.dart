@@ -5,9 +5,9 @@ import 'package:coffee_chain/models/DSbanHD_model.dart';
 import 'package:coffee_chain/service/url.dart';
 
 class BanHDService {
-  Future<List<BanHoatDongModel>> getBanHD() async {
+  Future<List<BanHoatDongModel>> getBanHD(String coSo) async {
     var url = Uri.parse(Url.getBanHD);
-    var res = await http.post(url);
+    var res = await http.post(url, body: {"coSo": coSo});
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
       return body.map((e) => BanHoatDongModel.fromJson(e)).toList();

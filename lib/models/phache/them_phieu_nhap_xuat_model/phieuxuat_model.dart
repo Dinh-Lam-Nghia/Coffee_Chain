@@ -7,16 +7,19 @@ class PhieuXuatModel {
   String? sLuong;
   String? donGia;
   String? thanhTien;
+  String? coSo;
 
-  PhieuXuatModel(
-      {this.id,
-      this.maPhieuNX,
-      this.maNVL,
-      this.tenNVL,
-      this.donViTinh,
-      this.sLuong,
-      this.donGia,
-      this.thanhTien});
+  PhieuXuatModel({
+    this.id,
+    this.maPhieuNX,
+    this.maNVL,
+    this.tenNVL,
+    this.donViTinh,
+    this.sLuong,
+    this.donGia,
+    this.thanhTien,
+    this.coSo,
+  });
 
   factory PhieuXuatModel.fromJson(Map<String, dynamic> json) {
     return PhieuXuatModel(
@@ -28,6 +31,7 @@ class PhieuXuatModel {
       sLuong: json['sLuong'],
       donGia: json['donGia'],
       thanhTien: json['thanhTien'],
+      coSo: json['coSo'],
     );
   }
 }

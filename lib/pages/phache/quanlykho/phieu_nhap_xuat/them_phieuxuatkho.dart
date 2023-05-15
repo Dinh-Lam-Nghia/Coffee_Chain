@@ -5,9 +5,7 @@ import 'package:coffee_chain/widgets/phache_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void themphieuxuatkho(
-  BuildContext context,
-) async {
+void themphieuxuatkho(BuildContext context, String maNV) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -38,14 +36,15 @@ void themphieuxuatkho(
             ],
           ),
         ),
-        content: const ThemPhieuXuatKhoPage(),
+        content: ThemPhieuXuatKhoPage(maNV: maNV),
       );
     },
   );
 }
 
 class ThemPhieuXuatKhoPage extends StatefulWidget {
-  const ThemPhieuXuatKhoPage({super.key});
+  const ThemPhieuXuatKhoPage({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<ThemPhieuXuatKhoPage> createState() => _ThemPhieuXuatKhoPageState();
@@ -62,7 +61,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
   @override
   void initState() {
     super.initState();
-    _phieuXuatProvider.autoMaPN();
+    _phieuXuatProvider.getAccPQ(widget.maNV);
   }
 
   @override

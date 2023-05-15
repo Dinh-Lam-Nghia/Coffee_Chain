@@ -1,7 +1,13 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:coffee_chain/models/DSbanHD_model.dart';
+import 'package:coffee_chain/models/NhanVien_model.dart';
+import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phache/DSmonchebien_model.dart';
+import 'package:coffee_chain/models/phanQuyen_model.dart';
 import 'package:coffee_chain/service/BanHD.service.dart';
 import 'package:coffee_chain/service/DSmonCheBien.service.dart';
+import 'package:coffee_chain/service/DangNhap.service.dart';
 import 'package:flutter/material.dart';
 
 class DSmonCheBienProvider extends ChangeNotifier {
@@ -16,10 +22,43 @@ class DSmonCheBienProvider extends ChangeNotifier {
   final BanHDService _banHDService = BanHDService();
   final DSmonCheBienService _dSmonCheBienService = DSmonCheBienService();
 
+  String? _coSo;
+  String _tenNV = '...';
+  String get tenNV => _tenNV;
+  int _PQPV = 0;
+  int get PQPV => _PQPV;
+  int _PQTN = 0;
+  int get PQTN => _PQTN;
+  int _PQAD = 0;
+  int get PQAD => _PQAD;
+  int _PQPC = 0;
+  int get PQPC => _PQPC;
+  final NhanVienService _nhanVienService = NhanVienService();
+  NhanVienModel? _nhanVien;
+  PhanQuyenModel? _phanQuyen;
+  UserPassModel? _CScoffee;
+  void getAccPQ(String maNV) async {
+    _nhanVien = await _nhanVienService.getNhanVien(maNV);
+    _tenNV = _nhanVien!.tenNV.toString();
+
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _PQPV = int.parse(_phanQuyen!.phucVu.toString());
+    _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
+    _PQAD = int.parse(_phanQuyen!.admin.toString());
+    _PQPC = int.parse(_phanQuyen!.phaChe.toString());
+
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
+
+    getListBanHD();
+    getListMonCheBien();
+    notifyListeners();
+  }
+
   void getListBanHD() async {
     List<BanHoatDongModel> _TMP = [];
     _TMP.clear();
-    _listBanHDTMP = await _banHDService.getBanHD();
+    _listBanHDTMP = await _banHDService.getBanHD(_coSo!);
 
     for (int i = 0; i < _listBanHDTMP.length; i++) {
       if (_listBanHDTMP[i].hoanThanhMon == 0) _TMP.add(_listBanHDTMP[i]);
@@ -30,7 +69,7 @@ class DSmonCheBienProvider extends ChangeNotifier {
   }
 
   void getListMonCheBien() async {
-    _listDSmonCheBien = await _dSmonCheBienService.getDSmonCheBien();
+    _listDSmonCheBien = await _dSmonCheBienService.getDSmonCheBien(_coSo!);
     notifyListeners();
   }
 

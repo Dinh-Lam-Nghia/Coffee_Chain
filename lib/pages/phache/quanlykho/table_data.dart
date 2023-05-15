@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TableData1 extends StatefulWidget {
-  const TableData1({super.key});
+  const TableData1({super.key, required this.maNV});
+  final String maNV;
 
   @override
   State<TableData1> createState() => _TableData1State();
@@ -22,7 +23,7 @@ class _TableData1State extends State<TableData1> {
   @override
   void initState() {
     super.initState();
-    _phieuProvider.getTablePhieu();
+    _phieuProvider.getAccPQ(widget.maNV);
   }
 
   @override
@@ -117,8 +118,9 @@ class _TableData1State extends State<TableData1> {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class TableData2 extends StatefulWidget {
-  const TableData2({super.key});
-
+  const TableData2({super.key, required this.maNV});
+  final String maNV;
+ 
   @override
   State<TableData2> createState() => _TableData2State();
 }
@@ -129,7 +131,7 @@ class _TableData2State extends State<TableData2> {
   @override
   void initState() {
     super.initState();
-    _thongKeKhoProvoder.getlistThongKeKho();
+    _thongKeKhoProvoder.getAccPQ(widget.maNV);
   }
 
   @override

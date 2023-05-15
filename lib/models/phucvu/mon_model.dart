@@ -7,6 +7,7 @@ class MonModel {
   String? noiNhanMon;
   double? giaTien;
   String? image;
+  String? coSo;
 
   MonModel(
     {
@@ -17,7 +18,8 @@ class MonModel {
       this.donViTinh,
       this.noiNhanMon,
       this.giaTien,
-      this.image
+      this.image,
+      this.coSo,
     }
   );
 
@@ -31,6 +33,7 @@ class MonModel {
       noiNhanMon: json['noiNhanMon'],
       giaTien: double.parse(json['giaTien'].toString()),
       image: json['image'],
+      coSo: json['coSo'],
     );
   }
 }

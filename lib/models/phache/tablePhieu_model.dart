@@ -12,6 +12,7 @@ class TablePhieuModel {
   String? tienThuTuDichVu;
   String? tienThuKhac;
   String? tongTien;
+  String? coSo;
 
   TablePhieuModel({
     this.maPhieuNX,
@@ -27,6 +28,7 @@ class TablePhieuModel {
     this.tienThuTuDichVu,
     this.tienThuKhac,
     this.tongTien,
+    this.coSo,
   });
 
   factory TablePhieuModel.fromJson(Map<String, dynamic> json) {
@@ -44,6 +46,7 @@ class TablePhieuModel {
       tienThuTuDichVu: json['tienThuTuDichVu'].toString(),
       tienThuKhac: json['tienThuKhac'].toString(),
       tongTien: json['tongTien'].toString(),
+      coSo: json['coSo'].toString(),
     );
   }
 }

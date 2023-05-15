@@ -1,5 +1,9 @@
+import 'package:coffee_chain/models/NhanVien_model.dart';
+import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phache/tablePhieu_model.dart';
 import 'package:coffee_chain/models/phache/them_phieu_nhap_xuat_model/phieuxuat_model.dart';
+import 'package:coffee_chain/models/phanQuyen_model.dart';
+import 'package:coffee_chain/service/DangNhap.service.dart';
 import 'package:coffee_chain/service/NVL.service.dart';
 import 'package:coffee_chain/service/PhieuNhapXuat.service.dart';
 import 'package:coffee_chain/service/phieuXuatKho.service.dart';
@@ -33,6 +37,38 @@ class PhieuXuatProvider extends ChangeNotifier {
   final TextEditingController _donGia = TextEditingController();
   TextEditingController get donGia => _donGia;
 
+  String? _coSo;
+  String _tenNV = '...';
+  String get tenNV => _tenNV;
+  int _PQPV = 0;
+  int get PQPV => _PQPV;
+  int _PQTN = 0;
+  int get PQTN => _PQTN;
+  int _PQAD = 0;
+  int get PQAD => _PQAD;
+  int _PQPC = 0;
+  int get PQPC => _PQPC;
+  final NhanVienService _nhanVienService = NhanVienService();
+  NhanVienModel? _nhanVien;
+  PhanQuyenModel? _phanQuyen;
+  UserPassModel? _CScoffee;
+  void getAccPQ(String maNV) async {
+    _nhanVien = await _nhanVienService.getNhanVien(maNV);
+    _tenNV = _nhanVien!.tenNV.toString();
+
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _PQPV = int.parse(_phanQuyen!.phucVu.toString());
+    _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
+    _PQAD = int.parse(_phanQuyen!.admin.toString());
+    _PQPC = int.parse(_phanQuyen!.phaChe.toString());
+
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
+
+    autoMaPN();
+    notifyListeners();
+  }
+
   double _tongTien = 0;
   double get tongTien => _tongTien;
 
@@ -41,7 +77,7 @@ class PhieuXuatProvider extends ChangeNotifier {
   String? _ma;
   int cout = 0;
   void autoMaPN() async {
-    _listPhieuTMP = await _phieuNXService.getTablePhieuNX();
+    _listPhieuTMP = await _phieuNXService.getTablePhieuNX(_coSo!);
     int i = _listPhieuTMP.length;
     (i == 0)
         ? cout = i + 1
@@ -49,7 +85,7 @@ class PhieuXuatProvider extends ChangeNotifier {
     _ma = "pn0$cout";
     _maPX = TextEditingController(text: _ma);
     _maPhieu = TextEditingController(text: _ma);
-    _nguoiLPX = TextEditingController(text: "Đinh Lâm Nghĩa");
+    _nguoiLPX = TextEditingController(text: _tenNV);
     getListPhieuXuat();
     notifyListeners();
   }
@@ -59,7 +95,7 @@ class PhieuXuatProvider extends ChangeNotifier {
   List<PhieuXuatModel> get phieuXuat => _phieuXuat;
   final PhieuXuatService _phieuXuatService = PhieuXuatService();
   void getListPhieuXuat() async {
-    _phieuXuatTMP = await _phieuXuatService.getPhieuXuat();
+    _phieuXuatTMP = await _phieuXuatService.getPhieuXuat(_coSo!);
     for (int i = 0; i < _phieuXuatTMP.length; i++) {
       if (_phieuXuatTMP[i].maPhieuNX == cout.toString()) {
         _phieuXuat.add(_phieuXuatTMP[i]);
@@ -133,13 +169,29 @@ class PhieuXuatProvider extends ChangeNotifier {
     double b = double.parse(_donGia.text);
     double c = a * b;
     String thanhTien = '$c';
+    String coSo = _coSo!;
 
-    addPhieuXuat(maPhieuNX, maNVL, donViTinh, sLuong, donGia, thanhTien);
+    addPhieuXuat(
+      maPhieuNX,
+      maNVL,
+      donViTinh,
+      sLuong,
+      donGia,
+      thanhTien,
+      coSo,
+    );
     notifyListeners();
   }
 
-  void addPhieuXuat(String maPhieuNX, String maNVL, String donViTinh,
-      String sLuong, String donGia, String thanhTien) async {
+  void addPhieuXuat(
+    String maPhieuNX,
+    String maNVL,
+    String donViTinh,
+    String sLuong,
+    String donGia,
+    String thanhTien,
+    String coSo,
+  ) async {
     await _phieuXuatService.addPhieuXuat(
       maPhieuNX,
       maNVL,
@@ -147,6 +199,7 @@ class PhieuXuatProvider extends ChangeNotifier {
       sLuong,
       donGia,
       thanhTien,
+      coSo,
     );
     _phieuXuat.clear();
     autoMaPN();
@@ -206,6 +259,7 @@ class PhieuXuatProvider extends ChangeNotifier {
     String denNgay = _denNgay.text;
     String soTienNX = _sum.toString();
     String tongTien = soTienNX.toString();
+    String coSo = _coSo!;
 
     await _phieuNXService.savePhieuNX(
       maPhieuNX,
@@ -221,6 +275,7 @@ class PhieuXuatProvider extends ChangeNotifier {
       '0',
       '0',
       tongTien,
+      coSo,
     );
     Navigator.of(context).pop();
     notifyListeners();

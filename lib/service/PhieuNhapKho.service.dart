@@ -5,19 +5,27 @@ import 'package:http/http.dart' as http;
 import 'package:coffee_chain/service/url.dart';
 
 class PhieuNhapService {
-  Future<List<PhieuNhapModel>> getPhieuNhap() async {
+  Future<List<PhieuNhapModel>> getPhieuNhap(String coSo) async {
     var url = Uri.parse(Url.getPhieuNhapKho);
-    var res = await http.post(url);
+    var res = await http.post(url, body: {'coSo': coSo});
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
       return body.map((e) => PhieuNhapModel.fromJson(e)).toList();
     } else {
-      throw Exception('Failed to load!'); 
+      throw Exception('Failed to load!');
     }
   }
 
-  Future<void> addPhieuNhap(String maPhieuNX, String maNVL, String donViTinh,
-      String sLuong, String hsd, String donGia, String thanhTien) async {
+  Future<void> addPhieuNhap(
+    String maPhieuNX,
+    String maNVL,
+    String donViTinh,
+    String sLuong,
+    String hsd,
+    String donGia,
+    String thanhTien,
+    String coSo,
+  ) async {
     var url = Uri.parse(Url.addPhieuNhap);
 
     await http.post(url, body: {
@@ -28,6 +36,7 @@ class PhieuNhapService {
       "hsd": hsd,
       "donGia": donGia,
       "thanhTien": thanhTien,
+      "coSo": coSo,
     });
   }
 

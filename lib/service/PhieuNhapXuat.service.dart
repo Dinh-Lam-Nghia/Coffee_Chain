@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:coffee_chain/service/url.dart';
 
 class TablePhieuNXService {
-  Future<List<TablePhieuModel>> getTablePhieuNX() async {
+  Future<List<TablePhieuModel>> getTablePhieuNX(String coSo) async {
     var url = Uri.parse(Url.getTablePhieuNX);
-    var res = await http.post(url);
+    var res = await http.post(url, body: {'coSo': coSo});
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
       return body.map((e) => TablePhieuModel.fromJson(e)).toList();
@@ -30,6 +30,7 @@ class TablePhieuNXService {
     String tienThuTuDichVu,
     String tienThuKhac,
     String tongTien,
+    String coSo,
   ) async {
     var url = Uri.parse(Url.savePhieuNX);
     var res = await http.post(url, body: {
@@ -46,6 +47,7 @@ class TablePhieuNXService {
       "tienThuTuDichVu": tienThuTuDichVu,
       "tienThuKhac": tienThuKhac,
       "tongTien": tongTien,
+      "coSo": coSo,
     });
   }
 

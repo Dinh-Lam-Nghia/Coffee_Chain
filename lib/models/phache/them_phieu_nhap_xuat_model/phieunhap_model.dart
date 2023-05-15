@@ -8,6 +8,7 @@ class PhieuNhapModel {
   String? hsd;
   double? donGia;
   double? thanhTien;
+  String? coSo;
 
   PhieuNhapModel({
     this.id,
@@ -19,6 +20,7 @@ class PhieuNhapModel {
     this.hsd,
     this.donGia,
     this.thanhTien,
+    this.coSo,
   });
 
   factory PhieuNhapModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class PhieuNhapModel {
       hsd: json["hsd"],
       donGia: double.parse(json["donGia"].toString()),
       thanhTien: double.parse(json["thanhTien"].toString()),
+      coSo: json["coSo"],
     );
   }
 }
