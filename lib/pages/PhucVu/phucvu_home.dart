@@ -43,7 +43,7 @@ class PhucVuHomePage extends StatefulWidget {
 enum listthem { thanhToan, admin, phaChe }
 
 class _PhucVuHomePageState extends State<PhucVuHomePage> {
-  PhucvuProvider _orderProvider = PhucvuProvider();
+  final PhucvuProvider _orderProvider = PhucvuProvider();
 
   @override
   void initState() {
