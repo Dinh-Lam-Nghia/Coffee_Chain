@@ -4,14 +4,28 @@ import 'package:coffee_chain/models/phanQuyen_model.dart';
 import 'package:coffee_chain/service/DangNhap.service.dart';
 import 'package:flutter/material.dart';
 
-enum menuTN { thanhtoan, thuchi }
+class QuanLyThuChiProvider extends ChangeNotifier {
 
-class ThunganProvider extends ChangeNotifier {
-  menuTN _chonBody = menuTN.thanhtoan;
-  menuTN get chonBody => _chonBody;
 
-  bool _thanhToan = false;
-  bool get thanhToan => _thanhToan;
+  final TextEditingController _maPT = TextEditingController();
+  TextEditingController get maPT => _maPT; 
+  final TextEditingController _nguoiLPT = TextEditingController();
+  TextEditingController get nguoiLPT => _nguoiLPT;
+  final TextEditingController _ngayThuTien = TextEditingController();
+  TextEditingController get ngayThuTien => _ngayThuTien;
+  final TextEditingController _soDuDauNgay = TextEditingController();
+  TextEditingController get soDuDauNgay => _soDuDauNgay;
+  final TextEditingController _soDuCuoiNgay = TextEditingController();
+  TextEditingController get soDuCuoiNgay => _soDuCuoiNgay;
+  final TextEditingController _layDL = TextEditingController();
+  TextEditingController get layDL => _layDL;
+
+  final TextEditingController _maPC = TextEditingController();
+  TextEditingController get maPC => _maPC; 
+  final TextEditingController _ngayLapPC = TextEditingController();
+  TextEditingController get ngayLapPC => _ngayLapPC;
+  final TextEditingController _nguoiLPC = TextEditingController();
+  TextEditingController get nguoiLPC => _nguoiLPC;
 
   String? _coSo;
   String _tenNV = '...';
@@ -31,7 +45,6 @@ class ThunganProvider extends ChangeNotifier {
   void getAccPQ(String maNV) async {
     _nhanVien = await _nhanVienService.getNhanVien(maNV);
     _tenNV = _nhanVien!.tenNV.toString();
-    print(_tenNV);
 
     _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
     _PQPV = int.parse(_phanQuyen!.phucVu.toString());
@@ -42,21 +55,6 @@ class ThunganProvider extends ChangeNotifier {
     _CScoffee = await _nhanVienService.getCoSo(maNV);
     _coSo = _CScoffee!.coSo.toString();
 
-    notifyListeners();
-  }
-
-  void clickThanhtoan() {
-    _chonBody = menuTN.thanhtoan;
-    notifyListeners();
-  }
-
-  void clickThuchi() {
-    _chonBody = menuTN.thuchi;
-    notifyListeners();
-  }
-
-  void onClickThanhtoan() {
-    _thanhToan = !_thanhToan;
     notifyListeners();
   }
 }
