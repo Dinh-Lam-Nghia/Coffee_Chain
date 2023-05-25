@@ -205,6 +205,7 @@ class _OrderPageState extends State<OrderPage> {
                                   PQAD: model.PQAD,
                                   PQPC: model.PQPC,
                                   XDTrang: 'phucVu',
+              
                                 ),
                         ],
                       ),

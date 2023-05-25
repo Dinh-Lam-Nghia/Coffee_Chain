@@ -203,6 +203,7 @@ class NhapXuatKhoInput extends StatelessWidget {
   final TextEditingController controller;
   final bool? readOnly;
   final int? db;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -321,7 +322,7 @@ class _AccUserState extends State<AccUser> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ThuNganHomePage()),
+                                builder: (context) => ThuNganHomeScreen(maNV: widget.maNV)),
                             (route) => false);
                       } else if (selectedMenu == listthem.admin) {
                         Navigator.pushAndRemoveUntil(

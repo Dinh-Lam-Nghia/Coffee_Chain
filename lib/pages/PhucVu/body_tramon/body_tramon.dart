@@ -82,6 +82,7 @@ class _TramonPageState extends State<TramonPage> {
                 height: 80,
               ),
               //
+
               SizedBox(
                 width: double.infinity,
                 child: Row(

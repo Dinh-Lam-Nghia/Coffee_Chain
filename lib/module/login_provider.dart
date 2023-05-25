@@ -56,26 +56,34 @@ class LoginProvider extends ChangeNotifier {
         if (_PQ!.phucVu == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => PhucVuHomeScreen(maNV: maNV,)),
-              (route) => false); 
+              MaterialPageRoute(
+                  builder: (context) => PhucVuHomeScreen(
+                        maNV: maNV,
+                      )),
+              (route) => false);
         } else if (_PQ!.thuNgan == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => ThuNganHomePage()),
-              (route) => false); 
+              MaterialPageRoute(builder: (context) => ThuNganHomeScreen(
+                        maNV: maNV,
+                      )),
+              (route) => false);
         } else if (_PQ!.admin == '1') {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => AdminHomePage()),
-              (route) => false); 
+              (route) => false);
         } else if (_PQ!.phaChe == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => PhaCheHomePage(maNV: maNV,)),
-              (route) => false); 
+              MaterialPageRoute(
+                  builder: (context) => PhaCheHomePage(
+                        maNV: maNV,
+                      )),
+              (route) => false);
         }
       }
     }
     notifyListeners();
-  } 
+  }
 }
