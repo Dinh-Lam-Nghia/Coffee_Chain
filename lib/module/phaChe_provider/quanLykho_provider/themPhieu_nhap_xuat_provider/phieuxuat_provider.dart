@@ -3,7 +3,7 @@ import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phache/tablePhieu_model.dart';
 import 'package:coffee_chain/models/phache/them_phieu_nhap_xuat_model/phieuxuat_model.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
-import 'package:coffee_chain/service/DangNhap.service.dart';
+import 'package:coffee_chain/service/NhanVien.service.dart';
 import 'package:coffee_chain/service/NVL.service.dart';
 import 'package:coffee_chain/service/PhieuNhapXuat.service.dart';
 import 'package:coffee_chain/service/phieuXuatKho.service.dart';
@@ -53,7 +53,10 @@ class PhieuXuatProvider extends ChangeNotifier {
   PhanQuyenModel? _phanQuyen;
   UserPassModel? _CScoffee;
   void getAccPQ(String maNV) async {
-    _nhanVien = await _nhanVienService.getNhanVien(maNV);
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
+
+    _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
     _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
@@ -61,9 +64,6 @@ class PhieuXuatProvider extends ChangeNotifier {
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());
     _PQPC = int.parse(_phanQuyen!.phaChe.toString());
-
-    _CScoffee = await _nhanVienService.getCoSo(maNV);
-    _coSo = _CScoffee!.coSo.toString();
 
     autoMaPN();
     notifyListeners();
@@ -121,36 +121,34 @@ class PhieuXuatProvider extends ChangeNotifier {
   final DsNVLService _dsNVLModelService = DsNVLService();
   String _er = '';
   String get er => _er;
-  int validateThemdong() {
-    print(_maNVL.selection.baseOffset.toInt());
-    if (_maNVL.selection.baseOffset.toInt() < 1) {
-      _er = 'Bạn chưa nhập mã NVL!';
-      load();
-      return 0;
-    }
-    if (_tenNVL.selection.baseOffset.toInt() < 1) {
-      _er = 'Bạn chưa nhập tên NVL!';
-      load();
-      return 0;
-    }
-    if (_donViTinh.selection.baseOffset.toInt() < 1) {
-      _er = 'Bạn chưa nhập đơn vị tính!';
-      load();
-      return 0;
-    }
-    if (_soLuong.selection.baseOffset.toInt() < 1) {
-      _er = 'Bạn chưa nhập số luọng!';
-      load();
-      return 0;
-    }
-    if (_donGia.selection.baseOffset.toInt() < 1) {
+  bool check = false;
+  void validateThemdong() {
+    check = false;
+    _er = '';
+    if (_donGia.text.toString() == '') {
       _er = 'Bạn chưa nhập đơn giá!';
-      load();
-      return 0;
+      check = true;
     }
-    checkMaNVL(_maNVL.text.toString(), _tenNVL.text.toString());
+    if (_soLuong.text.toString() == '') {
+      _er = 'Bạn chưa nhập số luọng!';
+      check = true;
+    }
+    if (_donViTinh.text.toString() == '') {
+      _er = 'Bạn chưa nhập đơn vị tính!';
+      check = true;
+    }
+    if (_tenNVL.text.toString() == '') {
+      _er = 'Bạn chưa nhập tên NVL!';
+      check = true;
+    }
+    if (_maNVL.text.toString() == '') {
+      _er = 'Bạn chưa nhập mã NVL!';
+      check = true;
+    }
+    if (!check) {
+      checkMaNVL(_maNVL.text.toString(), _tenNVL.text.toString());
+    }
     notifyListeners();
-    return 0;
   }
 
   void checkMaNVL(String ma, String ten) async {
@@ -222,7 +220,7 @@ class PhieuXuatProvider extends ChangeNotifier {
 
   void clickHuy(context) async {
     String maPhieuNX = cout.toString();
-    await _phieuXuatService.deletePhieuXuatMaPhieu(maPhieuNX);
+    await _phieuXuatService.deletePhieuXuatMaPhieu(maPhieuNX, _coSo!);
     Navigator.of(context).pop();
     notifyListeners();
   }

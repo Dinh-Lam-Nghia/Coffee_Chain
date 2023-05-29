@@ -179,7 +179,7 @@ class LoginPage extends StatelessWidget {
                                       //                 .resolveWith((states) =>
                                       //                     AppColors.Sepia),
                                       //             value: Radiobutton.thuNgan,
-                                      //             groupValue: model.radio,
+                                                  // groupValue: model.radio,
                                       //             onChanged: model.getRadio,
                                       //           ),
                                       //           Text(

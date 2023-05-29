@@ -2,9 +2,6 @@ import 'package:coffee_chain/module/Phucvu_provider/order_Provider/order_provide
 import 'package:coffee_chain/pages/PhucVu/body_order/order/dangPhucVu.dart';
 import 'package:coffee_chain/pages/PhucVu/body_order/order/mangVe.dart';
 import 'package:coffee_chain/pages/PhucVu/body_order/order/yeuCauThanhToan.dart';
-import 'package:coffee_chain/pages/admin/admin_home.dart';
-import 'package:coffee_chain/pages/phache/phache_home.dart';
-import 'package:coffee_chain/pages/thungan/thungan_home.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
 import 'package:coffee_chain/widgets/phache_widgets.dart';
@@ -63,8 +60,6 @@ class _OrderPageState extends State<OrderPage> {
   @override
   void initState() {
     super.initState();
-    _orderProvider.getListBanHD();
-    _orderProvider.getSL();
     _orderProvider.getAccPQ(widget.maNV);
   }
 
@@ -211,10 +206,13 @@ class _OrderPageState extends State<OrderPage> {
                       ),
                       //
                       (model.clickMnOd == clickMenuOrder.dangpv)
-                          ? const BodyDangPVResponsive()
+                          ? BodyDangPVResponsive(
+                              maNV: widget.maNV, model: model)
                           : (model.clickMnOd == clickMenuOrder.yctramon)
-                              ? const YeuCauTTResponsive()
-                              : const MangVeResponsive(),
+                              ? YeuCauTTResponsive(
+                                  maNV: widget.maNV, model: model)
+                              : MangVeResponsive(
+                                  maNV: widget.maNV, model: model),
                       //
                     ]),
               ),

@@ -45,9 +45,11 @@ class PhieuNhapService {
     await http.post(url, body: {"id": id});
   }
 
-  Future<void> deletePhieuNhapMaPhieu(String maPhieuNX) async {
+  Future<void> deletePhieuNhapMaPhieu(String maPhieuNX, String coSo) async {
     var url = Uri.parse(Url.deletePhieuNhapMaPhieu);
-    await http.post(url, body: {"maPhieuNX": maPhieuNX});
+    await http.post(url, body: {"maPhieuNX": maPhieuNX,
+      "coSo": coSo,
+    });
   }
 }
 

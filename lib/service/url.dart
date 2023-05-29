@@ -1,7 +1,8 @@
 class Url {
-  static const String baseUrl = "http://localhost/serverAPI_CoffeeChain";
+  static const String baseUrl = "http://192.168.1.8/serverAPI_CoffeeChain";// .1.14   .3.113
 
   //get
+  static const String image = "$baseUrl/Images/";
   static const String getBanHD = "$baseUrl/getBanHD.php";
   static const String getDSmonCheBien = "$baseUrl/getDSmonCheBien.php";
   static const String getTablePhieuNX = "$baseUrl/getPhieuNhapXuat.php";
@@ -12,19 +13,38 @@ class Url {
   static const String getPhieuXuatKho = "$baseUrl/getPhieuXuatKho.php";
   static const String getNVL = "$baseUrl/getNVL.php";
   static const String checkDN = "$baseUrl/checkDN.php";
+  static const String getAllDangnhap = "$baseUrl/getAllDangnhap.php";
   static const String phanQuyen = "$baseUrl/getPhanQuyen.php";
+  static const String getAllPhanQuyen = "$baseUrl/getAllPhanQuyen.php";
   static const String getNhanVien = "$baseUrl/getNhanVien.php";
+  static const String getAllNhanVien = "$baseUrl/getAllNhanVien.php";
   static const String getCoSo = "$baseUrl/getCoSo.php";
+  static const String getThucDon = "$baseUrl/getThucDon.php";
+  static const String getDsBan = "$baseUrl/getDsBan.php";
+  static const String getKhuyenMai = "$baseUrl/getKhuyenMai.php";
 
   //update
   static const String updateBanhoatdong = "$baseUrl/updateBanHD.php";
   static const String getUpMonHoanThanh = "$baseUrl/getUpMonHoanThanh.php";
   static const String checkAddNVL = "$baseUrl/checkAddNVL.php";
   static const String updatePhieuNhapKho = "$baseUrl/updatePhieuNhapKho.php";
+  static const String dangPvThanhToanMangve = "$baseUrl/dangPvThanhToanMangve.php";
+  static const String upSLmonmonCB = "$baseUrl/upSLmonmonCB.php";
+  static const String updateUser = "$baseUrl/updateUser.php";
+  static const String updatePQ = "$baseUrl/updatePQ.php";
 
   // add
   static const String addPhieuNhap = "$baseUrl/checkAddPhieuNhap.php";
   static const String addPhieuXuat = "$baseUrl/addPhieuXuat.php";
+  static const String addbanHD = "$baseUrl/addbanHD.php";
+  static const String adddSmonCheBien = "$baseUrl/adddSmonCheBien.php";
+  static const String addMon = "$baseUrl/addMon.php";
+  static const String addNhanVien = "$baseUrl/addNhanVien.php";
+  static const String addPQ = "$baseUrl/addPQ.php";
+  static const String addUser = "$baseUrl/addUser.php";
+  static const String addKhuyenMai = "$baseUrl/addKhuyenMai.php";
+  static const String addKMgiamGia = "$baseUrl/addKMgiamGia.php";
+  static const String addKMtangMon = "$baseUrl/addKMtangMon.php";
   static const String addPhieuThu = "$baseUrl/checkAddPhieuThu.php";
   static const String addPhieuChi = "$baseUrl/checkAddPhieuChi.php";
 
@@ -38,11 +58,17 @@ class Url {
   static const String deletePhieuXuatId = "$baseUrl/deletePhieuXuatId.php";
   static const String deletePhieuXuatMaPhieu = "$baseUrl/deletePhieuXuatMaPhieu.php";
   static const String deletePhieuNX = "$baseUrl/deletePhieuNX.php";
+  static const String deletemonCB = "$baseUrl/deletemonCB.php";
+  static const String deleteMonTD = "$baseUrl/deleteMonTD.php";
+  static const String deleteNhanVien3table = "$baseUrl/deleteNhanVien3table.php";
+  static const String deleteNhanVien = "$baseUrl/deleteNhanVien.php";
+  static const String dateleOnlyMaKM = "$baseUrl/dateleOnlyMaKM.php";
   static const String deletePhieuTC = "$baseUrl/deletePhieuTC.php";
 
   // edit
 
   // save
   static const String savePhieuNX = "$baseUrl/savePhieuNX.php";
+  static const String uploadImage = "$baseUrl/uploadImage.php";
   static const String savePhieuTC = "$baseUrl/savePhieuTC.php";
 }

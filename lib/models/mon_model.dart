@@ -5,25 +5,23 @@ class MonModel {
   String? nhomThucDon;
   String? donViTinh;
   String? noiNhanMon;
-  double? giaTien;
+  String? giaTien;
   String? image;
   String? coSo;
 
-  MonModel(
-    {
-      this.maMon,
-      this.tenMon,
-      this.loaiMon,
-      this.nhomThucDon,
-      this.donViTinh,
-      this.noiNhanMon,
-      this.giaTien,
-      this.image,
-      this.coSo,
-    }
-  );
+  MonModel({
+    this.maMon,
+    this.tenMon,
+    this.loaiMon,
+    this.nhomThucDon,
+    this.donViTinh,
+    this.noiNhanMon,
+    this.giaTien,
+    this.image,
+    this.coSo,
+  });
 
-  factory MonModel.fromJson(Map<String,dynamic>json){
+  factory MonModel.fromJson(Map<String, dynamic> json) {
     return MonModel(
       maMon: json['maMon'],
       tenMon: json['tenMon'],
@@ -31,7 +29,7 @@ class MonModel {
       nhomThucDon: json['nhomThucDon'],
       donViTinh: json['donViTinh'],
       noiNhanMon: json['noiNhanMon'],
-      giaTien: double.parse(json['giaTien'].toString()),
+      giaTien: json['giaTien'],
       image: json['image'],
       coSo: json['coSo'],
     );

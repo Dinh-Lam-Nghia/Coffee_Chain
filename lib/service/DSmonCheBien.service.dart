@@ -17,12 +17,52 @@ class DSmonCheBienService {
   }
 
   Future<void> postUpMonHoanThanh(
-      String maBan, String maMon, int hoanThanh) async {
+      String maBan, String maMon, int hoanThanh, String coSo) async {
     var url = Uri.parse(Url.getUpMonHoanThanh);
     await http.post(url, body: {
       "maBan": maBan,
       "maMon": maMon,
-      "hoanThanh": hoanThanh.toString()
+      "hoanThanh": hoanThanh.toString(),
+      "coSo": coSo,
+    });
+  }
+
+  Future<void> adddSmonCheBien(
+    String maBan,
+    String maMon,
+    String slMon,
+    String hoanThanh,
+    String note,
+    String coSo,
+  ) async {
+    var url = Uri.parse(Url.adddSmonCheBien);
+    await http.post(url, body: {
+      "maBan": maBan,
+      "maMon": maMon,
+      "slMon": slMon,
+      "hoanThanh": hoanThanh,
+      "note": note,
+      "coSo": coSo,
+    });
+  }
+  Future<void> upSLmonmonCB(
+      String maBan, String maMon, String slMon, String coSo) async {
+    var url = Uri.parse(Url.upSLmonmonCB);
+    await http.post(url, body: {
+      "maBan": maBan,
+      "maMon": maMon, 
+      "slMon": slMon,
+      "coSo": coSo,
+    });
+  }
+
+  Future<void> deletemonCB(
+      String maBan, String maMon, String coSo) async {
+    var url = Uri.parse(Url.deletemonCB);
+    await http.post(url, body: {
+      "maBan": maBan,
+      "maMon": maMon, 
+      "coSo": coSo,
     });
   }
 }
