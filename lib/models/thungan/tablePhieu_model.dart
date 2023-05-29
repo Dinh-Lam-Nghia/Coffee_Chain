@@ -5,7 +5,7 @@ class TablePhieuModel {
   String? loaiPhieuTC;
   String? nguoiTaoPhieuTC;
   String? ngayThuTienTC;
-  String? ngayLapPhieuTC;
+  String? ngayTaoPhieuTC;
   String? soDuDN;
   String? soDuCN;
   String? soTien;
@@ -16,7 +16,7 @@ class TablePhieuModel {
     this.loaiPhieuTC,
     this.nguoiTaoPhieuTC,
     this.ngayThuTienTC,
-    this.ngayLapPhieuTC,
+    this.ngayTaoPhieuTC,
     this.soDuDN,
     this.soDuCN,
     this.soTien,
@@ -29,7 +29,7 @@ class TablePhieuModel {
       loaiPhieuTC: json['loaiPhieuTC'],
       nguoiTaoPhieuTC: json['nguoiTaoPhieuTC'],
       ngayThuTienTC: json['ngayThuTienTC'],
-      ngayLapPhieuTC: json['ngayLapPhieuTC'],
+      ngayTaoPhieuTC: json['ngayTaoPhieuTC'],
       soDuDN: json['soDuDN'],
       soDuCN: json['soDuCN'],
       soTien: json['soTien'],

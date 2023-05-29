@@ -19,27 +19,25 @@ class PhieuChiService{
   Future<void> addPhieuChi(
     String maPhieuTC,
     String sTT,
-    String chiPNVL,
-    String chiPDN,
-    String khac,
+    String chiPhiNVL,
+    String chiPhiDienNuoc,
+    String chiPhiKhac,
     String soTien,
-    String ghiChu,
+    String note,
+    String thanhTien,
   ) async{
     var url = Uri.parse(Url.addPhieuChi);
 
     await http.post(url, body: {
       "maPhieuTC": maPhieuTC,
-      "sTT": sTT,
-      "chiPNVL": chiPNVL,
-      "chiPDN": chiPDN,
-      "khac": khac,
+      "STT": sTT,
+      "chiPhiNVL": chiPhiNVL,
+      "chiPhiDienNuoc": chiPhiDienNuoc,
+      "chiPhiKhac": chiPhiKhac,
       "soTien": soTien,
-      "ghiChu": ghiChu,
+      "ghiChu": note,
+      "thanhTien": thanhTien,
     });
-  }
-  Future<void> deletePhieuChiId(String id) async {
-    var url = Uri.parse(Url.deletePhieuChiId);
-    await http.post(url, body: {"id": id});
   }
   Future<void> deletePhieuChiMaPhieu(String maPhieuTC) async {
     var url = Uri.parse(Url.deletePhieuChiMaPhieu);

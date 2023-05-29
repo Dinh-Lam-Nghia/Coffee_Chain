@@ -84,9 +84,9 @@ class _ThemPhieuThuTienPageState extends State<ThemPhieuThuTienPage> {
                                   color: AppColors.black87,
                                 ),
                               ),
-                              NhapXuatKhoInput(
+                              ThuChiInput(
                                   widthInput: 170,
-                                  controller: model.maPT,
+                                  controller: model.maPhieuTC,
                                   readOnly: true)
                             ],
                           ),
@@ -98,7 +98,7 @@ class _ThemPhieuThuTienPageState extends State<ThemPhieuThuTienPage> {
                                 color: AppColors.black87,
                               ),
                             ),
-                            NhapXuatKhoInput(
+                            ThuChiInput(
                                 widthInput: 240,
                                 controller: model.nguoiLPT,
                                 readOnly: true)
@@ -258,23 +258,24 @@ class _ThemPhieuThuTienPageState extends State<ThemPhieuThuTienPage> {
                                             i++)
                                           DataRow(cells: [
                                             DataCell(TextTable(
-                                                text: model.phieuThu[i].NgayGLHD
+                                                text: model
+                                                    .phieuThu[i].ngayGioLHD
                                                     .toString(),
                                                 color: 1)),
                                             DataCell(TextTable(
-                                                text: model.phieuThu[i].MaHD
+                                                text: model.phieuThu[i].maHD
                                                     .toString(),
                                                 color: 1)),
                                             DataCell(TextTable(
-                                                text: model.phieuThu[i].NguoiTHD
+                                                text: model.phieuThu[i].nguoiTHD
                                                     .toString(),
                                                 color: 1)),
                                             DataCell(TextTable(
-                                                text: model.phieuThu[i].SoTPT
+                                                text: model.phieuThu[i].soTPT
                                                     .toString(),
                                                 color: 1)),
                                             DataCell(TextTable(
-                                                text: model.phieuThu[i].XemLHD
+                                                text: model.phieuThu[i].xemLHD
                                                     .toString(),
                                                 color: 1)),
                                             DataCell(IconButton(
@@ -420,14 +421,14 @@ Widget themD(PhieuThuProvider model) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "* Ngày giờ lập hóa đơn: ",
+                    "* Ngày GLHD: ",
                     style: AppStyles.lato.copyWith(
                       color: AppColors.white,
                       fontSize: 25,
                     ),
                   ),
                   NhapXuatKhoInput(
-                    widthInput: 310,
+                    widthInput: 400,
                     controller: model.ngayGLHD,
                   )
                 ],
@@ -458,14 +459,14 @@ Widget themD(PhieuThuProvider model) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "* Người tạo hóa đơn: ",
+                    "* Người THĐ: ",
                     style: AppStyles.lato.copyWith(
                       color: AppColors.white,
                       fontSize: 25,
                     ),
                   ),
                   NhapXuatKhoInput(
-                    widthInput: 330,
+                    widthInput: 400,
                     controller: model.nguoiTHD,
                   )
                 ],
@@ -477,14 +478,14 @@ Widget themD(PhieuThuProvider model) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "* Số tiền phải thu: ",
+                    "* Số TPT: ",
                     style: AppStyles.lato.copyWith(
                       color: AppColors.white,
                       fontSize: 25,
                     ),
                   ),
                   NhapXuatKhoInput(
-                    widthInput: 350,
+                    widthInput: 400,
                     controller: model.soTPT,
                   )
                 ],
@@ -496,14 +497,14 @@ Widget themD(PhieuThuProvider model) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "* Xem lại hóa đơn: ",
+                    "* Xem LHD: ",
                     style: AppStyles.lato.copyWith(
                       color: AppColors.white,
                       fontSize: 25,
                     ),
                   ),
                   NhapXuatKhoInput(
-                    widthInput: 350,
+                    widthInput: 400,
                     controller: model.xemLHD,
                   )
                 ],
@@ -517,7 +518,7 @@ Widget themD(PhieuThuProvider model) {
                 child: InkWell(
                   splashColor: AppColors.black26,
                   child: NhapXuatKhoPutton(
-                    width: 350,
+                    width: 200,
                     height: 35,
                     icon: Icons.control_point_outlined,
                     text: "Thêm",
