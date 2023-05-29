@@ -3,7 +3,7 @@ import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phache/tablePhieu_model.dart';
 import 'package:coffee_chain/models/phache/them_phieu_nhap_xuat_model/phieunhap_model.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
-import 'package:coffee_chain/service/DangNhap.service.dart';
+import 'package:coffee_chain/service/NhanVien.service.dart';
 import 'package:coffee_chain/service/NVL.service.dart';
 import 'package:coffee_chain/service/PhieuNhapKho.service.dart';
 import 'package:coffee_chain/service/PhieuNhapXuat.service.dart';
@@ -64,7 +64,10 @@ class PhieuNhapProvider extends ChangeNotifier {
   PhanQuyenModel? _phanQuyen;
   UserPassModel? _CScoffee;
   void getAccPQ(String maNV) async {
-    _nhanVien = await _nhanVienService.getNhanVien(maNV);
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
+
+    _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
     _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
@@ -72,9 +75,6 @@ class PhieuNhapProvider extends ChangeNotifier {
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());
     _PQPC = int.parse(_phanQuyen!.phaChe.toString());
-
-    _CScoffee = await _nhanVienService.getCoSo(maNV);
-    _coSo = _CScoffee!.coSo.toString();
 
     autoMaPN();
     notifyListeners();
@@ -267,7 +267,7 @@ class PhieuNhapProvider extends ChangeNotifier {
 
   void clickHuy(context) async {
     String maPhieuNX = cout.toString();
-    await _phieuNhapService.deletePhieuNhapMaPhieu(maPhieuNX);
+    await _phieuNhapService.deletePhieuNhapMaPhieu(maPhieuNX, _coSo!);
     Navigator.of(context).pop();
     notifyListeners();
   }

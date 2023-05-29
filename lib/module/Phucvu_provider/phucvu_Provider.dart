@@ -1,18 +1,20 @@
 import 'package:coffee_chain/models/NhanVien_model.dart';
+import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
-import 'package:coffee_chain/service/DangNhap.service.dart';
+import 'package:coffee_chain/service/NhanVien.service.dart';
 import 'package:flutter/material.dart';
 
 enum menuPV { order, tramon }
 
-class PhucvuProvider extends ChangeNotifier {
+class PhucvuProvider extends ChangeNotifier { 
   menuPV _chonBody = menuPV.order;
   menuPV get chonBody => _chonBody;
 
   bool _themOrder = false;
   bool get themOrder => _themOrder;
 
-  String _tenNV = 'A';
+  String? _coSo;
+  String _tenNV = '...';
   String get tenNV => _tenNV;
   int _PQPV = 0;
   int get PQPV => _PQPV;
@@ -25,9 +27,12 @@ class PhucvuProvider extends ChangeNotifier {
   final NhanVienService _nhanVienService = NhanVienService();
   NhanVienModel? _nhanVien;
   PhanQuyenModel? _phanQuyen;
+  UserPassModel? _CScoffee;
   void getAccPQ(String maNV) async {
-    print(maNV);
-    _nhanVien = await _nhanVienService.getNhanVien(maNV);
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
+
+    _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
     _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
@@ -35,7 +40,7 @@ class PhucvuProvider extends ChangeNotifier {
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());
     _PQPC = int.parse(_phanQuyen!.phaChe.toString());
-    
+
     notifyListeners();
   }
 

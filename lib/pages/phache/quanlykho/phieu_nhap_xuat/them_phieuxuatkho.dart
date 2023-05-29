@@ -71,11 +71,10 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
       builder: (context, child) {
         return Consumer<PhieuXuatProvider>(
           builder: (context, model, child) {
-            return Scaffold(
-                body: SingleChildScrollView(
-                    child: Container(
+            return SingleChildScrollView(
+                child: Container(
+              padding: EdgeInsets.all(20),
               width: 1490,
-              height: 800,
               color: AppColors.white,
               child: Column(children: <Widget>[
                 Container(
@@ -164,35 +163,6 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Container(
-                    //   width: 335,
-                    //   color: AppColors.grey,
-                    //   child: Column(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: [
-                    //       DropdownButton<String>(
-                    //         value: dropdownValue,
-                    //         icon: const Icon(Icons.arrow_downward),
-                    //         elevation: 16,
-                    //         style: AppStyles.lato
-                    //             .copyWith(fontWeight: FontWeight.w500),
-                    //         onChanged: (String? value) {
-                    //           setState(() {
-                    //             dropdownValue = value!;
-                    //           });
-                    //         },
-                    //         items: list
-                    //             .map<DropdownMenuItem<String>>((String value) {
-                    //           return DropdownMenuItem<String>(
-                    //             value: value,
-                    //             child: Text(value),
-                    //           );
-                    //         }).toList(),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    //
                     SizedBox(
                       child: Row(
                         children: [
@@ -272,7 +242,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                 Container(
                   padding: const EdgeInsets.only(top: 30),
                   width: double.infinity,
-                  height: 650,
+                  height: 600,
                   child: Column(
                     children: [
                       Container(
@@ -463,7 +433,7 @@ class _ThemPhieuXuatKhoPageState extends State<ThemPhieuXuatKhoPage> {
                   ),
                 ),
               ]),
-            )));
+            ));
           },
         );
       },

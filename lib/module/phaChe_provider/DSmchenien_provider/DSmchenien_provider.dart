@@ -7,7 +7,7 @@ import 'package:coffee_chain/models/phache/DSmonchebien_model.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
 import 'package:coffee_chain/service/BanHD.service.dart';
 import 'package:coffee_chain/service/DSmonCheBien.service.dart';
-import 'package:coffee_chain/service/DangNhap.service.dart';
+import 'package:coffee_chain/service/NhanVien.service.dart';
 import 'package:flutter/material.dart';
 
 class DSmonCheBienProvider extends ChangeNotifier {
@@ -38,7 +38,10 @@ class DSmonCheBienProvider extends ChangeNotifier {
   PhanQuyenModel? _phanQuyen;
   UserPassModel? _CScoffee;
   void getAccPQ(String maNV) async {
-    _nhanVien = await _nhanVienService.getNhanVien(maNV);
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
+
+    _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
     _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
@@ -47,24 +50,23 @@ class DSmonCheBienProvider extends ChangeNotifier {
     _PQAD = int.parse(_phanQuyen!.admin.toString());
     _PQPC = int.parse(_phanQuyen!.phaChe.toString());
 
-    _CScoffee = await _nhanVienService.getCoSo(maNV);
-    _coSo = _CScoffee!.coSo.toString();
-
-    getListBanHD();
     getListMonCheBien();
+    getListBanHD();
     notifyListeners();
   }
 
+  List<BanHoatDongModel> _TMP = [];
   void getListBanHD() async {
-    List<BanHoatDongModel> _TMP = [];
     _TMP.clear();
     _listBanHDTMP = await _banHDService.getBanHD(_coSo!);
 
     for (int i = 0; i < _listBanHDTMP.length; i++) {
-      if (_listBanHDTMP[i].hoanThanhMon == 0) _TMP.add(_listBanHDTMP[i]);
+      if (_listBanHDTMP[i].hoanThanhMon == 0 && _listBanHDTMP[i].thanhToan == 0)
+        _TMP.add(_listBanHDTMP[i]);
     }
 
     _listBanHD = _TMP;
+
     notifyListeners();
   }
 
@@ -78,14 +80,14 @@ class DSmonCheBienProvider extends ChangeNotifier {
       _listDSmonCheBienTungban;
   int getSLuongMonTrenBan(String maBan) {
     _listDSmonCheBienTungban.clear();
-    int cout = 0;
+    int _cout = 0;
     for (int i = 0; i < _listDSmonCheBien.length; i++) {
       if (_listDSmonCheBien[i].maBan.toString() == maBan.toString()) {
         _listDSmonCheBienTungban.add(_listDSmonCheBien[i]);
-        cout++;
+        _cout++;
       }
     }
-    return cout;
+    return _cout;
   }
 
   bool _soLanClick = false;
@@ -123,12 +125,11 @@ class DSmonCheBienProvider extends ChangeNotifier {
   void postUpMonHoanThanh(String maBan, String maMon, int hoanThanh) async {
     print(maBan + maMon);
     if (hoanThanh == 0) {
-      await _monHoanThanh.postUpMonHoanThanh(maBan, maMon, 1);
+      await _monHoanThanh.postUpMonHoanThanh(maBan, maMon, 1, _coSo!);
     } else {
-      await _monHoanThanh.postUpMonHoanThanh(maBan, maMon, 0);
+      await _monHoanThanh.postUpMonHoanThanh(maBan, maMon, 0, _coSo!);
     }
     getListBanHD();
-    getListMonCheBien();
     notifyListeners();
   }
 }

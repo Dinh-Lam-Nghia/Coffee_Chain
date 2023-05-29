@@ -51,8 +51,8 @@ class TablePhieuNXService {
     });
   }
 
-  Future<void> deletePhieuNX(String maPhieuNX) async {
+  Future<void> deletePhieuNX(String maPhieuNX, String coSo) async {
     var url = Uri.parse(Url.deletePhieuNX);
-    await http.post(url, body: {"maPhieuNX": maPhieuNX});
+    await http.post(url, body: {"maPhieuNX": maPhieuNX, "coSo": coSo});
   }
 }

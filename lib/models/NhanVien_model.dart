@@ -7,6 +7,7 @@ class NhanVienModel {
   String? ngayCap;
   String? caLamViec;
   String? avt;
+  String? coSo;
 
   NhanVienModel({
     this.maNV,
@@ -17,6 +18,7 @@ class NhanVienModel {
     this.ngayCap,
     this.caLamViec,
     this.avt,
+    this.coSo,
   });
 
   factory NhanVienModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class NhanVienModel {
       ngayCap: json["ngayCap"],
       caLamViec: json["caLamViec"],
       avt: json["avt"],
+      coSo: json["coSo"],
     );
   }
 }

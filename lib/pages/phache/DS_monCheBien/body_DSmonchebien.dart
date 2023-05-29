@@ -45,35 +45,6 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                             Padding(
                               padding: const EdgeInsets.only(left: 50),
                               child:
-                                  // Row(
-                                  // children: [
-                                  // Material(
-                                  //   color: AppColors.redPink,
-                                  //   child: InkWell(
-                                  //     onTap: () {},
-                                  //     splashColor: AppColors.grey,
-                                  //     child: Container(
-                                  //       padding: const EdgeInsets.symmetric(
-                                  //           horizontal: 16, vertical: 12),
-                                  //       decoration: BoxDecoration(
-                                  //           border: Border.all(
-                                  //               width: 1,
-                                  //               color: AppColors.darkRed)),
-                                  //       child: Row(
-                                  //         children: [
-                                  //           const Icon(Icons.add_alert_outlined,
-                                  //               size: 40,
-                                  //               color: AppColors.darkRed),
-                                  //           Text(" Báo hết",
-                                  //               style: AppStyles.lato.copyWith(
-                                  //                   fontWeight:
-                                  //                       FontWeight.w600))
-                                  //         ],
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // const SizedBox(width: 40),
                                   Material(
                                 color: AppColors.green,
                                 child: InkWell(
@@ -235,7 +206,7 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                                                 shrinkWrap: true,
                                                 itemBuilder:
                                                     (BuildContext context,
-                                                        index) {
+                                                        item) {
                                                   return Container(
                                                     margin:
                                                         const EdgeInsets.only(
@@ -262,7 +233,7 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                                                               child: Text(
                                                                 model
                                                                     .listDSmonCheBienTungBan[
-                                                                        index]
+                                                                        item]
                                                                     .tenMon
                                                                     .toString(),
                                                                 style: AppStyles.lato.copyWith(
@@ -275,7 +246,7 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                                                             ),
                                                             SizedBox(
                                                               child: Text(
-                                                                '(${model.listDSmonCheBienTungBan[index].slMon.toString()})',
+                                                                '(${model.listDSmonCheBienTungBan[item].slMon.toString()})',
                                                                 style: AppStyles.lato.copyWith(
                                                                     fontWeight:
                                                                         FontWeight
@@ -292,29 +263,30 @@ class _DSMCheBienPageState extends State<DSMCheBienPage> {
                                                         alignment: Alignment
                                                             .centerRight,
                                                         child: IconButton(
-                                                            onPressed: () => model.postUpMonHoanThanh(
-                                                                model
-                                                                    .listDSmonCheBienTungBan[
-                                                                        index]
-                                                                    .maBan
-                                                                    .toString(),
-                                                                model
-                                                                    .listDSmonCheBienTungBan[
-                                                                        index]
-                                                                    .maMon
-                                                                    .toString(),
-                                                                int.parse(model
-                                                                    .listDSmonCheBienTungBan[
-                                                                        index]
-                                                                    .hoanThanh
-                                                                    .toString())),
+                                                            onPressed: () {},
+                                                            // => model.postUpMonHoanThanh(
+                                                            //     model
+                                                            //         .listDSmonCheBienTungBan[
+                                                            //             index]
+                                                            //         .maBan
+                                                            //         .toString(),
+                                                            //     model
+                                                            //         .listDSmonCheBienTungBan[
+                                                            //             index]
+                                                            //         .maMon
+                                                            //         .toString(),
+                                                            //     int.parse(model
+                                                            //         .listDSmonCheBienTungBan[
+                                                            //             index]
+                                                            //         .hoanThanh
+                                                            //         .toString())),
                                                             icon: Icon(
                                                               Icons
                                                                   .notifications,
                                                               size: 30,
                                                               color: (model
                                                                           .listDSmonCheBienTungBan[
-                                                                              index]
+                                                                              item]
                                                                           .hoanThanh ==
                                                                       0)
                                                                   ? AppColors

@@ -12,7 +12,7 @@ class BanHDService {
       List<dynamic> body = jsonDecode(res.body);
       return body.map((e) => BanHoatDongModel.fromJson(e)).toList();
     } else {
-      throw Exception('Failed to load!');
+      throw Exception('Failed to load!'); 
     }
   }
 
@@ -21,6 +21,50 @@ class BanHDService {
     await http.post(url, body: {
       "maBan": maBan,
       "hoanThanhMon": hoanThanhMon.toString(),
+    });
+  }
+
+  Future<void> dangPvThanhToanMangve(
+    String maBan,
+    String dangPhucVu,
+    String thanhToan,
+    String mangve,
+    String coSo,
+  ) async {
+    var url = Uri.parse(Url.dangPvThanhToanMangve);
+    await http.post(url, body: {
+      "maBan": maBan,
+      "dangPhucVu": dangPhucVu,
+      "thanhToan": thanhToan,
+      "mangve": mangve,
+      "coSo": coSo,
+    });
+  }
+
+  Future<void> addbanHD(
+    String maBan,
+    String order,
+    String nguoiPhucVu,
+    String slKhach,
+    String hoanThanhMon,
+    String tongTien,
+    String dangPhucVu,
+    String thanhToan,
+    String mangve,
+    String coSo,
+  ) async {
+    var url = Uri.parse(Url.addbanHD);
+    await http.post(url, body: {
+      "maBan": maBan,
+      "order": order,
+      "nguoiPhucVu": nguoiPhucVu,
+      "slKhach": slKhach,
+      "hoanThanhMon": hoanThanhMon,
+      "tongTien": tongTien,
+      "dangPhucVu": dangPhucVu,
+      "thanhToan": thanhToan,
+      "mangve": mangve,
+      "coSo": coSo,
     });
   }
 }

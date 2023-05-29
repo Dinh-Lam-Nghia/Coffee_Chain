@@ -11,6 +11,8 @@ class AppColors {
   static const Color white1 = Color(0xffFFF1E6);
   static const Color Sepia = Color(0xff662C21);
   static const Color colorButton = Color(0xffFEE1BF);
+  static const Color darkOrange = Color(0xffEB6F47);
+  static const Color lightOrange = Color(0xffF57249);
   static const Color redPink = Color(0xffFF5F5E);
   static const Color red = Color(0xffE21A1A);
   static const Color orange = Color(0xffF94F19);

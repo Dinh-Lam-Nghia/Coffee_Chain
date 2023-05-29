@@ -183,7 +183,7 @@ class _PhucVuHomePageState extends State<PhucVuHomePage> {
                 ],
               ),
               body: (model.chonBody == menuPV.tramon)
-                  ? const TramonPageResponsive()
+                  ? TramonPageResponsive(maNV: widget.maNV)
                   : OrderBodyPage(maNV: widget.maNV),
               drawer: Drawer(
                 child: Container(

@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/table2TK_QLK_Provider.dart';
 import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/themPhieu_nhap_xuat_provider/phieunhap_provider.dart';
 import 'package:coffee_chain/pages/PhucVu/phucvu_home.dart';
 import 'package:coffee_chain/pages/admin/admin_home.dart';
@@ -327,7 +326,7 @@ class _AccUserState extends State<AccUser> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AdminHomePage()),
+                                builder: (context) => AdminHomeResponsive(maNV:  widget.maNV,)),
                             (route) => false);
                       } else if (selectedMenu == listthem.phaChe) {
                         Navigator.pushAndRemoveUntil(

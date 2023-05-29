@@ -6,7 +6,7 @@ import 'package:coffee_chain/pages/PhucVu/phucvu_home.dart';
 import 'package:coffee_chain/pages/admin/admin_home.dart';
 import 'package:coffee_chain/pages/phache/phache_home.dart';
 import 'package:coffee_chain/pages/thungan/thungan_home.dart';
-import 'package:coffee_chain/service/DangNhap.service.dart';
+import 'package:coffee_chain/service/NhanVien.service.dart';
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:flutter/material.dart';
 
@@ -56,26 +56,29 @@ class LoginProvider extends ChangeNotifier {
         if (_PQ!.phucVu == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => PhucVuHomeScreen(maNV: maNV,)),
-              (route) => false); 
+              MaterialPageRoute(
+                  builder: (context) => PhucVuHomeScreen(maNV: maNV)),
+              (route) => false);
         } else if (_PQ!.thuNgan == '1') {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => ThuNganHomePage()),
-              (route) => false); 
+              (route) => false);
         } else if (_PQ!.admin == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => AdminHomePage()),
-              (route) => false); 
+              MaterialPageRoute(
+                  builder: (context) => AdminHomeResponsive(maNV: maNV)),
+              (route) => false);
         } else if (_PQ!.phaChe == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => PhaCheHomePage(maNV: maNV,)),
-              (route) => false); 
+              MaterialPageRoute(
+                  builder: (context) => PhaCheHomePage(maNV: maNV)),
+              (route) => false);
         }
       }
     }
     notifyListeners();
-  } 
+  }
 }
