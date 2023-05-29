@@ -5,8 +5,11 @@ class Url {
   static const String image = "$baseUrl/Images/";
   static const String getBanHD = "$baseUrl/getBanHD.php";
   static const String getDSmonCheBien = "$baseUrl/getDSmonCheBien.php";
-  static const String getTablePhieuNX = "$baseUrl/getPhieuNhapXuat.php"; 
+  static const String getTablePhieuNX = "$baseUrl/getPhieuNhapXuat.php";
+  static const String getTablePhieuTC = "$baseUrl/getPhieuThuChi.php";
   static const String getPhieuNhapKho = "$baseUrl/getPhieuNhapKho.php";
+  static const String getPhieuThu = "$baseUrl/getPhieuThu.php";
+  static const String getPhieuChi = "$baseUrl/getPhieuChi.php";
   static const String getPhieuXuatKho = "$baseUrl/getPhieuXuatKho.php";
   static const String getNVL = "$baseUrl/getNVL.php";
   static const String checkDN = "$baseUrl/checkDN.php";
@@ -42,10 +45,16 @@ class Url {
   static const String addKhuyenMai = "$baseUrl/addKhuyenMai.php";
   static const String addKMgiamGia = "$baseUrl/addKMgiamGia.php";
   static const String addKMtangMon = "$baseUrl/addKMtangMon.php";
+  static const String addPhieuThu = "$baseUrl/checkAddPhieuThu.php";
+  static const String addPhieuChi = "$baseUrl/checkAddPhieuChi.php";
 
   //delete
   static const String deletePhieuNhapId = "$baseUrl/deletePhieuNhapId.php";
+  static const String deletePhieuThuId = "$baseUrl/deletePhieuThuId.php";
+  static const String deletePhieuChiId = "$baseUrl/deletePhieuChiId.php";
   static const String deletePhieuNhapMaPhieu = "$baseUrl/deletePhieuNhapMaPhieu.php";
+  static const String deletePhieuThuMaPhieu = "$baseUrl/deletePhieuThuMaPhieu.php";
+  static const String deletePhieuChiMaPhieu = "$baseUrl/deletePhieuChiMaPhieu.php";
   static const String deletePhieuXuatId = "$baseUrl/deletePhieuXuatId.php";
   static const String deletePhieuXuatMaPhieu = "$baseUrl/deletePhieuXuatMaPhieu.php";
   static const String deletePhieuNX = "$baseUrl/deletePhieuNX.php";
@@ -54,10 +63,12 @@ class Url {
   static const String deleteNhanVien3table = "$baseUrl/deleteNhanVien3table.php";
   static const String deleteNhanVien = "$baseUrl/deleteNhanVien.php";
   static const String dateleOnlyMaKM = "$baseUrl/dateleOnlyMaKM.php";
+  static const String deletePhieuTC = "$baseUrl/deletePhieuTC.php";
 
   // edit
 
   // save
   static const String savePhieuNX = "$baseUrl/savePhieuNX.php";
   static const String uploadImage = "$baseUrl/uploadImage.php";
+  static const String savePhieuTC = "$baseUrl/savePhieuTC.php";
 }

@@ -2,16 +2,16 @@ import 'package:coffee_chain/models/NhanVien_model.dart';
 import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
 import 'package:coffee_chain/service/DangNhap.service.dart';
+import 'package:coffee_chain/service/PhieuThuChi.service.dart';
 import 'package:flutter/material.dart';
 
-enum menuTN { thanhtoan, thuchi }
+import '../../../models/thungan/tablePhieu_model.dart';
 
-class ThunganProvider extends ChangeNotifier {
-  menuTN _chonBody = menuTN.thanhtoan;
-  menuTN get chonBody => _chonBody;
+class TableThuChiProvider extends ChangeNotifier {
+  List<TablePhieuModel> _TablePhieu = [];
+  List<TablePhieuModel> get TablePhieu => _TablePhieu;
 
-  bool _thanhToan = false;
-  bool get thanhToan => _thanhToan;
+  final TablePhieuTCServices _phieuTCService = TablePhieuTCServices();
 
   String? _coSo;
   String _tenNV = '...';
@@ -31,7 +31,6 @@ class ThunganProvider extends ChangeNotifier {
   void getAccPQ(String maNV) async {
     _nhanVien = await _nhanVienService.getNhanVien(maNV);
     _tenNV = _nhanVien!.tenNV.toString();
-    print(_tenNV);
 
     _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
     _PQPV = int.parse(_phanQuyen!.phucVu.toString());
@@ -42,21 +41,28 @@ class ThunganProvider extends ChangeNotifier {
     _CScoffee = await _nhanVienService.getCoSo(maNV);
     _coSo = _CScoffee!.coSo.toString();
 
+    getTablePhieu();
     notifyListeners();
   }
 
-  void clickThanhtoan() {
-    _chonBody = menuTN.thanhtoan;
+  void getTablePhieu() async {
+    _TablePhieu = await _phieuTCService.getTablePhieuTC(_coSo!);
+    print(_TablePhieu[0].maPhieuTC);
     notifyListeners();
   }
 
-  void clickThuchi() {
-    _chonBody = menuTN.thuchi;
-    notifyListeners();
+  String loaiPhieu(String loaiPhieuTC) {
+    if (loaiPhieuTC == 'pt' || loaiPhieuTC == 'PT') {
+      return "Phiếu thu";
+    } else if (loaiPhieuTC == 'pc' || loaiPhieuTC == 'PC') {
+      return "Phiếu chi";
+    }
+    return "...";
   }
 
-  void onClickThanhtoan() {
-    _thanhToan = !_thanhToan;
+  void deletePhieuTC(String maPhieuTC) async {
+    await _phieuTCService.deletePhieuTC(maPhieuTC);
+    getTablePhieu();
     notifyListeners();
   }
 }

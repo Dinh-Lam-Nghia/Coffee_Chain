@@ -9,7 +9,7 @@ void editphieunhapkho(BuildContext context, String maPhieu) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
-    builder: (BuildContext contextm) {
+    builder: (BuildContext context) {
       return AlertDialog(
           backgroundColor: AppColors.Sepia,
           title: SizedBox(

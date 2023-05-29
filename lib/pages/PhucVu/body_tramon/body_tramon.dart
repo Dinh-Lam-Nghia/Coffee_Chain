@@ -143,7 +143,7 @@ class _TramonPageState extends State<TramonPage> {
                 Text("Bàn order",
                     style: AppStyles.lato.copyWith(
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 20,                                                    
                         color: AppColors.white1)),
                 Text("(Số lượng)",
                     style: AppStyles.lato.copyWith(
@@ -159,6 +159,16 @@ class _TramonPageState extends State<TramonPage> {
               width: 985,
               child: SingleChildScrollView(
                 child: Column(
+                                                                                                                                                                         =======
+              const SizedBox(
+                height: 80,
+              ),
+              //
+
+              SizedBox(
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     for (int i = 0; i < model.banHDodel.length; i++)
                       InkWell(

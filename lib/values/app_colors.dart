@@ -25,4 +25,6 @@ class AppColors {
   static const Color brightPink = Color(0xffB7776B);
   static const Color colorrow = Color(0xffEBE4E2);
   static const Color Box = Color(0xffC4C4C4);
+  static const Color Organe = Color(0xffF68764);
+  static const Color Organe1 = Color(0xffFF5B694);
 }

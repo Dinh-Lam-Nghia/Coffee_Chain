@@ -1,4 +1,4 @@
-import 'package:coffee_chain/module/login_provider.dart'; 
+import 'package:coffee_chain/module/login_provider.dart';
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';

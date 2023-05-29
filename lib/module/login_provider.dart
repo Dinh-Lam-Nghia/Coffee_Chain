@@ -56,25 +56,27 @@ class LoginProvider extends ChangeNotifier {
         if (_PQ!.phucVu == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                  builder: (context) => PhucVuHomeScreen(maNV: maNV)),
+              MaterialPageRoute( 
+                  builder: (context) => PhucVuHomeScreen(maNV: maNV)), 
               (route) => false);
         } else if (_PQ!.thuNgan == '1') {
           Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => ThuNganHomePage()),
+              context, 
+              MaterialPageRoute(builder: (context) => ThuNganHomeScreen(
+                        maNV: maNV,
+                      )), 
               (route) => false);
         } else if (_PQ!.admin == '1') {
           Navigator.pushAndRemoveUntil(
-              context,
+              context, 
               MaterialPageRoute(
-                  builder: (context) => AdminHomeResponsive(maNV: maNV)),
+                  builder: (context) => AdminHomeResponsive(maNV: maNV)), 
               (route) => false);
         } else if (_PQ!.phaChe == '1') {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                  builder: (context) => PhaCheHomePage(maNV: maNV)),
+              MaterialPageRoute( 
+                  builder: (context) => PhaCheHomePage(maNV: maNV)), 
               (route) => false);
         }
       }
