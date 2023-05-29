@@ -8,9 +8,9 @@ import 'package:coffee_chain/service/PhieuThu.services.dart';
 import 'package:coffee_chain/service/PhieuThuChi.service.dart';
 import 'package:flutter/material.dart';
 
-class PhieuThuProvider extends ChangeNotifier{
-  TextEditingController _maPT = TextEditingController();
-  TextEditingController get maPT => _maPT;
+class PhieuThuProvider extends ChangeNotifier {
+  TextEditingController _maPhieuTC = TextEditingController();
+  TextEditingController get maPhieuTC => _maPhieuTC;
   TextEditingController _nguoiLPT = TextEditingController();
   TextEditingController get nguoiLPT => _nguoiLPT;
   final TextEditingController _ngayThuTien = TextEditingController();
@@ -39,7 +39,7 @@ class PhieuThuProvider extends ChangeNotifier{
   final TextEditingController _xemLHD = TextEditingController();
   TextEditingController get xemLHD => _xemLHD;
 
-  double _tongPhaiThu = 0;
+  final double _tongPhaiThu = 0;
   double get tongPhaiThu => _tongPhaiThu;
 
   String? _coSo;
@@ -84,8 +84,8 @@ class PhieuThuProvider extends ChangeNotifier{
     (i == 0)
         ? cout = i + 1
         : cout = int.parse(_listPhieuTMP[i - 1].maPhieuTC.toString()) + 1;
-    _ma = "pn0$cout";
-    _maPT = TextEditingController(text: _ma);
+    _ma = "pt0$cout";
+    _maPhieuTC = TextEditingController(text: _ma);
     _maPhieu = TextEditingController(text: _ma);
     _nguoiLPT = TextEditingController(text: _tenNV);
     getListPhieuThu();
@@ -93,13 +93,13 @@ class PhieuThuProvider extends ChangeNotifier{
   }
 
   List<PhieuThuModel> _phieuThuTMP = [];
-  List<PhieuThuModel> _phieuThu = [];
+  final List<PhieuThuModel> _phieuThu = [];
   List<PhieuThuModel> get phieuThu => _phieuThu;
-  PhieuThuService _phieuThuService = PhieuThuService();
-  void getListPhieuThu() async{
+  final PhieuThuService _phieuThuService = PhieuThuService();
+  void getListPhieuThu() async {
     _phieuThuTMP = await _phieuThuService.getPhieuThu(_coSo!);
     for (int i = 0; i < _phieuThuTMP.length; i++) {
-      if (_phieuThuTMP[i].maPhieuT == cout.toString()) {
+      if (_phieuThuTMP[i].maPhieuTC == cout.toString()) {
         _phieuThu.add(_phieuThuTMP[i]);
       }
     }
@@ -107,26 +107,20 @@ class PhieuThuProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  double _sum = 0;
+  final double _sum = 0;
   double get sum => _sum;
-  void sumTien(){
+  void sumTien() {
     List<double> numbers = [];
-    for (int i = 0; i < _phieuThu.length; i++){
-      numbers.add(double.parse(_phieuThu[i].TongTien.toString()));
+    for (int i = 0; i < _phieuThu.length; i++) {
+      numbers.add(double.parse(_phieuThu[i].tongTien.toString()));
     }
     print(numbers);
     notifyListeners();
     numbers.clear();
   }
 
-  void addPhieuThu(
-    String maPhieuTC,
-    String ngayGLHD,
-    String maHD,
-    String nguoiTHD,
-    String soTPT,
-    String xemLHD
-  ) async{
+  void addPhieuThu(String maPhieuTC, String ngayGLHD, String maHD,
+      String nguoiTHD, String soTPT, String xemLHD) async {
     await _phieuThuService.addPhieuThu(
       maPhieuTC,
       ngayGLHD,
@@ -152,12 +146,12 @@ class PhieuThuProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void luuPhieuTC(context) async{
+  void luuPhieuTC(context) async {
     int i = _listPhieuTMP.length;
     int cout = 0;
     (i == 0)
-      ? cout = i + 1
-      : cout = int.parse(_listPhieuTMP[i - 1].maPhieuTC.toString()) + 1;
+        ? cout = i + 1
+        : cout = int.parse(_listPhieuTMP[i - 1].maPhieuTC.toString()) + 1;
     String maPhieuTC = cout.toString();
     String nguoiTaoPhieuTC = _nguoiLPT.text;
     final n = _ngayThuTien.text.split('/');
@@ -167,7 +161,7 @@ class PhieuThuProvider extends ChangeNotifier{
 
     await _phieuTCServices.savePhieuTC(
       maPhieuTC,
-      'aa',
+      '0',
       nguoiTaoPhieuTC,
       ngayThuTien as String,
       '00/00/000',
@@ -178,8 +172,8 @@ class PhieuThuProvider extends ChangeNotifier{
     Navigator.of(context).pop();
     notifyListeners();
   }
-  
-void clickHuy(context) async {
+
+  void clickHuy(context) async {
     String maPhieuTC = cout.toString();
     await _phieuThuService.deletePhieuThuMaPhieu(maPhieuTC);
     Navigator.of(context).pop();
@@ -189,19 +183,16 @@ void clickHuy(context) async {
   void timkiem(String value) {
     List<PhieuThuModel> _TK = [];
     _phieuThu.clear();
-    (value == '')
-        ? _TK = _phieuThuTMP
-        : _TK = _phieuThuTMP
-            .toList();
+    (value == '') ? _TK = _phieuThuTMP : _TK = _phieuThuTMP.toList();
     for (int i = 0; i < _TK.length; i++) {
-      if (_TK[i].maPhieuT == cout.toString()) {
+      if (_TK[i].maPhieuTC == cout.toString()) {
         _phieuThu.add(_TK[i]);
       }
     }
     notifyListeners();
   }
+
   void load() {
     notifyListeners();
   }
-
 }

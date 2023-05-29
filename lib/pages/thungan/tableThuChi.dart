@@ -68,7 +68,7 @@ class _TableThuChiState extends State<TableThuChi> {
               for (int i = 0; i < model.TablePhieu.length; i++)
                 DataRow(cells: [
                   DataCell(TextTable(
-                      text: model.TablePhieu[i].ngayThuTienTC.toString(),
+                      text: model.TablePhieu[i].ngayTaoPhieuTC.toString(),
                       color: 1)),
                   DataCell(TextTable(
                       text: model.TablePhieu[i].maPhieuTC.toString(),
@@ -79,7 +79,7 @@ class _TableThuChiState extends State<TableThuChi> {
                   DataCell(TextTable(
                       text: model.TablePhieu[i].soTien.toString(), color: 1)),
                   DataCell(TextTable(
-                      text: model.TablePhieu[i].ngayLapPhieuTC.toString(),
+                      text: model.TablePhieu[i].nguoiTaoPhieuTC.toString(),
                       color: 1)),
                   DataCell(Row(
                     mainAxisAlignment: MainAxisAlignment.center,

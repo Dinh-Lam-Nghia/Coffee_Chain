@@ -590,7 +590,7 @@ Widget themD(PhieuNhapProvider model) {
               child: InkWell(
                 onTap: model.validateThemdong,
                 splashColor: AppColors.black26,
-                child: const NhapXuatKhoPutton(
+                child: const ThuChiPutton(
                   width: 200,
                   height: 35,
                   icon: Icons.control_point_outlined,

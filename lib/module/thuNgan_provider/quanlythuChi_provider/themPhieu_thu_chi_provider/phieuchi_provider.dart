@@ -1,3 +1,5 @@
+// ignore_for_file: recursive_getters
+
 import 'package:coffee_chain/models/NhanVien_model.dart';
 import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
@@ -7,7 +9,7 @@ import 'package:coffee_chain/service/DangNhap.service.dart';
 import 'package:coffee_chain/service/PhieuChi.services.dart';
 import 'package:coffee_chain/service/PhieuThuChi.service.dart';
 import 'package:flutter/material.dart';
-// import 'package:collection/collection.dart';
+import 'package:collection/collection.dart';
 
 class PhieuChiProvider extends ChangeNotifier {
   TextEditingController _maPC = TextEditingController();
@@ -16,10 +18,6 @@ class PhieuChiProvider extends ChangeNotifier {
   TextEditingController get ngayLPC => _ngayLPC;
   TextEditingController _nguoiLPC = TextEditingController();
   TextEditingController get nguoiLPC => _nguoiLPC;
-  final TextEditingController _soDuDauNgay = TextEditingController();
-  TextEditingController get soDuDauNgay => _soDuDauNgay;
-  final TextEditingController _soDuCuoiNgay = TextEditingController();
-  TextEditingController get soDuCuoiNgay => _soDuCuoiNgay;
   final TextEditingController _layDL = TextEditingController();
   TextEditingController get layDL => _layDL;
 
@@ -88,7 +86,7 @@ class PhieuChiProvider extends ChangeNotifier {
     (i == 0)
         ? cout = i + 1
         : cout = int.parse(_listPhieuTMP[i - 1].maPhieuTC.toString()) + 1;
-    _ma = "pn0$cout";
+    _ma = "pc01$cout";
     _maPC = TextEditingController(text: _ma);
     _maPhieu = TextEditingController(text: _ma);
     _nguoiLPC = TextEditingController(text: _tenNV);
@@ -97,13 +95,13 @@ class PhieuChiProvider extends ChangeNotifier {
   }
 
   List<PhieuChiModel> _phieuChiTMP = [];
-  List<PhieuChiModel> _phieuChi = [];
+  final List<PhieuChiModel> _phieuChi = [];
   List<PhieuChiModel> get phieuChi => _phieuChi;
   final PhieuChiService _phieuChiService = PhieuChiService();
   void getListPhieuChi() async {
     _phieuChiTMP = await _phieuChiService.getPhieuChi(_coSo!);
     for (int i = 0; i < _phieuChiTMP.length; i++) {
-      if (_phieuChiTMP[i].maPhieuC == cout.toString()) {
+      if (_phieuChiTMP[i].maPhieuTC == cout.toString()) {
         _phieuChi.add(_phieuChiTMP[i]);
       }
     }
@@ -111,15 +109,14 @@ class PhieuChiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  double _sum = 0;
-  double get sum => sum;
+  final double _sum = 0;
+  double get sum => _sum;
   void sumTien() {
     List<double> numbers = [];
     for (int i = 0; i < _phieuChi.length; i++) {
-      numbers.add(double.parse(_phieuChi[i].TongTien.toString()));
+      numbers.add(double.parse(_phieuChi[i].thanhTien.toString()));
     }
     print(numbers);
-    // _sum = numbers.sum;
     numbers.clear();
     notifyListeners();
   }
@@ -127,24 +124,25 @@ class PhieuChiProvider extends ChangeNotifier {
   void addPhieuChi(
     String maPhieuTC,
     String sTT,
-    String chiPNVL,
-    String chiPDN,
-    String khac,
+    String chiPhiNVL,
+    String chiPhiDienNuoc,
+    String chiPhiKhac,
     String soTien,
-    String ghiChu,
+    String note,
+    String thanhTien,
   ) async {
     await _phieuChiService.addPhieuChi(
       maPhieuTC,
       sTT,
-      chiPNVL,
-      chiPDN,
+      chiPhiNVL,
+      chiPhiDienNuoc,
+      chiPhiKhac,
       soTien,
-      khac,
-      ghiChu,
+      note,
+      thanhTien,
     );
     _phieuChi.clear();
     autoMaPC();
-    _soTT.clear();
     _chiPNVL.clear();
     _chiPDN.clear();
     _khac.clear();
@@ -160,21 +158,19 @@ class PhieuChiProvider extends ChangeNotifier {
         ? cout = i + 1
         : cout = int.parse(_listPhieuTMP[i - 1].maPhieuTC.toString()) + 1;
     String maPhieuTC = cout.toString();
-    String nguoiLapPhieu = _nguoiLPC.text;
-    final n = _ngayLPC.text.split('/');
-    String soDuDN = _soDuDauNgay.text;
-    String soDuCN = _soDuCuoiNgay.text;
-    String soTien = _sum.toString();
+    String nguoiLapPhieuTC = _nguoiLPC.text;
+    final n = ngayLPC.text.split('/');
+    String thanhTien = _sum.toString();
 
     await _phieuTCServices.savePhieuTC(
       maPhieuTC,
-      'aa',
-      nguoiLapPhieu,
+      '0',
+      nguoiLapPhieuTC,
       ngayLPC as String,
       '00/00/000',
       '0',
       '0',
-      soTien as double,
+      thanhTien as double,
     );
     Navigator.of(context).pop();
     notifyListeners();

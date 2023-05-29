@@ -2,6 +2,7 @@
 
 import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/table2TK_QLK_Provider.dart';
 import 'package:coffee_chain/module/phaChe_provider/quanLykho_provider/themPhieu_nhap_xuat_provider/phieunhap_provider.dart';
+import 'package:coffee_chain/module/thuNgan_provider/quanlythuChi_provider/themPhieu_thu_chi_provider/phieuthu_provider.dart';
 import 'package:coffee_chain/pages/PhucVu/phucvu_home.dart';
 import 'package:coffee_chain/pages/admin/admin_home.dart';
 import 'package:coffee_chain/pages/phache/phache_home.dart';
@@ -203,7 +204,6 @@ class NhapXuatKhoInput extends StatelessWidget {
   final TextEditingController controller;
   final bool? readOnly;
   final int? db;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -234,8 +234,75 @@ class NhapXuatKhoInput extends StatelessWidget {
   }
 }
 
+class ThuChiInput extends StatelessWidget {
+  const ThuChiInput({
+    super.key,
+    required this.widthInput,
+    required this.controller,
+    this.readOnly,
+    this.db,
+  });
+  final double widthInput;
+  final TextEditingController controller;
+  final bool? readOnly;
+  final int? db;
+
+  @override
+  Widget build(BuildContext context) {
+    PhieuThuProvider _phieuThuProvider = PhieuThuProvider();
+    return ChangeNotifierProvider<PhieuThuProvider>(
+      create: (context) => _phieuThuProvider,
+      builder: (context, child) {
+        return Consumer<PhieuThuProvider>(
+          builder: (context, model, child) {
+            return Container(
+              width: widthInput,
+              color: AppColors.grey1,
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: TextField(
+                controller: controller,
+                readOnly: readOnly ?? false,
+                style: const TextStyle(fontSize: 20, color: AppColors.black87),
+                decoration: const InputDecoration(
+                  filled: false,
+                  border: OutlineInputBorder(borderSide: BorderSide.none),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
 class NhapXuatKhoPutton extends StatelessWidget {
   const NhapXuatKhoPutton(
+      {super.key,
+      required this.width,
+      required this.height,
+      required this.icon,
+      required this.text});
+  final double width;
+  final double height;
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Icon(icon),
+        Text(text),
+      ]),
+    );
+  }
+}
+
+class ThuChiPutton extends StatelessWidget {
+  const ThuChiPutton(
       {super.key,
       required this.width,
       required this.height,
@@ -322,7 +389,8 @@ class _AccUserState extends State<AccUser> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ThuNganHomeScreen(maNV: widget.maNV)),
+                                builder: (context) =>
+                                    ThuNganHomeScreen(maNV: widget.maNV)),
                             (route) => false);
                       } else if (selectedMenu == listthem.admin) {
                         Navigator.pushAndRemoveUntil(

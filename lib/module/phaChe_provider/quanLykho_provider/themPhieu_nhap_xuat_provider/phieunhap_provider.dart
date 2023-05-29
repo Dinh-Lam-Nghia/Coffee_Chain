@@ -99,9 +99,9 @@ class PhieuNhapProvider extends ChangeNotifier {
   }
 
   List<PhieuNhapModel> _phieuNhapTMP = [];
-  List<PhieuNhapModel> _phieuNhap = [];
+  final List<PhieuNhapModel> _phieuNhap = [];
   List<PhieuNhapModel> get phieuNhap => _phieuNhap;
-  PhieuNhapService _phieuNhapService = PhieuNhapService();
+  final PhieuNhapService _phieuNhapService = PhieuNhapService();
   void getListPhieuNhap() async {
     _phieuNhapTMP = await _phieuNhapService.getPhieuNhap(_coSo!);
     for (int i = 0; i < _phieuNhapTMP.length; i++) {

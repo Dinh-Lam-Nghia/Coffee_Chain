@@ -1,37 +1,46 @@
-class PhieuChiModel{
+class PhieuChiModel {
   int? id;
-  String? maPhieuC;
-  int? SoTT;
-  String? TenKC;
-  String? ChiPNVL;
-  String? ChiPDN;
-  String? Khac;
-  double? TongTien;
-  String? Ghichu;
+  String? maPhieuTC;
+  String? ngayLPC;
+  String? nguoiLapPhieuTC;
+  String? soTT;
+  String? chiPhiNVL;
+  String? chiPhiDienNuoc;
+  String? chiPhiKhac;
+  double? soTien;
+  double? note;
+  double? thanhTien;
+  String? coSo;
 
   PhieuChiModel({
     this.id,
-    this.maPhieuC, 
-    this.SoTT, 
-    this.TenKC,
-    this.ChiPNVL,
-    this.ChiPDN,
-    this.Khac, 
-    this.TongTien, 
-    this.Ghichu,
-    });
+    this.ngayLPC,
+    this.nguoiLapPhieuTC,
+    this.soTT,
+    this.maPhieuTC,
+    this.chiPhiNVL,
+    this.chiPhiDienNuoc,
+    this.soTien,
+    this.chiPhiKhac,
+    this.note,
+    this.thanhTien,
+    this.coSo,
+  });
 
-    factory PhieuChiModel.fromJson(Map<String, dynamic> json){
-      return PhieuChiModel(
-        id: int.parse(json['id'].toString()),
-        maPhieuC: json['maPhieuC'],
-        SoTT: int.parse(json['SoTT'].toString()),
-        TenKC: json["TenKC"],
-        ChiPNVL:json["ChiPNVL"],
-        ChiPDN: json["ChiPDN"],
-        Khac: json["Khac"],
-        TongTien: double.parse(json["TongTien"].toString()),
-        Ghichu: json["Ghichu"],
-      );
-    }
+  factory PhieuChiModel.fromJson(Map<String, dynamic> json) {
+    return PhieuChiModel(
+      id: int.parse(json['id'].toString()),
+      maPhieuTC: json['maPhieuTC'],
+      ngayLPC: json['ngayLPC'],
+      nguoiLapPhieuTC: json['nguoiLapPhieuTC'],
+      soTT: json['soTT'],
+      chiPhiNVL: json["chiPhiNVL"],
+      chiPhiDienNuoc: json["chiPhiDienNuoc"],
+      chiPhiKhac: json["chiPhiKhac"],
+      soTien: double.parse(json["soTien"].toString()),
+      note: double.parse(json["note"].toString()),
+      thanhTien: double.parse(json["thanhTien"].toString()),
+      coSo: json["coSo"],
+    );
+  }
 }
