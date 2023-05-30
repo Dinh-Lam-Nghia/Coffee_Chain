@@ -1,12 +1,8 @@
-import 'package:coffee_chain/module/thuNgan_provider/thanhtoan_Provider/thanhToan_provider.dart';
-import 'package:coffee_chain/pages/thungan/body_thanhtoan/thanhToan.dart';
+import 'package:coffee_chain/module/thuNgan_provider/thanhtoan_Provider/thanhToan_provider.dart'; 
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
 import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/material.dart'; 
 
 class BodyChoTTResponsive extends StatelessWidget {
   const BodyChoTTResponsive(
@@ -130,7 +126,8 @@ class _BodyChoTTPageState extends State<BodyChoTTPage> {
                           IconButton(
                             iconSize: 40,
                             icon: const Icon(Icons.calculate),
-                            onPressed: () {},
+                            onPressed: () => widget.model.thanhToan(
+                                widget.model.listBanHD[index].maBan.toString()),
                           ),
                           IconButton(
                             iconSize: 40,

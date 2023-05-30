@@ -361,13 +361,13 @@ class _ThemPhieuThuTienPageState extends State<ThemPhieuThuTienPage> {
                                           child: InkWell(
                                             onTap: () {},
                                             splashColor: AppColors.black26,
-                                            child: const SizedBox(
+                                            child: SizedBox(
                                               width: 125,
                                               height: 40,
                                               child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
-                                                  children: [
+                                                  children: const [
                                                     Icon(Icons.help_outline),
                                                     Text("Giúp")
                                                   ]),

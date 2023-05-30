@@ -1,8 +1,6 @@
 import 'package:coffee_chain/module/thuNgan_provider/thungan_Provider.dart';
 import 'package:coffee_chain/pages/login.dart';
 import 'package:coffee_chain/pages/thungan/body_thanhtoan/body_thanhtoan.dart';
-import 'package:coffee_chain/pages/thungan/body_thanhtoan/thanhToan.dart';
-import 'package:coffee_chain/pages/thungan/body_thanhtoan/thanhtoanbody.dart';
 import 'package:coffee_chain/pages/thungan/body_thuchi/body_thuchi.dart';
 import 'package:coffee_chain/values/app_assets.dart';
 import 'package:coffee_chain/values/app_colors.dart';

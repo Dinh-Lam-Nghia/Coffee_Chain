@@ -1,11 +1,13 @@
 import 'package:coffee_chain/models/DSbanHD_model.dart';
 import 'package:coffee_chain/models/NhanVien_model.dart';
 import 'package:coffee_chain/models/UserPass.dart';
+import 'package:coffee_chain/models/mon_model.dart';
 import 'package:coffee_chain/models/phache/DSmonchebien_model.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
 import 'package:coffee_chain/service/BanHD.service.dart';
 import 'package:coffee_chain/service/DSmonCheBien.service.dart';
 import 'package:coffee_chain/service/NhanVien.service.dart';
+import 'package:coffee_chain/service/thucdon.service.dart';
 import 'package:flutter/material.dart';
 
 class TraMonProvider extends ChangeNotifier {
@@ -31,7 +33,7 @@ class TraMonProvider extends ChangeNotifier {
     _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
-    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV, _coSo!);
     _PQPV = int.parse(_phanQuyen!.phucVu.toString());
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());
@@ -143,42 +145,49 @@ class TraMonProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void chonMonTra(String maBan, String maMon) {
-  //   print(maMon);
-  //   bool kt = false;
-  //   for (int i = 0; i < _moTra.length; i++) {
-  //     if (_moTra[i].maMon == maMon) {
-  //       kt = true;
-  //       _moTra.removeAt(i);
-  //     }
-  //   }
-  //   if (!kt) {
-  //     for (int i = 0; i < _monCBTMP.length; i++) {
-  //       if (_monCBTMP[i].maBan == maBan && _monCBTMP[i].maMon == maMon) {
-  //         _moTra.add(_monCBTMP[i]);
-  //       }
-  //     }
-  //   }
-  //   xet(maMon);
-  //   notifyListeners();
-  // }
-
-  // String xet(String maMon) {
-  //   for (int i = 0; i < _moTra.length; i++) {
-  //     // print(_moTra[i].maMon);
-  //     if (_monCBTMP[i].maMon == maMon) {
-  //       return maMon;
-  //     }
-  //   }
-  //   return 'false';
-  // }
-
+  final ThucDonService _thucDonService = ThucDonService();
+  List<MonModel> _ListDSmonTMP = [];
   void tramon(String maNV) async {
+    double tt = 0;
+    double dg = 0;
+    double slGoc = 0;
+    _ListDSmonTMP = await _thucDonService.getThucDon(_coSo!);
+
     for (int i = 0; i < _moTra.length; i++) {
+      for (int a = 0; a < _banHDmodelTMP.length; a++) {
+        if (_moTra[i].maBan == _banHDmodelTMP[a].maBan) {
+          tt = double.parse(_banHDmodelTMP[a].tongTien.toString());
+        }
+      }
+      for (int c = 0; c < _ListDSmonTMP.length; c++) {
+        if (_moTra[i].maMon == _ListDSmonTMP[c].maMon) {
+          dg = double.parse(_ListDSmonTMP[c].giaTien.toString());
+        }
+      }
+      for (int b = 0; b < _monCBTMP.length; b++) {
+        if (_moTra[i].maBan == _monCBTMP[b].maBan) {
+          slGoc = double.parse(_monCBTMP[b].slMon.toString());
+        }
+      }
+
       if (int.parse(_moTra[i].slMon.toString()) > 0) {
+        double slmoi = double.parse(_moTra[i].slMon.toString());
+        double tien = tt - (dg * (slGoc - slmoi));
+        // print(sotra);
+        // print(dg);
+        // print(tien);
+
+        await _banHDService.UpdateBanHDtien(
+            _moTra[i].maBan.toString(), tien.toString(), _coSo!);
+
         await _dSmonCheBienModel.upSLmonmonCB(_moTra[i].maBan.toString(),
             _moTra[i].maMon.toString(), _moTra[i].slMon.toString(), _coSo!);
       } else {
+        double tien = tt - (dg * slGoc);
+
+        await _banHDService.UpdateBanHDtien(
+            _moTra[i].maBan.toString(), tien.toString(), _coSo!);
+
         await _dSmonCheBienModel.deletemonCB(
             _moTra[i].maBan.toString(), _moTra[i].maMon.toString(), _coSo!);
       }

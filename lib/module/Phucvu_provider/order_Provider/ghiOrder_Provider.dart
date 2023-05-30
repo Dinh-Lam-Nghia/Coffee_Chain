@@ -1,4 +1,3 @@
-
 import 'package:coffee_chain/models/Ban_model.dart';
 import 'package:coffee_chain/models/DSbanHD_model.dart';
 import 'package:coffee_chain/models/NhanVien_model.dart';
@@ -35,17 +34,18 @@ class GhiorderProvider extends ChangeNotifier {
   PhanQuyenModel? _phanQuyen;
   UserPassModel? _CScoffee;
   void getAccPQ(String maNV) async {
-   _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
     _coSo = _CScoffee!.coSo.toString();
 
     _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
-    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV, _coSo!);
     _PQPV = int.parse(_phanQuyen!.phucVu.toString());
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());
     _PQPC = int.parse(_phanQuyen!.phaChe.toString());
+    _tongTien = 0;
     getListDSmon();
     getlistBan();
     notifyListeners();
@@ -58,7 +58,6 @@ class GhiorderProvider extends ChangeNotifier {
   final BanService _banService = BanService();
   final BanHDService _banHDService = BanHDService();
   void getlistBan() async {
-    
     _banModel.clear();
     _banModelTMP = await _banService.getDsBan(_coSo!);
     _banHDmodel = await _banHDService.getBanHD(_coSo!);
@@ -97,7 +96,7 @@ class GhiorderProvider extends ChangeNotifier {
   final List<DSmonCheBienModel> _ListDSmonCB = [];
   List<DSmonCheBienModel> _ListDSmonHien = [];
   List<DSmonCheBienModel> get ListDSmonHien => _ListDSmonHien;
-  double _tongTien = 0 ;
+  double _tongTien = 0;
   double get tongTien => _tongTien;
   void addMonCB(String maMon) {
     bool check = false;
@@ -138,6 +137,7 @@ class GhiorderProvider extends ChangeNotifier {
   }
 
   int hienTheoNhomThucDon(String nhomThucDon) {
+    _tongTien = 0;
     _ListDSmonTMP1.clear();
     if (nhomThucDon == 'tc') {
       _clMenuMon = clickMenuMon.tc;
@@ -182,16 +182,18 @@ class GhiorderProvider extends ChangeNotifier {
   String _vl = 'chonban';
   String get vl => _vl;
   void nhanBan(String value) {
+    _tongTien = 0;
     _vl = value.toString();
-    print(_vl);
+    // print(_vl);
     notifyListeners();
   }
 
   String _slN = '0';
   String get slN => _slN;
   void sluongnguoi(String value) {
+    _tongTien = 0;
     _slN = value.toString();
-    print(_slN);
+    // print(_slN);
     notifyListeners();
   }
 
@@ -230,11 +232,11 @@ class GhiorderProvider extends ChangeNotifier {
 
       // print("ok3");
       // mon
-      for (int i = 0; i < _ListDSmonHien.length; i++) {
+      for (int i = 0; i < _ListDSmonCB.length; i++) {
         await _dSmonCheBienService.adddSmonCheBien(
           maBan,
-          _ListDSmonHien[i].maMon.toString(),
-          _ListDSmonHien[i].slMon.toString(),
+          _ListDSmonCB[i].maMon.toString(),
+          _ListDSmonCB[i].slMon.toString(),
           '0',
           '...',
           _coSo!,
@@ -242,6 +244,7 @@ class GhiorderProvider extends ChangeNotifier {
       }
       // print("ok4");
     }
+    _tongTien = 0;
     notifyListeners();
   }
 }

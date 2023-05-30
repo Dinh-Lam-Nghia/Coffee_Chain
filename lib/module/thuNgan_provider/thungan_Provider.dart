@@ -1,7 +1,7 @@
 import 'package:coffee_chain/models/NhanVien_model.dart';
 import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
-import 'package:coffee_chain/service/DangNhap.service.dart';
+import 'package:coffee_chain/service/NhanVien.service.dart';
 import 'package:flutter/material.dart';
 
 enum menuTN { thanhtoan, thuchi }
@@ -29,18 +29,17 @@ class ThunganProvider extends ChangeNotifier {
   PhanQuyenModel? _phanQuyen;
   UserPassModel? _CScoffee;
   void getAccPQ(String maNV) async {
-    _nhanVien = await _nhanVienService.getNhanVien(maNV);
-    _tenNV = _nhanVien!.tenNV.toString();
-    print(_tenNV);
+    _CScoffee = await _nhanVienService.getCoSo(maNV);
+    _coSo = _CScoffee!.coSo.toString();
 
-    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
+    _tenNV = _nhanVien!.tenNV.toString();
+
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV, _coSo!);
     _PQPV = int.parse(_phanQuyen!.phucVu.toString());
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());
     _PQPC = int.parse(_phanQuyen!.phaChe.toString());
-
-    _CScoffee = await _nhanVienService.getCoSo(maNV);
-    _coSo = _CScoffee!.coSo.toString();
 
     notifyListeners();
   }
@@ -55,8 +54,8 @@ class ThunganProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onClickThanhtoan() {
-    _thanhToan = !_thanhToan;
-    notifyListeners();
-  }
+  // void onClickThanhtoan() {
+  //   _thanhToan = !_thanhToan;
+  //   notifyListeners();
+  // }
 }

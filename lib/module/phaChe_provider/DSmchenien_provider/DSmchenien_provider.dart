@@ -44,7 +44,7 @@ class DSmonCheBienProvider extends ChangeNotifier {
     _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
-    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV, _coSo!);
     _PQPV = int.parse(_phanQuyen!.phucVu.toString());
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());
@@ -113,7 +113,7 @@ class DSmonCheBienProvider extends ChangeNotifier {
   final BanHDService _updatebanHD = BanHDService();
   void onclickTraMon() async {
     if (_chonBan != null) {
-      await _updatebanHD.UpdateBanHDHT(_chonBan.toString(), 1);
+      await _updatebanHD.UpdateBanHDHT(_chonBan.toString(), 1, _coSo!);
       getListBanHD();
       getListMonCheBien();
     }

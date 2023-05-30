@@ -39,10 +39,11 @@ class NhanVienService {
     }
   }
 
-  Future<PhanQuyenModel> PhanQuyen(String maNV) async {
+  Future<PhanQuyenModel> PhanQuyen(String maNV, String coSo) async {
     var url = Uri.parse(Url.phanQuyen);
     var res = await http.post(url, body: {
       "maNV": maNV,
+      "coSo": coSo,
     });
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
