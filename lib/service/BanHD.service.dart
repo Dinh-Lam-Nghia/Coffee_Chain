@@ -12,15 +12,41 @@ class BanHDService {
       List<dynamic> body = jsonDecode(res.body);
       return body.map((e) => BanHoatDongModel.fromJson(e)).toList();
     } else {
-      throw Exception('Failed to load!'); 
+      throw Exception('Failed to load!');
     }
   }
 
-  Future<void> UpdateBanHDHT(String maBan, int hoanThanhMon) async {
+  Future<BanHoatDongModel> getOnlyBanHD(String maBan, String coSo) async {
+    var url = Uri.parse(Url.getOnlyBanHD);
+    var res = await http.post(url, body: {
+      "maBan": maBan,
+      "coSo": coSo,
+    });
+    if (res.statusCode == 200) {
+      List<dynamic> body = jsonDecode(res.body);
+      return body.map((e) => BanHoatDongModel.fromJson(e)).toList()[0];
+    } else {
+      throw Exception('Failed to load!');
+    }
+  }
+
+  Future<void> UpdateBanHDHT(
+      String maBan, int hoanThanhMon, String coSo) async {
     var url = Uri.parse(Url.updateBanhoatdong);
     await http.post(url, body: {
       "maBan": maBan,
       "hoanThanhMon": hoanThanhMon.toString(),
+      "coSo": coSo,
+    });
+  }
+
+  Future<void> UpdateBanHDtien(
+      String maBan, String tongTien, String coSo) async {
+    var url = Uri.parse(Url.UpdateBanHDtien);
+    await http.post(url, body: {
+      "maBan": maBan,
+      "tongTien": tongTien,
+      "coSo": coSo,
     });
   }
 

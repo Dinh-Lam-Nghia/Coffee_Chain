@@ -35,7 +35,7 @@ class PhucvuProvider extends ChangeNotifier {
     _nhanVien = await _nhanVienService.getNhanVien(maNV, _coSo!);
     _tenNV = _nhanVien!.tenNV.toString();
 
-    _phanQuyen = await _nhanVienService.PhanQuyen(maNV);
+    _phanQuyen = await _nhanVienService.PhanQuyen(maNV, _coSo!);
     _PQPV = int.parse(_phanQuyen!.phucVu.toString());
     _PQTN = int.parse(_phanQuyen!.thuNgan.toString());
     _PQAD = int.parse(_phanQuyen!.admin.toString());

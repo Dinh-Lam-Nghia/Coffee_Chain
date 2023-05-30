@@ -1,4 +1,5 @@
 import 'package:coffee_chain/module/thuNgan_provider/thanhtoan_Provider/thanhToan_provider.dart';
+import 'package:coffee_chain/pages/thungan/body_thanhtoan/thanhToan.dart';
 import 'package:coffee_chain/pages/thungan/body_thanhtoan/thanhtoan/choThanhToan.dart';
 import 'package:coffee_chain/pages/thungan/body_thanhtoan/thanhtoan/mangVe.dart';
 import 'package:coffee_chain/values/app_colors.dart';
@@ -56,7 +57,7 @@ class _BodyThanhtoanPageState extends State<BodyThanhtoanPage> {
   @override
   void initState() {
     super.initState();
-    _thanhtoanProvider.getAccPQ(widget.maNV);
+    _thanhtoanProvider.getAccPQ(widget.maNV, 'null');
   }
 
   @override
@@ -68,103 +69,115 @@ class _BodyThanhtoanPageState extends State<BodyThanhtoanPage> {
           builder: (context, model, child) {
             return Scaffold(
                 backgroundColor: AppColors.backgroundColor,
-                body: SingleChildScrollView(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(top: 5, left: 5),
-                              child: Material(
-                                elevation: 4,
-                                color: (model.clickMnTT ==
-                                        clickMenuThanhToan.cttoan)
-                                    ? AppColors.Sepia
-                                    : AppColors.white,
-                                child: InkWell(
-                                  onTap: model.clickCTT,
-                                  splashColor: Colors.black26,
-                                  child: Container(
-                                    width: widget.widthButton,
-                                    height: widget.heightButton,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 2, color: AppColors.Sepia)),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                          "Yêu cầu thanh toán (${model.listCTT.length})",
-                                          style: AppStyles.lato.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: widget.sizeText,
-                                            color: (model.clickMnTT ==
-                                                    clickMenuThanhToan.cttoan)
-                                                ? AppColors.white1
-                                                : AppColors.Sepia,
-                                          )),
+                body: (model.XDthanhToan)
+                    ? ThanhToanResponsive(
+                        maNV: widget.maNV,
+                        maBan: model.maBanYctt,
+                      )
+                    : SingleChildScrollView(
+                        child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    padding:
+                                        const EdgeInsets.only(top: 5, left: 5),
+                                    child: Material(
+                                      elevation: 4,
+                                      color: (model.clickMnTT ==
+                                              clickMenuThanhToan.cttoan)
+                                          ? AppColors.Sepia
+                                          : AppColors.white,
+                                      child: InkWell(
+                                        onTap: model.clickCTT,
+                                        splashColor: Colors.black26,
+                                        child: Container(
+                                          width: widget.widthButton,
+                                          height: widget.heightButton,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: AppColors.Sepia)),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                "Yêu cầu thanh toán (${model.listCTT.length})",
+                                                style: AppStyles.lato.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: widget.sizeText,
+                                                  color: (model.clickMnTT ==
+                                                          clickMenuThanhToan
+                                                              .cttoan)
+                                                      ? AppColors.white1
+                                                      : AppColors.Sepia,
+                                                )),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(top: 5, left: 5),
-                              child: Material(
-                                elevation: 4,
-                                color: (model.clickMnTT ==
-                                        clickMenuThanhToan.mangve)
-                                    ? AppColors.Sepia
-                                    : AppColors.white,
-                                child: InkWell(
-                                  onTap: model.clickMV,
-                                  splashColor: Colors.black26,
-                                  child: Container(
-                                    width: widget.widthButton,
-                                    height: widget.heightButton,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 2, color: AppColors.Sepia)),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                          "Mang về (${model.listMV.length})",
-                                          style: AppStyles.lato.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: widget.sizeText,
-                                            color: (model.clickMnTT ==
-                                                    clickMenuThanhToan.mangve)
-                                                ? AppColors.white1
-                                                : AppColors.Sepia,
-                                          )),
+                                  Container(
+                                    padding:
+                                        const EdgeInsets.only(top: 5, left: 5),
+                                    child: Material(
+                                      elevation: 4,
+                                      color: (model.clickMnTT ==
+                                              clickMenuThanhToan.mangve)
+                                          ? AppColors.Sepia
+                                          : AppColors.white,
+                                      child: InkWell(
+                                        onTap: model.clickMV,
+                                        splashColor: Colors.black26,
+                                        child: Container(
+                                          width: widget.widthButton,
+                                          height: widget.heightButton,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: AppColors.Sepia)),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                "Mang về (${model.listMV.length})",
+                                                style: AppStyles.lato.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: widget.sizeText,
+                                                  color: (model.clickMnTT ==
+                                                          clickMenuThanhToan
+                                                              .mangve)
+                                                      ? AppColors.white1
+                                                      : AppColors.Sepia,
+                                                )),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                        (widget.small)
-                            ? Container()
-                            : AccUser(
-                                maNV: widget.maNV,
-                                tenNV: model.tenNV,
-                                PQPV: model.PQPV,
-                                PQTN: model.PQTN,
-                                PQAD: model.PQAD,
-                                PQPC: model.PQPC,
-                                XDTrang: 'thuNgan',
-                              ),
-                      ],
-                    ),
-                    (model.clickMnTT == clickMenuThanhToan.cttoan)
-                        ? BodyChoTTResponsive(model: model, maNV: widget.maNV)
-                        : MangVeResponsive(),
-                  ],
-                )));
+                              (widget.small)
+                                  ? Container()
+                                  : AccUser(
+                                      maNV: widget.maNV,
+                                      tenNV: model.tenNV,
+                                      PQPV: model.PQPV,
+                                      PQTN: model.PQTN,
+                                      PQAD: model.PQAD,
+                                      PQPC: model.PQPC,
+                                      XDTrang: 'thuNgan',
+                                    ),
+                            ],
+                          ),
+                          (model.clickMnTT == clickMenuThanhToan.cttoan)
+                              ? BodyChoTTResponsive(
+                                  model: model, maNV: widget.maNV)
+                              : MangVeResponsive(),
+                        ],
+                      )));
           },
         );
       },

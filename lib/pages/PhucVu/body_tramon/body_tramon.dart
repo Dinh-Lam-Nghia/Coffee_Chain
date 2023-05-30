@@ -143,7 +143,7 @@ class _TramonPageState extends State<TramonPage> {
                 Text("Bàn order",
                     style: AppStyles.lato.copyWith(
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,                                                    
+                        fontSize: 20,
                         color: AppColors.white1)),
                 Text("(Số lượng)",
                     style: AppStyles.lato.copyWith(
@@ -159,72 +159,74 @@ class _TramonPageState extends State<TramonPage> {
               width: 985,
               child: SingleChildScrollView(
                 child: Column(
-                                                                                                                                                                         =======
-              const SizedBox(
-                height: 80,
-              ),
-              //
-
-              SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    for (int i = 0; i < model.banHDodel.length; i++)
-                      InkWell(
-                        onTap: () =>
-                            model.clickBan(model.banHDodel[i].maBan.toString()),
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                            top: 5,
-                          ),
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          width: 985,
-                          height: (widget.small) ? 55 : 70,
-                          decoration: BoxDecoration(
-                            color: (model.maBan.toString() ==
-                                    model.banHDodel[i].maBan.toString())
-                                ? AppColors.brightPink
-                                : AppColors.colorrow,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(model.banHDodel[i].tenBan.toString(),
-                                      style: AppStyles.lato.copyWith(
-                                        color: (model.maBan.toString() ==
-                                                model.banHDodel[i].maBan
-                                                    .toString())
-                                            ? AppColors.white1
-                                            : AppColors.black87,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                      )),
-                                  Text(
-                                      "(${model.slMon(model.banHDodel[i].maBan.toString())})",
-                                      style: AppStyles.lato.copyWith(
-                                        color: AppColors.red,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                      )),
-                                ],
+                    SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          for (int i = 0; i < model.banHDodel.length; i++)
+                            InkWell(
+                              onTap: () => model.clickBan(
+                                  model.banHDodel[i].maBan.toString()),
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  top: 5,
+                                ),
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                width: 985,
+                                height: (widget.small) ? 55 : 70,
+                                decoration: BoxDecoration(
+                                  color: (model.maBan.toString() ==
+                                          model.banHDodel[i].maBan.toString())
+                                      ? AppColors.brightPink
+                                      : AppColors.colorrow,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                            model.banHDodel[i].tenBan
+                                                .toString(),
+                                            style: AppStyles.lato.copyWith(
+                                              color: (model.maBan.toString() ==
+                                                      model.banHDodel[i].maBan
+                                                          .toString())
+                                                  ? AppColors.white1
+                                                  : AppColors.black87,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20,
+                                            )),
+                                        Text(
+                                            "(${model.slMon(model.banHDodel[i].maBan.toString())})",
+                                            style: AppStyles.lato.copyWith(
+                                              color: AppColors.red,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20,
+                                            )),
+                                      ],
+                                    ),
+                                    IconButton(
+                                        iconSize: 50,
+                                        color: Colors.white,
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.check_box)),
+                                  ],
+                                ),
                               ),
-                              IconButton(
-                                  iconSize: 50,
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.check_box)),
-                            ],
-                          ),
-                        ),
+                            ),
+                        ],
                       ),
+                    ),
                   ],
                 ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );
