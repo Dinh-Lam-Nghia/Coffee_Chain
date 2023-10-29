@@ -1,6 +1,6 @@
 class Url {
-  static const String baseUrl =
-      "http://192.168.152.80/serverAPI_CoffeeChain"; // .1.14   .3.113
+  static const String baseUrl = "http://192.168.152.80/serverAPI_CoffeeChain";
+
 
   //get
   static const String image = "$baseUrl/Images/";
