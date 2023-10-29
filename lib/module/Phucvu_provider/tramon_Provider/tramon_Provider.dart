@@ -11,6 +11,13 @@ import 'package:coffee_chain/service/thucdon.service.dart';
 import 'package:flutter/material.dart';
 
 class TraMonProvider extends ChangeNotifier {
+  bool _click_Cban = false;
+  bool get click_Cban => _click_Cban;
+  void chonBan() {
+    _click_Cban = !_click_Cban;
+    notifyListeners();
+  }
+
   String? _coSo;
   String _tenNV = '...';
   String get tenNV => _tenNV;
