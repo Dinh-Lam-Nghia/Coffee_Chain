@@ -12,18 +12,26 @@ class TramonPageResponsive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return ResponsiveContainer(
         small: TramonPage(
           small: true,
           maNV: maNV,
-          heightRow: (height / 10) * 6,
+          heightRow: height,
+          widthRow: width,
+        ),
+        medium: TramonPage(
+          small: false,
+          maNV: maNV,
+          heightRow: (height / 10) * 7,
+          widthRow: (width / 100) * 45,
         ),
         large: TramonPage(
           small: false,
           maNV: maNV,
           heightRow: (height / 10) * 8.3,
+          widthRow: (width / 100) * 45,
         ));
   }
 }
@@ -33,10 +41,12 @@ class TramonPage extends StatefulWidget {
       {super.key,
       required this.small,
       required this.maNV,
-      required this.heightRow});
+      required this.heightRow,
+      required this.widthRow});
   final String maNV;
   final bool small;
   final double heightRow;
+  final double widthRow;
 
   @override
   State<TramonPage> createState() => _TramonPageState();
@@ -53,8 +63,7 @@ class _TramonPageState extends State<TramonPage> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
+    // double width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider<TraMonProvider>(
       create: (context) => _traMonProvider,
       builder: (context, child) {
@@ -98,16 +107,59 @@ class _TramonPageState extends State<TramonPage> {
                                   // mainAxisAlignment:
                                   //     MainAxisAlignment.spaceAround,
                                   children: [
-                                    row1(context, model, widget.heightRow),
-                                    row2(context, model, widget.heightRow),
+                                    (widget.small)
+                                        ? InkWell(
+                                            onTap: model.chonBan,
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20, left: 20),
+                                              width: widget.widthRow,
+                                              height: (widget.small) ? 60 : 80,
+                                              decoration: const BoxDecoration(
+                                                color: AppColors.brightPink,
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text("Chọn bàn order",
+                                                      style: AppStyles.lato
+                                                          .copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontSize: 20,
+                                                              color: AppColors
+                                                                  .white1)),
+                                                  const Icon(
+                                                    Icons
+                                                        .keyboard_arrow_down_sharp,
+                                                    color: AppColors.white1,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                        : row1(context, model, widget.heightRow,
+                                            widget.widthRow),
+                                    (model.click_Cban)
+                                        ? row1(context, model, widget.heightRow,
+                                            widget.widthRow)
+                                        : Container(),
+                                    const SizedBox(height: 10),
+                                    row2(context, model, widget.heightRow,
+                                        widget.widthRow),
                                   ],
                                 )
                               : Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    row1(context, model, widget.heightRow),
-                                    row2(context, model, widget.heightRow),
+                                    row1(context, model, widget.heightRow,
+                                        widget.widthRow),
+                                    row2(context, model, widget.heightRow,
+                                        widget.widthRow),
                                   ],
                                 )),
                     ],
@@ -121,18 +173,20 @@ class _TramonPageState extends State<TramonPage> {
     );
   }
 
-  Widget row1(BuildContext context, TraMonProvider model, double heightRow) {
+  Widget row1(BuildContext context, TraMonProvider model, double heightRow,
+      double width) {
     return Container(
       padding: EdgeInsets.only(
           bottom: (widget.small) ? 20 : 0,
           left: (widget.small) ? 20 : 0,
           right: (widget.small) ? 20 : 0),
       height: heightRow,
+      width: width,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.only(right: 20, left: 20),
-            width: 985,
+            width: width,
             height: (widget.small) ? 60 : 80,
             decoration: const BoxDecoration(
               color: AppColors.brightPink,
@@ -232,18 +286,20 @@ class _TramonPageState extends State<TramonPage> {
     );
   }
 
-  Widget row2(BuildContext context, TraMonProvider model, double heightRow) {
+  Widget row2(BuildContext context, TraMonProvider model, double heightRow,
+      double width) {
     return Container(
       padding: EdgeInsets.only(
           bottom: (widget.small) ? 20 : 0,
           left: (widget.small) ? 20 : 0,
           right: (widget.small) ? 20 : 0),
       height: heightRow,
+      width: width,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.only(right: 20, left: 20),
-            width: 770,
+            // width: width,
             height: 80,
             decoration: const BoxDecoration(
               color: Colors.white70,
@@ -261,14 +317,14 @@ class _TramonPageState extends State<TramonPage> {
           ),
           Expanded(
             child: Container(
-              width: 770,
+              width: width,
               color: AppColors.white,
               child: SingleChildScrollView(
                 child: Column(children: [
                   for (int i = 0; i < model.MonCB.length; i++)
                     Container(
                       padding: const EdgeInsets.only(right: 20, left: 25),
-                      width: 770,
+                      width: width,
                       height: (widget.small) ? 55 : 70,
                       decoration: const BoxDecoration(
                           border: Border(
@@ -313,8 +369,8 @@ class _TramonPageState extends State<TramonPage> {
           ),
           Container(
             padding: const EdgeInsets.only(right: 20, left: 25),
-            width: 770,
-            height: (widget.small) ? 100 : 150,
+            // width: 770,
+            height: (widget.small) ? 100 : 100,
             decoration: const BoxDecoration(color: Colors.white70),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -323,24 +379,25 @@ class _TramonPageState extends State<TramonPage> {
                   onTap: () => model.tramon(widget.maNV),
                   child: Container(
                     padding: const EdgeInsets.all(10),
-                    width: (widget.small) ? 100 : 180,
-                    height: (widget.small) ? 100 : 180,
+                    width: (widget.small) ? 100 : 100,
+                    height: (widget.small) ? 100 : 80,
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.Sepia),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.check_circle,
-                          size: 50,
+                          size: (widget.small) ? 30 : 20,
                           color: Colors.green,
                         ),
                         (!widget.small)
                             ? Text(
                                 'Trả món',
-                                style: AppStyles.lato
-                                    .copyWith(color: AppColors.green),
+                                style: AppStyles.lato.copyWith(
+                                    color: AppColors.green,
+                                    fontSize: (widget.small) ? 10 : 15),
                               )
                             : Container(),
                       ],
