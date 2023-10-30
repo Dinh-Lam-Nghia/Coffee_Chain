@@ -16,9 +16,23 @@ class BodyDangPVResponsive extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return ResponsiveContainer(
       small: BodyDangPVPage(
-          small: true, sizeText: width * 0.3 / 9, maNV: maNV, model: model),
+        small: true,
+        sizeText: (width / 200) * 2,
+        maNV: maNV,
+        model: model,
+      ),
+      medium: BodyDangPVPage(
+        sizeText: (width / 200) * 2,
+        maNV: maNV,
+        model: model,
+        small: false,
+      ),
       large: BodyDangPVPage(
-          small: false, sizeText: width * 0.2 / 14, maNV: maNV, model: model),
+        small: false,
+        sizeText: (width / 200) * 2,
+        maNV: maNV,
+        model: model,
+      ),
     );
   }
 }

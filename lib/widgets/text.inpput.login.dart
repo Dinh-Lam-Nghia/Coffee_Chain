@@ -17,12 +17,12 @@ class TextInputLogin extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         obscureText: obscureText ?? false,
-        style: TextStyle(fontSize: sizeTextIntput ?? 27),
+        style: TextStyle(fontSize: sizeTextIntput),
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.white,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide.none),
         ),
       ),

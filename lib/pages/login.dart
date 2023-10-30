@@ -16,27 +16,30 @@ class LoginScreen extends StatelessWidget {
     return ResponsiveContainer(
         small: LoginPage(
           padingWidth: width * 0.03,
-          sizeText: 18,
+          sizeText: (width / 200) * 7,
           sizeTextIntput: 15,
-          sizeTextButton: 25,
+          sizeTextButton: (width / 200) * 7,
           sizeHeightButton: 60,
           paddingtop: 20,
+          widthImg: (width / 100) * 50,
         ),
         medium: LoginPage(
           padingWidth: width * 0.25,
-          sizeText: 22,
-          sizeTextIntput: 24,
-          sizeTextButton: 40,
-          sizeHeightButton: 80,
+          sizeText: (width / 200) * 3.5,
+          sizeTextIntput: 10,
+          sizeTextButton: (width / 200) * 5,
+          sizeHeightButton: 70,
           paddingtop: 30,
+          widthImg: (width / 100) * 30,
         ),
         large: LoginPage(
           padingWidth: width * 0.3,
-          sizeText: 25,
-          sizeTextIntput: 27,
-          sizeTextButton: 60,
-          sizeHeightButton: 100,
-          paddingtop: 45,
+          sizeText: (width / 200) * 3,
+          sizeTextIntput: (width / 100) * 1,
+          sizeTextButton: (width / 200) * 4.5,
+          sizeHeightButton: 80,
+          paddingtop: 30,
+          widthImg: (width / 100) * 20,
         ));
   }
 }
@@ -50,6 +53,7 @@ class LoginPage extends StatelessWidget {
     required this.sizeTextButton,
     required this.sizeHeightButton,
     required this.paddingtop,
+    required this.widthImg,
   });
   final double padingWidth;
   final double sizeText;
@@ -57,6 +61,7 @@ class LoginPage extends StatelessWidget {
   final double sizeTextButton;
   final double sizeHeightButton;
   final double paddingtop;
+  final double widthImg;
 
   final LoginProvider _loginProvider = LoginProvider();
 
@@ -75,7 +80,7 @@ class LoginPage extends StatelessWidget {
                         child: Column(
                           children: [
                             SizedBox(height: paddingtop),
-                            Image.asset(AppAssetImages.logo, width: 540),
+                            Image.asset(AppAssetImages.logo, width: widthImg),
                             const SizedBox(height: 47),
                             Form(
                               key: model.form,
@@ -115,7 +120,7 @@ class LoginPage extends StatelessWidget {
                                             sizeTextIntput: sizeTextIntput,
                                           ),
                                           Container(
-                                            height: 65,
+                                            height: 50,
                                             padding: const EdgeInsets.only(
                                                 right: 10),
                                             alignment: Alignment.centerRight,
@@ -179,7 +184,7 @@ class LoginPage extends StatelessWidget {
                                       //                 .resolveWith((states) =>
                                       //                     AppColors.Sepia),
                                       //             value: Radiobutton.thuNgan,
-                                                  // groupValue: model.radio,
+                                      // groupValue: model.radio,
                                       //             onChanged: model.getRadio,
                                       //           ),
                                       //           Text(
@@ -259,7 +264,7 @@ class LoginPage extends StatelessWidget {
 
                                       //
 
-                                      const SizedBox(height: 60),
+                                      const SizedBox(height: 20),
                                       Material(
                                         color: AppColors.brownBlack,
                                         child: InkWell(

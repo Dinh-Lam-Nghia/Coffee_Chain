@@ -30,7 +30,7 @@ class TramonPageResponsive extends StatelessWidget {
         large: TramonPage(
           small: false,
           maNV: maNV,
-          heightRow: (height / 10) * 8.3,
+          heightRow: (height / 10) * 8,
           widthRow: (width / 100) * 45,
         ));
   }
@@ -315,56 +315,54 @@ class _TramonPageState extends State<TramonPage> {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              width: width,
-              color: AppColors.white,
-              child: SingleChildScrollView(
-                child: Column(children: [
-                  for (int i = 0; i < model.MonCB.length; i++)
-                    Container(
-                      padding: const EdgeInsets.only(right: 20, left: 25),
-                      width: width,
-                      height: (widget.small) ? 55 : 70,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: AppColors.black87))),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(model.MonCB[i].tenMon.toString(),
-                                  style: AppStyles.lato.copyWith(
+          Container(
+            // width: width,
+            color: AppColors.white,
+            child: SingleChildScrollView(
+              child: Column(children: [
+                for (int i = 0; i < model.MonCB.length; i++)
+                  Container(
+                    padding: const EdgeInsets.only(right: 20, left: 25),
+                    width: width,
+                    height: (widget.small) ? 55 : 70,
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: AppColors.black87))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text(model.MonCB[i].tenMon.toString(),
+                                style: AppStyles.lato.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                )),
+                            Text(" (${model.MonCB[i].slMon.toString()})",
+                                style: AppStyles.lato.copyWith(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
-                                  )),
-                              Text(" (${model.MonCB[i].slMon.toString()})",
-                                  style: AppStyles.lato.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                      color: AppColors.red)),
-                            ],
+                                    color: AppColors.red)),
+                          ],
+                        ),
+                        Container(
+                          width: 100,
+                          height: 30,
+                          color: AppColors.grey1,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: TextFormField(
+                            onChanged: (value) => model.chonMonTra(
+                                value.toString(),
+                                model.MonCB[i].maMon.toString()),
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                                hintText: '0', border: InputBorder.none),
                           ),
-                          Container(
-                            width: 100,
-                            height: 30,
-                            color: AppColors.grey1,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: TextFormField(
-                              onChanged: (value) => model.chonMonTra(
-                                  value.toString(),
-                                  model.MonCB[i].maMon.toString()),
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                  hintText: '0', border: InputBorder.none),
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                ]),
-              ),
+                  ),
+              ]),
             ),
           ),
           Container(
@@ -389,7 +387,7 @@ class _TramonPageState extends State<TramonPage> {
                       children: [
                         Icon(
                           Icons.check_circle,
-                          size: (widget.small) ? 30 : 20,
+                          size: (widget.small) ? 30 : 30,
                           color: Colors.green,
                         ),
                         (!widget.small)
@@ -397,7 +395,7 @@ class _TramonPageState extends State<TramonPage> {
                                 'Trả món',
                                 style: AppStyles.lato.copyWith(
                                     color: AppColors.green,
-                                    fontSize: (widget.small) ? 10 : 15),
+                                    fontSize: (widget.small) ? 10 : 20),
                               )
                             : Container(),
                       ],
