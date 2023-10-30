@@ -18,16 +18,27 @@ class ThanhToanResponsive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return ResponsiveContainer(
         small: ThanhToanPage(
           small: true,
           maNV: maNV,
           maBan: maBan,
+          width: (width * 0.8),
+          height: (height * 0.8),
+          fontSize: (width / 200) * 8,
+          btnHeight: (height / 2) * 0.2,
+          btnWidth: (width / 2) * 0.5,
         ),
         large: ThanhToanPage(
           small: false,
           maNV: maNV,
           maBan: maBan,
+          width: (width * 0.8),
+          height: (height * 0.8),
+          fontSize: (width / 200) * 3,
+          btnHeight: (height / 2) * 0.2,
+          btnWidth: (width / 2) * 0.5,
         ));
   }
 }
@@ -38,10 +49,20 @@ class ThanhToanPage extends StatefulWidget {
     required this.small,
     required this.maNV,
     required this.maBan,
+    required this.width,
+    required this.height,
+    required this.fontSize,
+    required this.btnHeight,
+    required this.btnWidth,
   });
   final String maNV;
   final bool small;
   final String maBan;
+  final double width;
+  final double height;
+  final double btnWidth;
+  final double btnHeight;
+  final double fontSize;
 
   @override
   State<ThanhToanPage> createState() => _ThanhToanPageState();
@@ -52,7 +73,7 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
 
   @override
   void initState() {
-    _thanhToanProvider.getAccPQ(widget.maNV, widget.maBan); 
+    _thanhToanProvider.getAccPQ(widget.maNV, widget.maBan);
     super.initState();
   }
 
@@ -103,7 +124,7 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                               flex: 3,
                               child: Container(
                                 color: AppColors.white,
-                                height: 800,
+                                height: widget.height,
                                 child: Column(
                                   children: [
                                     Container(
@@ -125,8 +146,8 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                           ),
                                           Text("Chương trình khuyến mãi",
                                               style: AppStyles.lato.copyWith(
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 25,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: widget.fontSize,
                                               )),
                                         ],
                                       ),
@@ -234,36 +255,35 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                 ),
                               ),
                             ),
+                            SizedBox(width: 10),
                             Expanded(
                               flex: 4,
                               child: SizedBox(
-                                height: 800,
+                                height: widget.height,
                                 child: Column(children: [
                                   Container(
                                     padding: const EdgeInsets.only(
                                         right: 20, left: 30),
-                                    width: 1000,
+                                    width: widget.width,
                                     height: 80,
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                             "HĐ 0${model.maHD}/${model.banHoatDong!.order} - ${model.banHoatDong!.tenBan}",
                                             style: AppStyles.lato.copyWith(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 20,
+                                              fontSize: 15,
                                             )),
-                                        const SizedBox(width: 400),
                                         Text(model.ngay,
                                             style: AppStyles.lato.copyWith(
                                               fontWeight: FontWeight.w600,
                                               fontSize: 20,
                                             )),
-                                        const SizedBox(width: 50),
                                         Text(model.gioi,
                                             style: AppStyles.lato.copyWith(
                                               fontWeight: FontWeight.w600,
@@ -275,7 +295,7 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                   Container(
                                     padding: const EdgeInsets.only(
                                         right: 20, left: 30),
-                                    width: 1000,
+                                    width: widget.width,
                                     height: 80,
                                     decoration: const BoxDecoration(
                                       color: AppColors.colorrow,
@@ -289,13 +309,11 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                               fontWeight: FontWeight.w900,
                                               fontSize: 20,
                                             )),
-                                        const SizedBox(width: 300),
                                         Text("Số lượng",
                                             style: AppStyles.lato.copyWith(
                                               fontWeight: FontWeight.w900,
                                               fontSize: 20,
                                             )),
-                                        const SizedBox(width: 15),
                                         Text("Thành tiền",
                                             style: AppStyles.lato.copyWith(
                                               fontWeight: FontWeight.w900,
@@ -307,7 +325,7 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                   Container(
                                     padding: const EdgeInsets.only(
                                         right: 20, left: 25),
-                                    width: 1000,
+                                    width: widget.width,
                                     height: 80,
                                     decoration: const BoxDecoration(
                                       color: AppColors.white,
@@ -321,7 +339,6 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                               fontWeight: FontWeight.w600,
                                               fontSize: 20,
                                             )),
-                                        const SizedBox(width: 85),
                                         const SizedBox(
                                           width: 80,
                                           height: 64,
@@ -349,37 +366,24 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                   Container(
                                     padding: const EdgeInsets.only(
                                         right: 20, left: 30),
-                                    width: 1000,
+                                    width: widget.width,
                                     height: 80,
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Tổng thanh toán",
-                                            style: AppStyles.lato.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 20,
-                                            )),
-                                        const SizedBox(width: 40),
-                                        Text("75.0000 VND",
-                                            style: AppStyles.lato.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 20,
-                                            )),
-                                        const SizedBox(width: 250),
                                         Text("Thành tiền",
                                             style: AppStyles.lato.copyWith(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 20,
+                                              fontSize: widget.fontSize,
                                             )),
-                                        const SizedBox(width: 180),
                                         Text("75.000 VND",
                                             style: AppStyles.lato.copyWith(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 20,
+                                              fontSize: widget.fontSize,
                                             )),
                                       ],
                                     ),
@@ -387,18 +391,18 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                   Container(
                                     padding: const EdgeInsets.only(
                                         right: 20, left: 30),
-                                    width: 1000,
+                                    width: widget.width,
                                     height: 80,
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Container(
-                                          width: 180,
-                                          height: 58,
+                                          width: widget.btnWidth,
+                                          height: widget.btnHeight,
                                           decoration: const BoxDecoration(
                                               color: AppColors.Sepia),
                                           child: Row(
@@ -421,10 +425,9 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                             ],
                                           ),
                                         ),
-                                        const SizedBox(width: 250),
                                         Container(
-                                          width: 180,
-                                          height: 58,
+                                          width: widget.btnWidth,
+                                          height: widget.btnHeight,
                                           decoration: const BoxDecoration(
                                               color: AppColors.Sepia),
                                           child: Row(
@@ -433,32 +436,6 @@ class _ThanhToanPageState extends State<ThanhToanPage> {
                                             children: [
                                               const Icon(
                                                 Icons.attach_money,
-                                                size: 50,
-                                                color: AppColors.colorButton,
-                                              ),
-                                              Text("Thanh toán",
-                                                  style: AppStyles.lato
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 20,
-                                                          color: AppColors
-                                                              .colorButton)),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(width: 40),
-                                        Container(
-                                          width: 277,
-                                          height: 58,
-                                          decoration: const BoxDecoration(
-                                              color: AppColors.Sepia),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Icon(
-                                                Icons.print,
                                                 size: 50,
                                                 color: AppColors.colorButton,
                                               ),
