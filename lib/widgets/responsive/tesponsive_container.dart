@@ -1,9 +1,8 @@
-
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
 
 const kSmallScreenSize = 750;
-const kMediumScreenSize = 1100; 
+const kMediumScreenSize = 1100;
 
 class ResponsiveContainer extends StatelessWidget {
   const ResponsiveContainer(
