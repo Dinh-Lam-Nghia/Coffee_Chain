@@ -153,41 +153,41 @@ class _OrderPageState extends State<OrderPage> {
                                   ),
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 5, left: 5),
-                                child: Material(
-                                  elevation: 4,
-                                  color:
-                                      (model.clickMnOd == clickMenuOrder.mangve)
-                                          ? AppColors.Sepia
-                                          : AppColors.white,
-                                  child: InkWell(
-                                    onTap: model.clickMV,
-                                    splashColor: Colors.black26,
-                                    child: Container(
-                                      width: widget.widthButton,
-                                      height: widget.heightButton,
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 2,
-                                              color: AppColors.Sepia)),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            "Mang về (${model.listMV.length})",
-                                            style: AppStyles.lato.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: widget.sizeText,
-                                              color: (model.clickMnOd ==
-                                                      clickMenuOrder.mangve)
-                                                  ? AppColors.white1
-                                                  : AppColors.Sepia,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              // Container(
+                              //   padding: const EdgeInsets.only(top: 5, left: 5),
+                              //   child: Material(
+                              //     elevation: 4,
+                              //     color:
+                              //         (model.clickMnOd == clickMenuOrder.mangve)
+                              //             ? AppColors.Sepia
+                              //             : AppColors.white,
+                              //     child: InkWell(
+                              //       onTap: model.clickMV,
+                              //       splashColor: Colors.black26,
+                              //       child: Container(
+                              //         width: widget.widthButton,
+                              //         height: widget.heightButton,
+                              //         decoration: BoxDecoration(
+                              //             border: Border.all(
+                              //                 width: 2,
+                              //                 color: AppColors.Sepia)),
+                              //         child: Container(
+                              //           alignment: Alignment.center,
+                              //           child: Text(
+                              //               "Mang về (${model.listMV.length})",
+                              //               style: AppStyles.lato.copyWith(
+                              //                 fontWeight: FontWeight.w600,
+                              //                 fontSize: widget.sizeText,
+                              //                 color: (model.clickMnOd ==
+                              //                         clickMenuOrder.mangve)
+                              //                     ? AppColors.white1
+                              //                     : AppColors.Sepia,
+                              //               )),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                           (widget.small)
@@ -200,7 +200,6 @@ class _OrderPageState extends State<OrderPage> {
                                   PQAD: model.PQAD,
                                   PQPC: model.PQPC,
                                   XDTrang: 'phucVu',
-              
                                 ),
                         ],
                       ),
@@ -208,11 +207,12 @@ class _OrderPageState extends State<OrderPage> {
                       (model.clickMnOd == clickMenuOrder.dangpv)
                           ? BodyDangPVResponsive(
                               maNV: widget.maNV, model: model)
-                          : (model.clickMnOd == clickMenuOrder.yctramon)
-                              ? YeuCauTTResponsive(
-                                  maNV: widget.maNV, model: model)
-                              : MangVeResponsive(
-                                  maNV: widget.maNV, model: model),
+                          :
+                          // (model.clickMnOd == clickMenuOrder.yctramon)
+                          //     ?
+                          YeuCauTTResponsive(maNV: widget.maNV, model: model)
+                      // : MangVeResponsive(
+                      //     maNV: widget.maNV, model: model),
                       //
                     ]),
               ),

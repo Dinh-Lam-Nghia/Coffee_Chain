@@ -14,25 +14,51 @@ class YeuCauTTResponsive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return ResponsiveContainer(
       small: YeuCauTTPage(
-          small: true, sizeText: width * 0.3 / 9, maNV: maNV, model: model),
+        small: true,
+        sizeText: (width / 100) * 3.5,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
+        maNV: maNV,
+        model: model,
+      ),
+      medium: YeuCauTTPage(
+        sizeText: (width / 200) * 3,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
+        maNV: maNV,
+        model: model,
+        small: false,
+      ),
       large: YeuCauTTPage(
-          small: false, sizeText: width * 0.2 / 14, maNV: maNV, model: model),
+        small: false,
+        sizeText: (width / 200) * 3,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
+        maNV: maNV,
+        model: model,
+      ),
     );
   }
 }
 
 class YeuCauTTPage extends StatefulWidget {
-  const YeuCauTTPage(
-      {super.key,
-      required this.sizeText,
-      required this.maNV,
-      required this.model,
-      required this.small});
+  const YeuCauTTPage({
+    super.key,
+    required this.sizeText,
+    required this.heightGridView,
+    required this.iconSize,
+    required this.maNV,
+    required this.model,
+    required this.small,
+  });
   final String maNV;
   final OrderProvider model;
   final double sizeText;
+  final double heightGridView;
+  final double iconSize;
   final bool small;
 
   @override
@@ -65,9 +91,9 @@ class _YeuCauTTPageState extends State<YeuCauTTPage> {
           child: GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 400,
-                childAspectRatio: 11 / 6,
-                crossAxisSpacing: (!widget.small) ? 10 : 0,
-                mainAxisSpacing: (!widget.small) ? 10 : 0,
+                childAspectRatio: 11 / 5,
+                crossAxisSpacing: (!widget.small) ? 5 : 0,
+                mainAxisSpacing: (!widget.small) ? 5 : 0,
               ),
               itemCount: widget.model.listYCTT.length,
               shrinkWrap: true,

@@ -296,7 +296,6 @@ class _ThemTDDialogState extends State<ThemTDDialog> {
                           child: Row(
                             children: [
                               Expanded(
-                                flex: 1,
                                 child: Text(
                                   'Nhóm thực đơn ',
                                   style: AppStyles.lato.copyWith(
@@ -307,13 +306,11 @@ class _ThemTDDialogState extends State<ThemTDDialog> {
                                 ),
                               ),
                               Expanded(
-                                flex: 1,
                                 child: Container(
                                     color: AppColors.grey1,
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          flex: 4,
                                           child: (model.checkNTD)
                                               ? InputThemMon1(
                                                   controller: model.nhomTD,
@@ -342,7 +339,7 @@ class _ThemTDDialogState extends State<ThemTDDialog> {
                                                       DropdownMenuItem(
                                                         value: 'nuocpc',
                                                         child: Text(
-                                                            'Nước uống pha chế'),
+                                                            'Nước pha chế'),
                                                       ),
                                                     ],
                                                     onChanged: (value) {
@@ -378,7 +375,6 @@ class _ThemTDDialogState extends State<ThemTDDialog> {
                               ),
                               const SizedBox(width: 10),
                               Expanded(
-                                flex: 1,
                                 child: SizedBox(
                                   child: Row(children: [
                                     Text(
@@ -401,13 +397,11 @@ class _ThemTDDialogState extends State<ThemTDDialog> {
                                 ),
                               ),
                               Expanded(
-                                flex: 1,
                                 child: Container(
                                     color: AppColors.grey1,
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          flex: 4,
                                           child: (model.checkDVT)
                                               ? InputThemMon1(
                                                   controller: model.donViTinh,
