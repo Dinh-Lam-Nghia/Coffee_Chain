@@ -165,8 +165,9 @@ class _InputThemMon1State extends State<InputThemMon1> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       color: AppColors.grey1,
       child: TextFormField(
+        keyboardType: TextInputType.text,
         controller: widget.controller,
-        decoration: const InputDecoration( 
+        decoration: const InputDecoration(
           border: InputBorder.none,
         ),
       ),

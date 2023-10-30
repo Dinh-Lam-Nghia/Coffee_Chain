@@ -30,9 +30,9 @@ class BodyGhiOrderResponsive extends StatelessWidget {
         large: BodyGhiOrderPage(
           small: false,
           maNV: maNV,
-          widthRow1: ((width / 5) * 3),
-          widthRow2: ((width / 5) * 2),
-          height: ((height / 10) * 8.4),
+          widthRow1: ((width / 100) * 55),
+          widthRow2: ((width / 100) * 40),
+          height: ((height / 100) * 70),
         ));
   }
 }
@@ -89,195 +89,197 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
                                 ],
                               ),
                             )
-                          : SizedBox(
-                              width: double.infinity,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.only(
-                                            top: 5, left: 5),
-                                        child: Material(
-                                          color: AppColors.white,
-                                          child: InkWell(
-                                            onTap: () =>
-                                                model.hienTheoNhomThucDon('tc'),
-                                            child: Container(
-                                              width: 250,
-                                              height: 70,
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                      bottom: BorderSide(
-                                                          color: (model
-                                                                      .clMenuMon ==
-                                                                  clickMenuMon
-                                                                      .tc)
-                                                              ? AppColors.Sepia
-                                                              : AppColors.white,
-                                                          width: 8))),
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                child: Text("Tất cả",
-                                                    style: AppStyles.lato
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600)),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Material(
-                                          color: AppColors.white,
-                                          child: InkWell(
-                                            onTap: () => model
-                                                .hienTheoNhomThucDon('cafe'),
-                                            child: Container(
-                                              width: 220,
-                                              height: 70,
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                      bottom: BorderSide(
-                                                          color: (model
-                                                                      .clMenuMon ==
-                                                                  clickMenuMon
-                                                                      .coffee)
-                                                              ? AppColors.Sepia
-                                                              : AppColors.white,
-                                                          width: 8))),
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                child: Text("Coffee",
-                                                    style: AppStyles.lato
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600)),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Material(
-                                          color: AppColors.white,
-                                          child: InkWell(
-                                            onTap: () => model
-                                                .hienTheoNhomThucDon('trasua'),
-                                            child: Container(
-                                              width: 220,
-                                              height: 70,
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                      bottom: BorderSide(
-                                                          color: (model
-                                                                      .clMenuMon ==
-                                                                  clickMenuMon
-                                                                      .tea)
-                                                              ? AppColors.Sepia
-                                                              : AppColors.white,
-                                                          width: 8))),
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                child: Text("Trà sửa",
-                                                    style: AppStyles.lato
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600)),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Material(
-                                          color: AppColors.white,
-                                          child: InkWell(
-                                            onTap: () =>
-                                                model.hienTheoNhomThucDon(
-                                                    'nuocngot'),
-                                            child: Container(
-                                              width: 220,
-                                              height: 70,
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                      bottom: BorderSide(
-                                                          color: (model
-                                                                      .clMenuMon ==
-                                                                  clickMenuMon
-                                                                      .nn)
-                                                              ? AppColors.Sepia
-                                                              : AppColors.white,
-                                                          width: 8))),
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                child: Text("Nước ngọt",
-                                                    style: AppStyles.lato
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600)),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Material(
-                                          // elevation: 4,
-                                          color: AppColors.white,
-                                          child: InkWell(
-                                            onTap: () => model
-                                                .hienTheoNhomThucDon('khac'),
-                                            child: Container(
-                                              width: 220,
-                                              height: 70,
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                      bottom: BorderSide(
-                                                          color: (model
-                                                                      .clMenuMon ==
-                                                                  clickMenuMon
-                                                                      .more)
-                                                              ? AppColors.Sepia
-                                                              : AppColors.white,
-                                                          width: 8))),
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                child: Text("Khác",
-                                                    style: AppStyles.lato
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600)),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  AccUser(
-                                    maNV: widget.maNV,
-                                    tenNV: model.tenNV,
-                                    PQPV: model.PQPV,
-                                    PQTN: model.PQTN,
-                                    PQAD: model.PQAD,
-                                    PQPC: model.PQPC,
-                                    XDTrang: 'phucVu',
-                                    drawer: AppColors.black87,
-                                  ),
-                                ],
+                          : Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    // Row(
+                                    //   children: [
+                                    //     Container(
+                                    //       padding: const EdgeInsets.only(
+                                    //           top: 5, left: 5),
+                                    //       child: Material(
+                                    //         color: AppColors.white,
+                                    //         child: InkWell(
+                                    //           onTap: () =>
+                                    //               model.hienTheoNhomThucDon('tc'),
+                                    //           child: Container(
+                                    //             width: 250,
+                                    //             height: 70,
+                                    //             decoration: BoxDecoration(
+                                    //                 border: Border(
+                                    //                     bottom: BorderSide(
+                                    //                         color: (model
+                                    //                                     .clMenuMon ==
+                                    //                                 clickMenuMon
+                                    //                                     .tc)
+                                    //                             ? AppColors.Sepia
+                                    //                             : AppColors.white,
+                                    //                         width: 8))),
+                                    //             child: Container(
+                                    //               alignment: Alignment.center,
+                                    //               child: Text("Tất cả",
+                                    //                   style: AppStyles.lato
+                                    //                       .copyWith(
+                                    //                           fontWeight:
+                                    //                               FontWeight
+                                    //                                   .w600)),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     Container(
+                                    //       padding: const EdgeInsets.only(top: 5),
+                                    //       child: Material(
+                                    //         color: AppColors.white,
+                                    //         child: InkWell(
+                                    //           onTap: () => model
+                                    //               .hienTheoNhomThucDon('cafe'),
+                                    //           child: Container(
+                                    //             width: 220,
+                                    //             height: 70,
+                                    //             decoration: BoxDecoration(
+                                    //                 border: Border(
+                                    //                     bottom: BorderSide(
+                                    //                         color: (model
+                                    //                                     .clMenuMon ==
+                                    //                                 clickMenuMon
+                                    //                                     .coffee)
+                                    //                             ? AppColors.Sepia
+                                    //                             : AppColors.white,
+                                    //                         width: 8))),
+                                    //             child: Container(
+                                    //               alignment: Alignment.center,
+                                    //               child: Text("Coffee",
+                                    //                   style: AppStyles.lato
+                                    //                       .copyWith(
+                                    //                           fontWeight:
+                                    //                               FontWeight
+                                    //                                   .w600)),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     Container(
+                                    //       padding: const EdgeInsets.only(top: 5),
+                                    //       child: Material(
+                                    //         color: AppColors.white,
+                                    //         child: InkWell(
+                                    //           onTap: () => model
+                                    //               .hienTheoNhomThucDon('trasua'),
+                                    //           child: Container(
+                                    //             width: 220,
+                                    //             height: 70,
+                                    //             decoration: BoxDecoration(
+                                    //                 border: Border(
+                                    //                     bottom: BorderSide(
+                                    //                         color: (model
+                                    //                                     .clMenuMon ==
+                                    //                                 clickMenuMon
+                                    //                                     .tea)
+                                    //                             ? AppColors.Sepia
+                                    //                             : AppColors.white,
+                                    //                         width: 8))),
+                                    //             child: Container(
+                                    //               alignment: Alignment.center,
+                                    //               child: Text("Trà sửa",
+                                    //                   style: AppStyles.lato
+                                    //                       .copyWith(
+                                    //                           fontWeight:
+                                    //                               FontWeight
+                                    //                                   .w600)),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     Container(
+                                    //       padding: const EdgeInsets.only(top: 5),
+                                    //       child: Material(
+                                    //         color: AppColors.white,
+                                    //         child: InkWell(
+                                    //           onTap: () =>
+                                    //               model.hienTheoNhomThucDon(
+                                    //                   'nuocngot'),
+                                    //           child: Container(
+                                    //             width: 220,
+                                    //             height: 70,
+                                    //             decoration: BoxDecoration(
+                                    //                 border: Border(
+                                    //                     bottom: BorderSide(
+                                    //                         color: (model
+                                    //                                     .clMenuMon ==
+                                    //                                 clickMenuMon
+                                    //                                     .nn)
+                                    //                             ? AppColors.Sepia
+                                    //                             : AppColors.white,
+                                    //                         width: 8))),
+                                    //             child: Container(
+                                    //               alignment: Alignment.center,
+                                    //               child: Text("Nước ngọt",
+                                    //                   style: AppStyles.lato
+                                    //                       .copyWith(
+                                    //                           fontWeight:
+                                    //                               FontWeight
+                                    //                                   .w600)),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     Container(
+                                    //       padding: const EdgeInsets.only(top: 5),
+                                    //       child: Material(
+                                    //         // elevation: 4,
+                                    //         color: AppColors.white,
+                                    //         child: InkWell(
+                                    //           onTap: () => model
+                                    //               .hienTheoNhomThucDon('khac'),
+                                    //           child: Container(
+                                    //             width: 220,
+                                    //             height: 70,
+                                    //             decoration: BoxDecoration(
+                                    //                 border: Border(
+                                    //                     bottom: BorderSide(
+                                    //                         color: (model
+                                    //                                     .clMenuMon ==
+                                    //                                 clickMenuMon
+                                    //                                     .more)
+                                    //                             ? AppColors.Sepia
+                                    //                             : AppColors.white,
+                                    //                         width: 8))),
+                                    //             child: Container(
+                                    //               alignment: Alignment.center,
+                                    //               child: Text("Khác",
+                                    //                   style: AppStyles.lato
+                                    //                       .copyWith(
+                                    //                           fontWeight:
+                                    //                               FontWeight
+                                    //                                   .w600)),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    AccUser(
+                                      maNV: widget.maNV,
+                                      tenNV: model.tenNV,
+                                      PQPV: model.PQPV,
+                                      PQTN: model.PQTN,
+                                      PQAD: model.PQAD,
+                                      PQPC: model.PQPC,
+                                      XDTrang: 'phucVu',
+                                      drawer: AppColors.black87,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                       const SizedBox(height: 10),
@@ -295,6 +297,7 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
                                 ],
                               )
                             : Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   row1(context, model, widget.widthRow1,
                                       widget.height, widget.small),
@@ -318,43 +321,38 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
       double height, bool small) {
     return Container(
       width: widthRow1,
-      height: height,
+      // height: height,
       alignment: Alignment.topCenter,
+      margin: EdgeInsets.symmetric(horizontal: (widget.small) ? 5 : 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                alignment: Alignment.center,
-                margin:
-                    EdgeInsets.symmetric(horizontal: (widget.small) ? 0 : 10),
-                width: (widget.small) ? widthRow1 : (widthRow1 / 10) * 9.8,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(25)),
-                child: TextFormField(
-                  onChanged: model.timkiem,
-                  decoration: const InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.search,
-                        size: 40,
-                      ),
-                      hintText: 'Nhập mã/Tên món cần tìm',
-                      border: InputBorder.none),
-                ),
-              ),
-            ],
+          Container(
+            alignment: Alignment.center,
+            width: (widget.small) ? widthRow1 : (widthRow1 / 10) * 9.8,
+            height: 50,
+            decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(25)),
+            child: TextFormField(
+              onChanged: model.timkiem,
+              decoration: const InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.search,
+                    size: 40,
+                  ),
+                  hintText: 'Nhập mã/Tên món cần tìm',
+                  border: InputBorder.none),
+            ),
           ),
           //
           Container(
+            color: Colors.amberAccent,
             width: double.infinity,
-            height: (height / 10) * 9.2,
             padding: const EdgeInsets.all(20),
             child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300,
+                  maxCrossAxisExtent: 200,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
@@ -464,213 +462,218 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
 
   Widget row2(BuildContext context, GhiorderProvider model, double widthRow2,
       double height, bool small) {
-    return Container(
-      padding: const EdgeInsets.only(left: 5),
-      alignment: Alignment.topCenter,
-      width: widthRow2,
-      height: height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          (widget.small)
-              ? Container()
-              : Row(
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.only(left: 5),
+        alignment: Alignment.topCenter,
+        width: widthRow2,
+        // height: height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            (widget.small)
+                ? Container()
+                : Row(
+                    children: [
+                      row2_1(model, small, widthRow2),
+                      row2_2(model, small, widthRow2)
+                    ],
+                  ),
+            const SizedBox(height: 20),
+            Container(
+              width: double.infinity,
+              // height: (widget.small) ? (height / 10) * 9.5 : (height / 10) * 9.1,
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    row2_1(model, small, widthRow2),
-                    row2_2(model, small, widthRow2)
-                  ],
-                ),
-          const SizedBox(height: 20),
-          Container(
-            width: double.infinity,
-            height: (widget.small) ? (height / 10) * 9.5 : (height / 10) * 9.1,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    color: AppColors.white,
-                    child: SizedBox(
+                    Container(
                       width: double.infinity,
-                      child: DataTable(
-                          dataRowHeight: (widget.small) ? 120 : 80,
-                          columns: [
-                            DataColumn(
-                                label: Expanded(
-                                    child: Text(
-                              "Tên món",
-                              style: AppStyles.lato.copyWith(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ))),
-                            DataColumn(
-                                label: Expanded(
-                                    child: Center(
-                                        child: Text(
-                              "Số lượng",
-                              style: AppStyles.lato.copyWith(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            )))),
-                            DataColumn(
-                                label: Expanded(
-                                    child: Center(
-                                        child: Text(
-                              "Thành tiền",
-                              style: AppStyles.lato.copyWith(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            )))),
-                          ],
-                          rows: [
-                            for (int i = 0; i < model.ListDSmonHien.length; i++)
-                              DataRow(cells: [
-                                DataCell(Text(
-                                  model.ListDSmonHien[i].tenMon.toString(),
-                                  style: AppStyles.lato.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                )),
-                                DataCell(Center(
-                                    child: Text(
-                                  model.ListDSmonHien[i].slMon.toString(),
-                                  style: AppStyles.lato.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ))),
-                                DataCell(Center(
-                                    child: Text(
-                                  model
-                                      .tinhtien(
-                                          model.ListDSmonHien[i].maMon
-                                              .toString(),
-                                          model.ListDSmonHien[i].slMon
-                                              .toString())
-                                      .toString(),
-                                  style: AppStyles.lato.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ))),
-                              ])
-                          ]),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    padding: const EdgeInsets.only(right: 20, left: 25),
-                    width: double.infinity,
-                    height: 60,
-                    decoration: const BoxDecoration(
                       color: AppColors.white,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: DataTable(
+                            dataRowHeight: (widget.small) ? 120 : 80,
+                            columns: [
+                              DataColumn(
+                                  label: Expanded(
+                                      child: Text(
+                                "Tên món",
+                                style: AppStyles.lato.copyWith(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ))),
+                              DataColumn(
+                                  label: Expanded(
+                                      child: Center(
+                                          child: Text(
+                                "Số lượng",
+                                style: AppStyles.lato.copyWith(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              )))),
+                              DataColumn(
+                                  label: Expanded(
+                                      child: Center(
+                                          child: Text(
+                                "Thành tiền",
+                                style: AppStyles.lato.copyWith(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              )))),
+                            ],
+                            rows: [
+                              for (int i = 0;
+                                  i < model.ListDSmonHien.length;
+                                  i++)
+                                DataRow(cells: [
+                                  DataCell(Text(
+                                    model.ListDSmonHien[i].tenMon.toString(),
+                                    style: AppStyles.lato.copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  )),
+                                  DataCell(Center(
+                                      child: Text(
+                                    model.ListDSmonHien[i].slMon.toString(),
+                                    style: AppStyles.lato.copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ))),
+                                  DataCell(Center(
+                                      child: Text(
+                                    model
+                                        .tinhtien(
+                                            model.ListDSmonHien[i].maMon
+                                                .toString(),
+                                            model.ListDSmonHien[i].slMon
+                                                .toString())
+                                        .toString(),
+                                    style: AppStyles.lato.copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ))),
+                                ])
+                            ]),
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Icon(Icons.info_outline),
-                        Text("Tổng tiền: ",
-                            style: AppStyles.lato.copyWith(
-                                fontWeight: FontWeight.w600, fontSize: 20)),
-                        Text("${model.tongTien.toStringAsFixed(3)} VND",
-                            style: AppStyles.lato.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                color: AppColors.red)),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    padding: const EdgeInsets.only(right: 15),
-                    child: Row(
+                    const SizedBox(height: 5),
+                    Container(
+                      padding: const EdgeInsets.only(right: 20, left: 25),
+                      width: double.infinity,
+                      height: 60,
+                      decoration: const BoxDecoration(
+                        color: AppColors.white,
+                      ),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              model.luuOrder();
-                              if (model.KTluu) {
+                          const Icon(Icons.info_outline),
+                          Text("Tổng tiền: ",
+                              style: AppStyles.lato.copyWith(
+                                  fontWeight: FontWeight.w600, fontSize: 20)),
+                          Text("${model.tongTien.toStringAsFixed(3)} VND",
+                              style: AppStyles.lato.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  color: AppColors.red)),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Container(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                model.luuOrder();
+                                if (model.KTluu) {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PhucVuHomeScreen(
+                                                  maNV: widget.maNV)),
+                                      (route) => false);
+                                }
+                              },
+                              child: Container(
+                                width: 126,
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.local_dining,
+                                      size: 70,
+                                      color: Colors.blue,
+                                    ),
+                                    Container(
+                                        alignment: Alignment.topCenter,
+                                        child: Text(
+                                          'Gửi',
+                                          style: AppStyles.lato.copyWith(
+                                              fontSize: 18, color: Colors.blue),
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            InkWell(
+                              onTap: () {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PhucVuHomeScreen(
                                             maNV: widget.maNV)),
                                     (route) => false);
-                              }
-                            },
-                            child: Container(
-                              width: 126,
-                              color: Colors.white,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.local_dining,
-                                    size: 70,
-                                    color: Colors.blue,
-                                  ),
-                                  Container(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        'Gửi',
-                                        style: AppStyles.lato.copyWith(
-                                            fontSize: 18, color: Colors.blue),
-                                      ))
-                                ],
+                              },
+                              child: Container(
+                                width: 121,
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.cancel,
+                                      size: 70,
+                                      color: Colors.red,
+                                    ),
+                                    Container(
+                                        alignment: Alignment.topCenter,
+                                        child: Text(
+                                          'hủy bỏ',
+                                          style: AppStyles.lato.copyWith(
+                                              fontSize: 18, color: Colors.red),
+                                        ))
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          PhucVuHomeScreen(maNV: widget.maNV)),
-                                  (route) => false);
-                            },
-                            child: Container(
-                              width: 121,
-                              color: Colors.white,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.cancel,
-                                    size: 70,
-                                    color: Colors.red,
-                                  ),
-                                  Container(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        'hủy bỏ',
-                                        style: AppStyles.lato.copyWith(
-                                            fontSize: 18, color: Colors.red),
-                                      ))
-                                ],
-                              ),
-                            ),
-                          )
-                        ]),
-                  ),
-                ],
+                            )
+                          ]),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

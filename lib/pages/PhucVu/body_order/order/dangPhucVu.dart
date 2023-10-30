@@ -14,22 +14,29 @@ class BodyDangPVResponsive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return ResponsiveContainer(
       small: BodyDangPVPage(
         small: true,
-        sizeText: (width / 200) * 2,
+        sizeText: (width / 100) * 3.5,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
         maNV: maNV,
         model: model,
       ),
       medium: BodyDangPVPage(
-        sizeText: (width / 200) * 2,
+        sizeText: (width / 200) * 3,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
         maNV: maNV,
         model: model,
         small: false,
       ),
       large: BodyDangPVPage(
         small: false,
-        sizeText: (width / 200) * 2,
+        sizeText: (width / 200) * 3,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
         maNV: maNV,
         model: model,
       ),
@@ -41,6 +48,8 @@ class BodyDangPVPage extends StatefulWidget {
   const BodyDangPVPage({
     super.key,
     required this.sizeText,
+    required this.heightGridView,
+    required this.iconSize,
     required this.maNV,
     required this.model,
     required this.small,
@@ -48,6 +57,8 @@ class BodyDangPVPage extends StatefulWidget {
   final String maNV;
   final OrderProvider model;
   final double sizeText;
+  final double heightGridView;
+  final double iconSize;
   final bool small;
 
   @override
@@ -77,13 +88,14 @@ class _BodyDangPVPageState extends State<BodyDangPVPage> {
             : Container(),
         Container(
           width: double.infinity,
+          height: widget.heightGridView,
           padding: const EdgeInsets.all(20),
           child: GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 400,
-                childAspectRatio: 11 / 6,
-                crossAxisSpacing: (!widget.small) ? 10 : 0,
-                mainAxisSpacing: (!widget.small) ? 10 : 0,
+                childAspectRatio: 11 / 5,
+                crossAxisSpacing: (!widget.small) ? 5 : 0,
+                mainAxisSpacing: (!widget.small) ? 5 : 0,
               ),
               itemCount: widget.model.listDPV.length,
               shrinkWrap: true,
