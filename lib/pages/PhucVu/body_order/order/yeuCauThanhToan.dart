@@ -148,7 +148,7 @@ class _YeuCauTTPageState extends State<YeuCauTTPage> {
                           width: double.infinity,
                           // height: 145,
                           child: Text(
-                            '${double.parse(widget.model.listYCTT[index].tongTien.toString()).toStringAsFixed(3)}.000 VND',
+                            '${double.parse(widget.model.listYCTT[index].tongTien.toString())} VND',
                             style: AppStyles.lato.copyWith(
                               color: AppColors.white,
                               fontWeight: FontWeight.w900,
