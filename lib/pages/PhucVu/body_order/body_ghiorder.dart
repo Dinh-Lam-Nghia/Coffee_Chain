@@ -347,7 +347,7 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
           ),
           //
           Container(
-            color: Colors.amberAccent,
+            // color: Colors.amberAccent,
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             child: GridView.builder(
@@ -391,7 +391,7 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
                                           maxLines: 1,
                                         ),
                                         AutoSizeText(
-                                          '${double.parse(model.ListDSmon[index].giaTien.toString()).toStringAsFixed(3)} VND',
+                                          '${double.parse(model.ListDSmon[index].giaTien.toString())} VND',
                                           style: AppStyles.montserrat.copyWith(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 20,
@@ -447,7 +447,7 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
               maxLines: 1,
             ),
             AutoSizeText(
-              '${double.parse(model.ListDSmon[index].giaTien.toString()).toStringAsFixed(3)} VND',
+              '${double.parse(model.ListDSmon[index].giaTien.toString())} VND',
               style: AppStyles.montserrat.copyWith(
                 fontWeight: FontWeight.w900,
                 fontSize: 20,
@@ -583,7 +583,7 @@ class _BodyGhiOrderPageState extends State<BodyGhiOrderPage> {
                           Text("Tổng tiền: ",
                               style: AppStyles.lato.copyWith(
                                   fontWeight: FontWeight.w600, fontSize: 20)),
-                          Text("${model.tongTien.toStringAsFixed(3)} VND",
+                          Text("${model.tongTien} VND",
                               style: AppStyles.lato.copyWith(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 20,
