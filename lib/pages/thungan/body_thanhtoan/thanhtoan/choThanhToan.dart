@@ -1,8 +1,8 @@
-import 'package:coffee_chain/module/thuNgan_provider/thanhtoan_Provider/thanhToan_provider.dart'; 
+import 'package:coffee_chain/module/thuNgan_provider/thanhtoan_Provider/thanhToan_provider.dart';
 import 'package:coffee_chain/values/app_colors.dart';
 import 'package:coffee_chain/values/app_styles.dart';
 import 'package:coffee_chain/widgets/responsive/tesponsive_container.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class BodyChoTTResponsive extends StatelessWidget {
   const BodyChoTTResponsive(
@@ -13,23 +13,53 @@ class BodyChoTTResponsive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return ResponsiveContainer(
-      small: BodyChoTTPage(sizeText: width * 0.3 / 9, model: model, maNV: maNV),
-      large:
-          BodyChoTTPage(sizeText: width * 0.2 / 14, model: model, maNV: maNV),
+      small: BodyChoTTPage(
+        small: true,
+        sizeText: (width / 100) * 3.5,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
+        maNV: maNV,
+        model: model,
+      ),
+      medium: BodyChoTTPage(
+        sizeText: (width / 200) * 3,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
+        maNV: maNV,
+        model: model,
+        small: false,
+      ),
+      large: BodyChoTTPage(
+        small: false,
+        sizeText: (width / 200) * 3,
+        heightGridView: (height / 100) * 80,
+        iconSize: (width / 200) * 3,
+        maNV: maNV,
+        model: model,
+      ),
     );
   }
 }
 
 class BodyChoTTPage extends StatefulWidget {
-  const BodyChoTTPage(
-      {super.key,
-      required this.sizeText,
-      required this.model,
-      required this.maNV});
-  final double sizeText;
-  final ThanhToanProvider model;
+  const BodyChoTTPage({
+    super.key,
+    required this.sizeText,
+    required this.heightGridView,
+    required this.iconSize,
+    required this.maNV,
+    required this.model,
+    required this.small,
+  });
+
   final String maNV;
+  final ThanhToanProvider model;
+  final double sizeText;
+  final double heightGridView;
+  final double iconSize;
+  final bool small;
 
   @override
   State<BodyChoTTPage> createState() => _BodyChoTTPageState();
@@ -41,11 +71,11 @@ class _BodyChoTTPageState extends State<BodyChoTTPage> {
     return Container(
         padding: const EdgeInsets.all(20),
         child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 400,
-              childAspectRatio: 11 / 6,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 10,
+              childAspectRatio: 11 / 5,
+              crossAxisSpacing: (!widget.small) ? 5 : 0,
+              mainAxisSpacing: (!widget.small) ? 5 : 0,
             ),
             itemCount: widget.model.listCTT.length,
             shrinkWrap: true,

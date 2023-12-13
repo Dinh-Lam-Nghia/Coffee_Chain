@@ -200,7 +200,7 @@ class _ThucDonPageState extends State<ThucDonPage> {
                                         color: 1)),
                                     DataCell(TextTable(
                                         text:
-                                            '${int.parse(model.thucDonModel[i].giaTien.toString()).toStringAsFixed(3)}',
+                                            '${int.parse(model.thucDonModel[i].giaTien.toString())}',
                                         color: 1)),
                                     DataCell(Container(
                                       decoration: BoxDecoration(

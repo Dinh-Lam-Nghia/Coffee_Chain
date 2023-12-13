@@ -1,13 +1,20 @@
+// ignore_for_file: camel_case_types, non_constant_identifier_names
+
 import 'package:coffee_chain/models/DSbanHD_model.dart';
 import 'package:coffee_chain/models/HoaDon_model.dart';
 import 'package:coffee_chain/models/NhanVien_model.dart';
 import 'package:coffee_chain/models/UserPass.dart';
 import 'package:coffee_chain/models/khuyenMai_model.dart';
+import 'package:coffee_chain/models/mon_model.dart';
+import 'package:coffee_chain/models/phache/DSmonchebien_model.dart';
 import 'package:coffee_chain/models/phanQuyen_model.dart';
 import 'package:coffee_chain/service/BanHD.service.dart';
+import 'package:coffee_chain/service/DSmonCheBien.service.dart';
+import 'package:coffee_chain/service/DSmonHoaDon.service.dart';
 import 'package:coffee_chain/service/HoaDon.service.dart';
 import 'package:coffee_chain/service/KhuyenMai.service.dart';
 import 'package:coffee_chain/service/NhanVien.service.dart';
+import 'package:coffee_chain/service/thucdon.service.dart';
 import 'package:flutter/material.dart';
 
 enum clickMenuThanhToan { cttoan, mangve }
@@ -31,7 +38,9 @@ class ThanhToanProvider extends ChangeNotifier {
   NhanVienModel? _nhanVien;
   PhanQuyenModel? _phanQuyen;
   UserPassModel? _CScoffee;
+  String mban = '';
   void getAccPQ(String maNV, String maBan) async {
+    mban = maBan;
     _CScoffee = await _nhanVienService.getCoSo(maNV);
     _coSo = _CScoffee!.coSo.toString();
 
@@ -47,6 +56,9 @@ class ThanhToanProvider extends ChangeNotifier {
     getListKM();
     aotoMaHD();
     getbanYCTT(maBan);
+
+    getAllListMonCB(maBan);
+    getAllMon();
     notifyListeners();
   }
 
@@ -90,15 +102,63 @@ class ThanhToanProvider extends ChangeNotifier {
     }
   }
 
-  String maBanYctt = '';
-  bool XDthanhToan = false;
+  String _maBanYctt = '';
+  String get maBanYctt => _maBanYctt;
+  bool _XDthanhToan = false;
+  bool get XDthanhToan => _XDthanhToan;
   void thanhToan(String maBan) {
-    maBanYctt = maBan;
-    XDthanhToan = true;
+    _listMonCB.clear();
+    // _giaMon.clear();
+
+    _maBanYctt = maBan;
+    _XDthanhToan = true;
     notifyListeners();
   }
 
   //thanh toan
+
+  final DSmonCheBienService _dSmonCheBienService = DSmonCheBienService();
+
+  List<DSmonCheBienModel> _allListMonCB = [];
+  List<DSmonCheBienModel> _listMonCB = [];
+  List<DSmonCheBienModel> get listMonCB => _listMonCB;
+  void getAllListMonCB(String maBan) async {
+    _allListMonCB = await _dSmonCheBienService.getDSmonCheBien(_coSo!);
+    for (int i = 0; i < _allListMonCB.length; i++) {
+      if (_allListMonCB[i].maBan == maBan) {
+        _listMonCB.add(_allListMonCB[i]);
+      }
+    }
+    notifyListeners();
+  }
+
+  final ThucDonService _thucDonService = ThucDonService();
+  List<MonModel> _listAllMon = [];
+  void getAllMon() async {
+    _listAllMon = await _thucDonService.getThucDon(_coSo!);
+    notifyListeners();
+  }
+
+  // List<double> _giaMon = [];
+  String getGiaMon(String maMon, String soLuong) {
+    int sluong = int.parse(soLuong);
+    for (int i = 0; i < _listAllMon.length; i++) {
+      if (_listAllMon[i].maMon == maMon) {
+        double tien = sluong * double.parse(_listAllMon[i].giaTien.toString());
+        // _giaMon.add(tien);
+        return tien.toString();
+      }
+    }
+    return "";
+  }
+
+  // String tongTien() {
+  //   double s = 0;
+  //   for (int i = 0; i < _giaMon.length; i++) {
+  //     s += _giaMon[i];
+  //   }
+  //   return s.toString();
+  // }
 
   String _ngay = '';
   String get ngay => _ngay;
@@ -175,16 +235,55 @@ class ThanhToanProvider extends ChangeNotifier {
 
   HoaDonService _hoaDonService = HoaDonService();
   List<HoaDonModel> _hoaDonTMP = [];
-  int _maHD = 0;
-  int get maHD => _maHD;
+  String _maHD = "hd00";
+  String get maHD => _maHD;
 
   void aotoMaHD() async {
     _hoaDonTMP = await _hoaDonService.getHoaDon(_coSo!);
-    if (!_hoaDonTMP.isNotEmpty) {
-      _maHD = 1;
-    } else {
-      _maHD = int.parse(_hoaDonTMP[_hoaDonTMP.length - 1].maHD.toString()) + 1;
+    _maHD = 'hd${_hoaDonTMP.length + 1}';
+    // if (!_hoaDonTMP.isNotEmpty) {
+    //   _maHD = 1;
+    // } else {
+    //   _maHD = int.parse(_hoaDonTMP[_hoaDonTMP.length - 1].maHD.toString()) + 1;
+    // }
+    notifyListeners();
+  }
+
+  DsMonHoaDonService _dsmonHDSv = DsMonHoaDonService();
+  void thanhToanAndInHoaDon() async {
+    //add hoa don
+    String maHD = _maHD;
+    String ngayGioTaoHD = '${_ngay} - ${_gioi}';
+    String nguoiTaoHD = _tenNV;
+    String soTienPhaiThu = banHoatDong!.tongTien.toString();
+    String coSo = _coSo!;
+    await _hoaDonService.addHoaDon(
+        maHD, ngayGioTaoHD, nguoiTaoHD, soTienPhaiThu, coSo);
+
+    // add mon Hoa don
+
+    for (int i = 0; i < _listMonCB.length; i++) {
+      String maMon = _listMonCB[i].maMon.toString();
+      // int sl = _listMonCB[i].slMon!;
+      String sluong = _listMonCB[i].slMon!.toString();
+      String donGia = '0';
+      String thanhTien = '0';
+
+      for (int j = 0; j < _listAllMon.length; j++) {
+        if (_listAllMon[j].maMon! == maMon) {
+          donGia = _listAllMon[j].giaTien.toString();
+          thanhTien = '${double.parse(donGia) * double.parse(sluong)}';
+        }
+      }
+      await _dsmonHDSv.adddSMonHoaDon(
+          maHD, mban, maMon, sluong, donGia, thanhTien, coSo);
+      //delete dsmoncheBien
+      await _dSmonCheBienService.deletemonCB(mban, maMon, coSo);
     }
+    //delete banHoatDong
+    await _banHDService.deleteBanHD(mban, coSo);
+
+    getListBanHD();
     notifyListeners();
   }
 

@@ -93,4 +93,15 @@ class BanHDService {
       "coSo": coSo,
     });
   }
+
+  Future<void> deleteBanHD(
+    String maBan,
+    String coSo,
+  ) async {
+    var url = Uri.parse(Url.deleteBanHD);
+    await http.post(url, body: {
+      "maBan": maBan,
+      "coSo": coSo,
+    });
+  }
 }

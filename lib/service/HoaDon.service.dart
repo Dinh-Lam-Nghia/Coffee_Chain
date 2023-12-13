@@ -16,4 +16,21 @@ class HoaDonService {
       throw Exception('Failed to load!');
     }
   }
+
+  Future<void> addHoaDon(
+    String maHD,
+    String ngayGioTaoHD,
+    String nguoiTaoHD,
+    String soTienPhaiThu,
+    String coSo,
+  ) async {
+    var url = Uri.parse(Url.addHoaDon);
+    var res = await http.post(url, body: {
+      "maHD": maHD,
+      "ngayGioTaoHD": ngayGioTaoHD,
+      "nguoiTaoHD": nguoiTaoHD,
+      "soTienPhaiThu": soTienPhaiThu,
+      "coSo": coSo,
+    });
+  }
 }
