@@ -1,5 +1,5 @@
 class Url {
-  static const String baseUrl = "http://192.168.1.5/serverAPI_CoffeeChain";
+  static const String baseUrl = "http://192.168.1.6/serverAPI_CoffeeChain";
 
   //get
   static const String image = "$baseUrl/Images/";
@@ -51,6 +51,8 @@ class Url {
   static const String addKMtangMon = "$baseUrl/addKMtangMon.php";
   static const String addPhieuThu = "$baseUrl/checkAddPhieuThu.php";
   static const String addPhieuChi = "$baseUrl/checkAddPhieuChi.php";
+  static const String addHoaDon = "$baseUrl/addHoaDon.php";
+  static const String adddSMonHoaDon = "$baseUrl/adddSMonHoaDon.php";
 
   //delete
   static const String deletePhieuNhapId = "$baseUrl/deletePhieuNhapId.php";
@@ -73,8 +75,7 @@ class Url {
   static const String deleteNhanVien = "$baseUrl/deleteNhanVien.php";
   static const String dateleOnlyMaKM = "$baseUrl/dateleOnlyMaKM.php";
   static const String deletePhieuTC = "$baseUrl/deletePhieuTC.php";
-
-  // edit
+  static const String deleteBanHD = "$baseUrl/deleteBanHD.php";
 
   // save
   static const String savePhieuNX = "$baseUrl/savePhieuNX.php";

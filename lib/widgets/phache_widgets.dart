@@ -23,12 +23,14 @@ class TextTable extends StatefulWidget {
 class _TextTableState extends State<TextTable> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Container(
       alignment: Alignment.center,
       // ignore: sort_child_properties_last
       child: Text(
         widget.text,
         style: AppStyles.lato.copyWith(
+            fontSize: (width / 200) * 2.3,
             fontWeight: FontWeight.w400,
             color:
                 (widget.color == 0) ? AppColors.white : AppColors.brownBlack),
@@ -374,7 +376,6 @@ class _AccUserState extends State<AccUser> {
                               color: widget.drawer ?? AppColors.black87)),
                     ),
                     onSelected: (value) {
-                      
                       setState(() {
                         selectedMenu = value;
                       });
@@ -396,7 +397,9 @@ class _AccUserState extends State<AccUser> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AdminHomeResponsive(maNV:  widget.maNV,)),
+                                builder: (context) => AdminHomeResponsive(
+                                      maNV: widget.maNV,
+                                    )),
                             (route) => false);
                       } else if (selectedMenu == listthem.phaChe) {
                         Navigator.pushAndRemoveUntil(

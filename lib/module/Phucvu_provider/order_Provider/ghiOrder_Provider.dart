@@ -166,11 +166,12 @@ class GhiorderProvider extends ChangeNotifier {
   void timkiem(String value) {
     if (value == '') {
       _ListDSmonTMP1.clear();
-      for (int i = 0; i < _ListDSmonTMP.length; i++) {
-        if (_ListDSmonTMP[i].nhomThucDon.toString() == 'cafe') {
-          _ListDSmonTMP1.add(_ListDSmonTMP[i]);
-        }
-      }
+      getListDSmon();
+      // for (int i = 0; i < _ListDSmonTMP.length; i++) {
+      //   if (_ListDSmonTMP[i].nhomThucDon.toString() == 'cafe') {
+      //     _ListDSmonTMP1.add(_ListDSmonTMP[i]);
+      //   }
+      // }
     } else {
       _ListDSmon = _ListDSmonTMP1.where((element) =>
           element.tenMon!.toUpperCase().contains(value.toUpperCase())).toList();

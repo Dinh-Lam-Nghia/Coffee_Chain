@@ -159,17 +159,18 @@ class _BodyThanhtoanPageState extends State<BodyThanhtoanPage> {
                                   ),
                                 ],
                               ),
-                              (widget.small)
-                                  ? Container()
-                                  : AccUser(
-                                      maNV: widget.maNV,
-                                      tenNV: model.tenNV,
-                                      PQPV: model.PQPV,
-                                      PQTN: model.PQTN,
-                                      PQAD: model.PQAD,
-                                      PQPC: model.PQPC,
-                                      XDTrang: 'thuNgan',
-                                    ),
+                              // (widget.small)
+                              //     ? Container()
+                              //     :
+                              AccUser(
+                                maNV: widget.maNV,
+                                tenNV: model.tenNV,
+                                PQPV: model.PQPV,
+                                PQTN: model.PQTN,
+                                PQAD: model.PQAD,
+                                PQPC: model.PQPC,
+                                XDTrang: 'thuNgan',
+                              ),
                             ],
                           ),
                           (model.clickMnTT == clickMenuThanhToan.cttoan)

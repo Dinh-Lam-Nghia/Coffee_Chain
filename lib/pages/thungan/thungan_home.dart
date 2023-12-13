@@ -74,75 +74,71 @@ class _ThuNganHomePageState extends State<ThuNganHomePage> {
                     size: 50,
                   ),
                 ),
-                title: (widget.small)
-                    ? const Text("Thu ngân")
-                    : SizedBox(
-                        child: Row(
-                          children: [
-                            InkWell(
-                              onTap: model.clickThanhtoan,
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                title:
+                    // (widget.small)
+                    //     ? const Text("Thu ngân")
+                    //     :
+                    SizedBox(
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: model.clickThanhtoan,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          color: (model.chonBody == menuTN.thanhtoan)
+                              ? AppColors.white1
+                              : AppColors.Sepia,
+                          margin: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.monetization_on_outlined,
+                                size: 45,
                                 color: (model.chonBody == menuTN.thanhtoan)
-                                    ? AppColors.white1
-                                    : AppColors.Sepia,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.monetization_on_outlined,
-                                      size: 45,
+                                    ? AppColors.Sepia
+                                    : AppColors.white1,
+                              ),
+                              Text(" Thanh toán",
+                                  style: AppStyles.lato.copyWith(
+                                      fontWeight: FontWeight.w600,
                                       color:
                                           (model.chonBody == menuTN.thanhtoan)
                                               ? AppColors.Sepia
-                                              : AppColors.white1,
-                                    ),
-                                    Text(" Thanh toán",
-                                        style: AppStyles.lato.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: (model.chonBody ==
-                                                    menuTN.thanhtoan)
-                                                ? AppColors.Sepia
-                                                : AppColors.white1))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: model.clickThuchi,
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                color: (model.chonBody == menuTN.thuchi)
-                                    ? AppColors.white1
-                                    : AppColors.Sepia,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.shop,
-                                      size: 45,
-                                      color: (model.chonBody == menuTN.thuchi)
-                                          ? AppColors.Sepia
-                                          : AppColors.white1,
-                                    ),
-                                    Text(" Thu chi",
-                                        style: AppStyles.lato.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: (model.chonBody ==
-                                                    menuTN.thuchi)
-                                                ? AppColors.Sepia
-                                                : AppColors.white1))
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                                              : AppColors.white1))
+                            ],
+                          ),
                         ),
                       ),
+                      InkWell(
+                        onTap: model.clickThuchi,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          color: (model.chonBody == menuTN.thuchi)
+                              ? AppColors.white1
+                              : AppColors.Sepia,
+                          margin: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.shop,
+                                size: 45,
+                                color: (model.chonBody == menuTN.thuchi)
+                                    ? AppColors.Sepia
+                                    : AppColors.white1,
+                              ),
+                              Text(" Thu chi",
+                                  style: AppStyles.lato.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: (model.chonBody == menuTN.thuchi)
+                                          ? AppColors.Sepia
+                                          : AppColors.white1))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 actions: [
                   (widget.small)
                       ? Container()
@@ -186,149 +182,149 @@ class _ThuNganHomePageState extends State<ThuNganHomePage> {
               body: (model.chonBody == menuTN.thuchi)
                   ? ThuchiPageReponsive(maNV: widget.maNV)
                   : ThanhToanPageReponsive(maNV: widget.maNV),
-              drawer: Drawer(
-                child: Container(
-                  color: AppColors.Sepia,
-                  child: SizedBox(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            const SizedBox(height: 30),
-                            Text(
-                              "NHÂN VIÊN THU NGÂN",
-                              style: AppStyles.lato.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.white1),
-                            ),
-                            const SizedBox(height: 50),
-                            InkWell(
-                              onTap: model.clickThanhtoan,
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                color: (model.chonBody == menuTN.thanhtoan)
-                                    ? AppColors.white1
-                                    : AppColors.Sepia,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.list_alt_rounded,
-                                      size: 45,
-                                      color:
-                                          (model.chonBody == menuTN.thanhtoan)
-                                              ? AppColors.Sepia
-                                              : AppColors.white1,
-                                    ),
-                                    Text(" Thanh toán",
-                                        style: AppStyles.lato.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: (model.chonBody ==
-                                                    menuTN.thanhtoan)
-                                                ? AppColors.Sepia
-                                                : AppColors.white1))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 50),
-                            InkWell(
-                              onTap: model.clickThuchi,
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                color: (model.chonBody == menuTN.thuchi)
-                                    ? AppColors.white1
-                                    : AppColors.Sepia,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      AppAssetIcon.iconChuong,
-                                      width: 40,
-                                    ),
-                                    Text(" Trả món",
-                                        style: AppStyles.lato.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: (model.chonBody ==
-                                                    menuTN.thuchi)
-                                                ? AppColors.Sepia
-                                                : AppColors.white1))
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              width: double.infinity,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AccUser(
-                                    maNV: widget.maNV,
-                                    tenNV: model.tenNV,
-                                    PQPV: model.PQPV,
-                                    PQTN: model.PQTN,
-                                    PQAD: model.PQAD,
-                                    PQPC: model.PQPC,
-                                    XDTrang: 'thuNgan',
-                                    drawer: AppColors.white1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                InkWell(
-                                  onTap: () {},
-                                  child: const Icon(
-                                    Icons.wifi,
-                                    size: 30,
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: const Icon(
-                                    Icons.help_outline,
-                                    size: 30,
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginScreen()),
-                                    );
-                                  },
-                                  child: const Icon(
-                                    Icons.power_settings_new,
-                                    size: 30,
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // drawer: Drawer(
+              //   child: Container(
+              //     color: AppColors.Sepia,
+              //     child: SizedBox(
+              //       child: Column(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           Column(
+              //             children: [
+              //               const SizedBox(height: 30),
+              //               Text(
+              //                 "NHÂN VIÊN THU NGÂN",
+              //                 style: AppStyles.lato.copyWith(
+              //                     fontWeight: FontWeight.w600,
+              //                     color: AppColors.white1),
+              //               ),
+              //               const SizedBox(height: 50),
+              //               InkWell(
+              //                 onTap: model.clickThanhtoan,
+              //                 child: Container(
+              //                   padding:
+              //                       const EdgeInsets.symmetric(horizontal: 15),
+              //                   color: (model.chonBody == menuTN.thanhtoan)
+              //                       ? AppColors.white1
+              //                       : AppColors.Sepia,
+              //                   margin:
+              //                       const EdgeInsets.symmetric(horizontal: 15),
+              //                   child: Row(
+              //                     children: [
+              //                       Icon(
+              //                         Icons.list_alt_rounded,
+              //                         size: 45,
+              //                         color:
+              //                             (model.chonBody == menuTN.thanhtoan)
+              //                                 ? AppColors.Sepia
+              //                                 : AppColors.white1,
+              //                       ),
+              //                       Text(" Thanh toán",
+              //                           style: AppStyles.lato.copyWith(
+              //                               fontWeight: FontWeight.w600,
+              //                               color: (model.chonBody ==
+              //                                       menuTN.thanhtoan)
+              //                                   ? AppColors.Sepia
+              //                                   : AppColors.white1))
+              //                     ],
+              //                   ),
+              //                 ),
+              //               ),
+              //               const SizedBox(height: 50),
+              //               InkWell(
+              //                 onTap: model.clickThuchi,
+              //                 child: Container(
+              //                   padding:
+              //                       const EdgeInsets.symmetric(horizontal: 15),
+              //                   color: (model.chonBody == menuTN.thuchi)
+              //                       ? AppColors.white1
+              //                       : AppColors.Sepia,
+              //                   margin:
+              //                       const EdgeInsets.symmetric(horizontal: 15),
+              //                   child: Row(
+              //                     children: [
+              //                       Image.asset(
+              //                         AppAssetIcon.iconChuong,
+              //                         width: 40,
+              //                       ),
+              //                       Text(" Trả món",
+              //                           style: AppStyles.lato.copyWith(
+              //                               fontWeight: FontWeight.w600,
+              //                               color: (model.chonBody ==
+              //                                       menuTN.thuchi)
+              //                                   ? AppColors.Sepia
+              //                                   : AppColors.white1))
+              //                     ],
+              //                   ),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //           Column(
+              //             children: [
+              //               SizedBox(
+              //                 width: double.infinity,
+              //                 child: Row(
+              //                   mainAxisAlignment: MainAxisAlignment.center,
+              //                   children: [
+              //                     AccUser(
+              //                       maNV: widget.maNV,
+              //                       tenNV: model.tenNV,
+              //                       PQPV: model.PQPV,
+              //                       PQTN: model.PQTN,
+              //                       PQAD: model.PQAD,
+              //                       PQPC: model.PQPC,
+              //                       XDTrang: 'thuNgan',
+              //                       drawer: AppColors.white1,
+              //                     ),
+              //                   ],
+              //                 ),
+              //               ),
+              //               const SizedBox(height: 10),
+              //               Row(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //                 children: [
+              //                   InkWell(
+              //                     onTap: () {},
+              //                     child: const Icon(
+              //                       Icons.wifi,
+              //                       size: 30,
+              //                       color: AppColors.white,
+              //                     ),
+              //                   ),
+              //                   InkWell(
+              //                     onTap: () {},
+              //                     child: const Icon(
+              //                       Icons.help_outline,
+              //                       size: 30,
+              //                       color: AppColors.white,
+              //                     ),
+              //                   ),
+              //                   InkWell(
+              //                     onTap: () {
+              //                       Navigator.push(
+              //                         context,
+              //                         MaterialPageRoute(
+              //                             builder: (context) =>
+              //                                 const LoginScreen()),
+              //                       );
+              //                     },
+              //                     child: const Icon(
+              //                       Icons.power_settings_new,
+              //                       size: 30,
+              //                       color: AppColors.white,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //               const SizedBox(height: 20),
+              //             ],
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             );
           },
         );

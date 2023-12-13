@@ -269,16 +269,25 @@ class _PhucVuHomePageState extends State<PhucVuHomePage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  AccUser(
-                                    maNV: widget.maNV,
-                                    tenNV: model.tenNV,
-                                    PQPV: model.PQPV,
-                                    PQTN: model.PQTN,
-                                    PQAD: model.PQAD,
-                                    PQPC: model.PQPC,
-                                    XDTrang: 'phucVu',
-                                    drawer: AppColors.white1,
-                                  ),
+                                  Text(model.tenNV.toString(),
+                                      style: AppStyles.lato.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.white1)),
+                                  const Icon(
+                                    Icons.person,
+                                    size: 40,
+                                    color: AppColors.white1,
+                                  )
+                                  // AccUser(
+                                  //   maNV: widget.maNV,
+                                  //   tenNV: model.tenNV,
+                                  //   PQPV: model.PQPV,
+                                  //   PQTN: model.PQTN,
+                                  //   PQAD: model.PQAD,
+                                  //   PQPC: model.PQPC,
+                                  //   XDTrang: 'phucVu',
+                                  //   drawer: AppColors.white1,
+                                  // ),
                                 ],
                               ),
                             ),

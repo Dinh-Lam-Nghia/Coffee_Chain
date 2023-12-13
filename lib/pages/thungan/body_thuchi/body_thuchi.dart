@@ -46,78 +46,65 @@ class _ThuchiPageReponsiveState extends State<ThuchiPageReponsive> {
                       child: Column(
                         children: [
                           SizedBox(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 289,
-                                        height: 70,
-                                        decoration: BoxDecoration(
-                                            color: AppColors.white,
-                                            border: Border.all(
-                                                width: 2,
-                                                color: AppColors.Sepia)),
-                                        child: PopupMenuButton<listthem>(
-                                          initialValue: selectedMenu,
-                                          child: Center(
-                                            child: Text("Thêm",
-                                                style: AppStyles.lato.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w600)),
-                                          ),
-                                          onSelected: (value) {
-                                            setState(() {
-                                              selectedMenu = value;
-                                            });
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 289,
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        border: Border.all(
+                                            width: 2, color: AppColors.Sepia)),
+                                    child: PopupMenuButton<listthem>(
+                                      initialValue: selectedMenu,
+                                      child: Center(
+                                        child: Text("Thêm",
+                                            style: AppStyles.lato.copyWith(
+                                                fontWeight: FontWeight.w600)),
+                                      ),
+                                      onSelected: (value) {
+                                        setState(() {
+                                          selectedMenu = value;
+                                        });
 
-                                            if (selectedMenu ==
-                                                listthem.phieuthu) {
-                                              themphieuthu(
-                                                  context, widget.maNV);
-                                            } else {
-                                              themphieuchi(
-                                                  context, widget.maNV);
-                                            }
-                                          },
-                                          itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry<listthem>>[
-                                            PopupMenuItem<listthem>(
-                                              value: listthem.phieuthu,
-                                              child: Text('Tạo phiếu thu',
-                                                  style: AppStyles.lato
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400)),
-                                            ),
-                                            PopupMenuItem<listthem>(
-                                              value: listthem.phieuchi,
-                                              child: Text('Tạo phiếu chi',
-                                                  style: AppStyles.lato
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400)),
-                                            ),
-                                          ],
+                                        if (selectedMenu == listthem.phieuthu) {
+                                          themphieuthu(context, widget.maNV);
+                                        } else {
+                                          themphieuchi(context, widget.maNV);
+                                        }
+                                      },
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<listthem>>[
+                                        PopupMenuItem<listthem>(
+                                          value: listthem.phieuthu,
+                                          child: Text('Tạo phiếu thu',
+                                              style: AppStyles.lato.copyWith(
+                                                  fontWeight: FontWeight.w400)),
                                         ),
-                                      ),
-                                      const SizedBox(width: 1550),
-                                      AccUser(
-                                        maNV: widget.maNV,
-                                        tenNV: model.tenNV,
-                                        PQPV: model.PQPV,
-                                        PQTN: model.PQTN,
-                                        PQAD: model.PQAD,
-                                        PQPC: model.PQPC,
-                                        XDTrang: 'thuNgan',
-                                      ),
-                                    ],
+                                        PopupMenuItem<listthem>(
+                                          value: listthem.phieuchi,
+                                          child: Text('Tạo phiếu chi',
+                                              style: AppStyles.lato.copyWith(
+                                                  fontWeight: FontWeight.w400)),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  AccUser(
+                                    maNV: widget.maNV,
+                                    tenNV: model.tenNV,
+                                    PQPV: model.PQPV,
+                                    PQTN: model.PQTN,
+                                    PQAD: model.PQAD,
+                                    PQPC: model.PQPC,
+                                    XDTrang: 'thuNgan',
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(height: 50),
